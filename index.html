@@ -31,6 +31,7 @@
     --green-bg: #e3f7ec;
     --red: #d63b3b;
     --red-bg: #fde8e8;
+    --purple: #8b5cf6;
     --shadow: rgba(74,108,247,0.08);
     --shadow-btn: rgba(74,108,247,0.3);
     --shadow-btn-hover: rgba(74,108,247,0.4);
@@ -55,6 +56,7 @@
     --green-bg: #1a3327;
     --red: #ef5a5a;
     --red-bg: #3a1f1f;
+    --purple: #a78bfa;
     --shadow: rgba(107,138,255,0.1);
     --shadow-btn: rgba(107,138,255,0.35);
     --shadow-btn-hover: rgba(107,138,255,0.5);
@@ -92,6 +94,24 @@
   .topbar button:hover { border-color: var(--accent); background: var(--hover-bg); }
   .topbar button.icon-btn { padding: 12px 14px; font-size: 18px; }
 
+  /* Главный экран: две большие кнопки */
+  .home-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 600px) { .home-split { grid-template-columns: 1fr; } }
+
+  .home-block {
+    padding: 28px 24px; border-radius: 16px; cursor: pointer;
+    border: 2px solid var(--border); background: var(--card-bg);
+    text-align: center; transition: .2s;
+  }
+  .home-block:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadow); }
+  .home-block .icon { font-size: 42px; margin-bottom: 10px; }
+  .home-block .title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .home-block .desc { font-size: 14px; color: var(--text-muted); }
+
+  /* Сетки */
   .menu { display: grid; gap: 12px; }
   .menu button {
     padding: 18px 20px; font-size: 18px; background: var(--card-bg); color: var(--text);
@@ -137,6 +157,12 @@
     color: var(--text);
   }
 
+  .formula-image {
+    width: 100%; max-width: 480px; margin: 12px auto;
+    display: block; border-radius: 10px;
+    border: 2px solid var(--border-soft);
+  }
+
   .toggle-btn {
     display: flex; align-items: center; gap: 8px;
     background: none; border: none; cursor: pointer;
@@ -157,13 +183,8 @@
     display: none;
   }
   .symbols.open { display: block; }
-  .symbols .sym-row {
-    display: block;
-    margin-bottom: 4px;
-  }
-  .symbols .sym-row .katex {
-    display: inline;
-  }
+  .symbols .sym-row { display: block; margin-bottom: 4px; }
+  .symbols .sym-row .katex { display: inline; }
   .symbols b { color: var(--accent); font-weight: 600; }
 
   .note {
@@ -176,9 +197,7 @@
     padding: 3px 10px; border-radius: 12px;
   }
 
-  .ref-tabs {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
-  }
+  .ref-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
   .ref-tabs button {
     padding: 9px 14px; font-size: 14px; border: 2px solid var(--border);
     background: var(--card-bg); color: var(--text);
@@ -212,17 +231,12 @@
   .flashcard .answer { font-size: 18px; line-height: 1.8; }
   .flashcard .answer .sym-list {
     font-size: 14px; color: var(--text);
-    display: inline-block; margin-top: 10px;
-    text-align: center;
+    display: inline-block; margin-top: 10px; text-align: center;
   }
   .flashcard .answer .sym-list .sym-row {
-    display: block;
-    margin-bottom: 4px;
-    text-align: center;
+    display: block; margin-bottom: 4px; text-align: center;
   }
-  .flashcard .answer .sym-list .sym-row .katex {
-    display: inline;
-  }
+  .flashcard .answer .sym-list .sym-row .katex { display: inline; }
   .flashcard .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .flashcard button {
     padding: 14px 26px; font-size: 16px; border: none; border-radius: 10px;
@@ -250,6 +264,58 @@
   .quiz-result.ok { color: var(--green); }
   .quiz-result.bad { color: var(--red); }
 
+  /* Задачи ЕГЭ */
+  .task-card {
+    background: var(--card-bg); border-radius: 16px; padding: 28px;
+    border: 2px solid var(--border-soft);
+  }
+  .task-condition {
+    font-size: 17px; line-height: 1.8; margin-bottom: 20px;
+  }
+  .task-options { display: grid; gap: 12px; margin-bottom: 18px; }
+  .task-options button {
+    padding: 16px 20px; font-size: 17px; text-align: left;
+    background: var(--block-bg); color: var(--text);
+    border: 2px solid var(--border-soft); border-radius: 10px;
+    cursor: pointer; transition: .15s;
+  }
+  .task-options button:hover { border-color: var(--accent); background: var(--hover-bg); }
+  .task-options button.correct { background: var(--green-bg); border-color: var(--green); }
+  .task-options button.wrong { background: var(--red-bg); border-color: var(--red); }
+
+  .task-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .task-actions button {
+    padding: 12px 22px; font-size: 15px; border-radius: 10px;
+    cursor: pointer; border: 2px solid var(--border);
+    background: var(--card-bg); color: var(--text);
+    transition: .15s;
+  }
+  .task-actions button:hover { border-color: var(--accent); background: var(--hover-bg); }
+  .task-actions button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .task-actions button.primary:hover { background: var(--accent-hover); }
+
+  .task-solution {
+    margin-top: 18px; padding: 18px 20px;
+    background: var(--block-bg); border-radius: 12px;
+    border-left: 4px solid var(--accent);
+    display: none;
+  }
+  .task-solution.open { display: block; }
+  .task-solution .step { margin-bottom: 12px; font-size: 15px; line-height: 1.7; }
+  .task-solution .step-num {
+    display: inline-block; width: 24px; height: 24px;
+    background: var(--accent); color: #fff; border-radius: 50%;
+    text-align: center; line-height: 24px; font-size: 13px; font-weight: 600;
+    margin-right: 8px;
+  }
+  .task-answer {
+    margin-top: 14px; padding: 14px 18px;
+    background: var(--green-bg); border-radius: 12px;
+    display: none; font-size: 16px;
+  }
+  .task-answer.open { display: block; }
+  .task-answer b { color: var(--green); }
+
   .support {
     position: fixed; bottom: 24px; right: 24px; z-index: 100;
   }
@@ -268,14 +334,14 @@
 
   @media print {
     body { background: #fff !important; color: #000 !important; padding: 0; }
-    .topbar, .support, .toggle-btn,
+    .topbar, .support, .toggle-btn, .task-actions,
     .back-btn, .section-header .ege-info, .ref-tabs { display: none !important; }
 
     .container { max-width: 100%; }
     h1 { font-size: 22px; margin-bottom: 4px; }
     .subtitle { font-size: 12px; margin-bottom: 16px; }
 
-    .formula-card {
+    .formula-card, .task-card {
       border: 1px solid #ccc !important;
       box-shadow: none !important;
       page-break-inside: avoid;
@@ -289,8 +355,8 @@
       margin-bottom: 8px;
     }
     .formula-title { font-size: 14px; }
-
     .symbols { display: block !important; font-size: 12px; }
+    .task-solution, .task-answer { display: block !important; }
 
     .subsection-title {
       font-size: 14px; color: #000 !important;
@@ -308,7 +374,7 @@
 <body>
 <div class="container">
   <h1>⚛️ Формулы ЕГЭ по физике</h1>
-  <p class="subtitle">Справочник · Флеш-карты · Тренажёр</p>
+  <p class="subtitle">Теория · Практика · Справочные материалы</p>
 
   <div class="topbar">
     <input type="text" id="search" placeholder="Поиск формулы...">
@@ -449,8 +515,7 @@ const topics = [
           { id: "k4", title: "Скорость при равноускоренном движении", latex: "v = v_0 + at", symbols: { v: "скорость, м/с", v_0: "начальная скорость, м/с", a: "ускорение, м/с²", t: "время, с" }, ege: "Задание 1" },
           { id: "k5", title: "Перемещение при равноускоренном движении", latex: "s = v_0 t + \\frac{at^2}{2}", symbols: { s: "перемещение, м", v_0: "начальная скорость, м/с", a: "ускорение, м/с²", t: "время, с" }, ege: "Задание 1" },
           { id: "k6", title: "Перемещение без времени", latex: "s = \\frac{v^2 - v_0^2}{2a}", symbols: { s: "перемещение, м", v: "конечная скорость, м/с", v_0: "начальная скорость, м/с", a: "ускорение, м/с²" }, ege: "Задание 1" },
-          { id: "k13", title: "Средняя скорость (путь)", latex: "v_{ср} = \\frac{s_1 + s_2 + ...}{t_1 + t_2 + ...}", symbols: { v_ср: "средняя скорость, м/с", s: "путь на участке, м", t: "время на участке, с" }, ege: "Задание 1", note: "Средняя скорость - это весь путь, делённый на всё время" },
-          { id: "k14", title: "Средняя скорость (среднее арифметическое)", latex: "v_{ср} = \\frac{v_1 + v_2}{2}", symbols: { v_ср: "средняя скорость, м/с", v_1: "скорость на 1 участке", v_2: "скорость на 2 участке" }, ege: "Задание 1", note: "Только если равные промежутки времени" }
+          { id: "k13", title: "Средняя скорость (путь)", latex: "v_{ср} = \\frac{s_1 + s_2 + ...}{t_1 + t_2 + ...}", symbols: { v_ср: "средняя скорость, м/с", s: "путь на участке, м", t: "время на участке, с" }, ege: "Задание 1", note: "Средняя скорость - это весь путь, делённый на всё время" }
         ]
       },
       {
@@ -460,8 +525,7 @@ const topics = [
           { id: "k8", title: "Максимальная высота подъёма", latex: "h_{max} = \\frac{v_0^2 \\sin^2\\alpha}{2g}", symbols: { h_max: "высота, м", v_0: "начальная скорость, м/с", "\\alpha": "угол бросания", g: "ускорение свободного падения, м/с²" }, ege: "Задание 1" },
           { id: "k9", title: "Время полёта", latex: "t = \\frac{2v_0 \\sin\\alpha}{g}", symbols: { t: "время полёта, с", v_0: "начальная скорость, м/с", "\\alpha": "угол бросания", g: "ускорение свободного падения, м/с²" }, ege: "Задание 1" },
           { id: "k15", title: "Высота свободного падения", latex: "h = \\frac{gt^2}{2}", symbols: { h: "высота, м", g: "ускорение свободного падения, м/с²", t: "время, с" }, ege: "Задание 1" },
-          { id: "k16", title: "Скорость при свободном падении", latex: "v = gt", symbols: { v: "скорость, м/с", g: "ускорение свободного падения, м/с²", t: "время, с" }, ege: "Задание 1" },
-          { id: "k17", title: "Скорость при падении с высоты", latex: "v = \\sqrt{2gh}", symbols: { v: "скорость, м/с", g: "ускорение свободного падения, м/с²", h: "высота, м" }, ege: "Задание 1" }
+          { id: "k16", title: "Скорость при свободном падении", latex: "v = gt", symbols: { v: "скорость, м/с", g: "ускорение свободного падения, м/с²", t: "время, с" }, ege: "Задание 1" }
         ]
       },
       {
@@ -469,9 +533,7 @@ const topics = [
         formulas: [
           { id: "k10", title: "Центростремительное ускорение", latex: "a_{цс} = \\frac{v^2}{R} = \\omega^2 R", symbols: { a_цс: "центростремительное ускорение, м/с²", v: "линейная скорость, м/с", R: "радиус, м", "\\omega": "угловая скорость, рад/с" }, ege: "Задание 1" },
           { id: "k11", title: "Угловая скорость", latex: "\\omega = \\frac{2\\pi}{T} = 2\\pi\\nu", symbols: { "\\omega": "угловая скорость, рад/с", T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 1" },
-          { id: "k12", title: "Период обращения", latex: "T = \\frac{t}{N}", symbols: { T: "период, с", t: "время, с", N: "число оборотов" }, ege: "Задание 1" },
-          { id: "k18", title: "Связь линейной и угловой скорости", latex: "v = \\omega R", symbols: { v: "линейная скорость, м/с", "\\omega": "угловая скорость, рад/с", R: "радиус, м" }, ege: "Задание 1" },
-          { id: "k19", title: "Частота обращения", latex: "\\nu = \\frac{1}{T}", symbols: { "\\nu": "частота, Гц", T: "период, с" }, ege: "Задание 1" }
+          { id: "k18", title: "Связь линейной и угловой скорости", latex: "v = \\omega R", symbols: { v: "линейная скорость, м/с", "\\omega": "угловая скорость, рад/с", R: "радиус, м" }, ege: "Задание 1" }
         ]
       }
     ]
@@ -485,8 +547,7 @@ const topics = [
         title: "Законы Ньютона",
         formulas: [
           { id: "d1", title: "Второй закон Ньютона", latex: "\\vec{F} = m\\vec{a}", symbols: { F: "равнодействующая сила, Н", m: "масса, кг", a: "ускорение, м/с²" }, ege: "Задание 2" },
-          { id: "d2", title: "Третий закон Ньютона", latex: "\\vec{F}_{12} = -\\vec{F}_{21}", symbols: { F_12: "сила действия, Н", F_21: "сила противодействия, Н" }, ege: "Задание 2" },
-          { id: "d10", title: "Первый закон Ньютона (условие покоя)", latex: "\\sum \\vec{F} = 0 \\Rightarrow \\vec{v} = const", symbols: { F: "сумма всех сил, Н", v: "скорость, м/с" }, ege: "Задание 2", note: "Тело покоится или движется равномерно и прямолинейно" }
+          { id: "d2", title: "Третий закон Ньютона", latex: "\\vec{F}_{12} = -\\vec{F}_{21}", symbols: { F_12: "сила действия, Н", F_21: "сила противодействия, Н" }, ege: "Задание 2" }
         ]
       },
       {
@@ -495,19 +556,14 @@ const topics = [
           { id: "d3", title: "Сила тяжести", latex: "F_{т} = mg", symbols: { F_т: "сила тяжести, Н", m: "масса, кг", g: "ускорение свободного падения, м/с²" }, ege: "Задание 2" },
           { id: "d4", title: "Закон Гука", latex: "F_{упр} = kx", symbols: { F_упр: "сила упругости, Н", k: "жёсткость, Н/м", x: "деформация, м" }, ege: "Задание 2" },
           { id: "d5", title: "Сила трения", latex: "F_{тр} = \\mu N", symbols: { F_тр: "сила трения, Н", "\\mu": "коэффициент трения", N: "сила нормального давления, Н" }, ege: "Задание 2" },
-          { id: "d6", title: "Закон всемирного тяготения", latex: "F = G\\frac{m_1 m_2}{r^2}", symbols: { F: "сила притяжения, Н", G: "гравитационная постоянная", m_1: "масса 1 тела, кг", m_2: "масса 2 тела, кг", r: "расстояние, м" }, ege: "Задание 2" },
-          { id: "d7", title: "Вес тела при движении с ускорением", latex: "P = m(g \\pm a)", symbols: { P: "вес, Н", m: "масса, кг", g: "ускорение свободного падения", a: "ускорение, м/с²" }, note: "+a при движении вверх, -a при движении вниз", ege: "Задание 2" },
-          { id: "d11", title: "Вес покоящегося тела", latex: "P = mg", symbols: { P: "вес, Н", m: "масса, кг", g: "ускорение свободного падения, м/с²" }, ege: "Задание 2" },
-          { id: "d12", title: "Первая космическая скорость", latex: "v_1 = \\sqrt{gR} = \\sqrt{\\frac{GM}{R}}", symbols: { v_1: "первая космическая скорость, м/с", g: "ускорение свободного падения", R: "радиус планеты, м", G: "гравитационная постоянная", M: "масса планеты, кг" }, ege: "Задание 2" },
-          { id: "d13", title: "Вторая космическая скорость", latex: "v_2 = \\sqrt{2gR} = \\sqrt{\\frac{2GM}{R}}", symbols: { v_2: "вторая космическая скорость, м/с" }, ege: "Задание 2" }
+          { id: "d6", title: "Закон всемирного тяготения", latex: "F = G\\frac{m_1 m_2}{r^2}", symbols: { F: "сила притяжения, Н", G: "гравитационная постоянная", m_1: "масса 1 тела, кг", m_2: "масса 2 тела, кг", r: "расстояние, м" }, ege: "Задание 2" }
         ]
       },
       {
         title: "Импульс тела и силы",
         formulas: [
           { id: "d8", title: "Импульс тела", latex: "p = mv", symbols: { p: "импульс, кг·м/с", m: "масса, кг", v: "скорость, м/с" }, ege: "Задание 3" },
-          { id: "d9", title: "Изменение импульса (импульс силы)", latex: "\\Delta p = F\\Delta t", symbols: { "\\Delta p": "изменение импульса, кг·м/с", F: "сила, Н", "\\Delta t": "время, с" }, ege: "Задание 3" },
-          { id: "d14", title: "Закон сохранения импульса", latex: "m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'", symbols: { m_1: "масса 1 тела, кг", v_1: "скорость до, м/с", v_1_: "скорость после, м/с" }, ege: "Задание 3", note: "Для замкнутой системы тел" }
+          { id: "d9", title: "Изменение импульса (импульс силы)", latex: "\\Delta p = F\\Delta t", symbols: { "\\Delta p": "изменение импульса, кг·м/с", F: "сила, Н", "\\Delta t": "время, с" }, ege: "Задание 3" }
         ]
       }
     ]
@@ -531,10 +587,7 @@ const topics = [
           { id: "e4", title: "Потенциальная энергия (гравитация)", latex: "E_p = mgh", symbols: { E_p: "потенциальная энергия, Дж", m: "масса, кг", g: "ускорение свободного падения", h: "высота, м" }, ege: "Задание 3" },
           { id: "e5", title: "Потенциальная энергия (упругая деформация)", latex: "E_p = \\frac{kx^2}{2}", symbols: { E_p: "потенциальная энергия, Дж", k: "жёсткость, Н/м", x: "деформация, м" }, ege: "Задание 3" },
           { id: "e6", title: "Закон сохранения механической энергии", latex: "E_k + E_p = const", symbols: { E_k: "кинетическая энергия, Дж", E_p: "потенциальная энергия, Дж" }, ege: "Задание 3" },
-          { id: "e7", title: "КПД", latex: "\\eta = \\frac{A_{полезная}}{A_{затраченная}} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", A_полезная: "полезная работа, Дж", A_затраченная: "затраченная работа, Дж" }, ege: "Задание 3" },
-          { id: "e8", title: "Работа силы тяжести", latex: "A = -mg\\Delta h", symbols: { A: "работа, Дж", m: "масса, кг", g: "ускорение свободного падения", "\\Delta h": "изменение высоты, м" }, ege: "Задание 3" },
-          { id: "e9", title: "Работа силы упругости", latex: "A = -\\frac{kx^2}{2}", symbols: { A: "работа, Дж", k: "жёсткость, Н/м", x: "деформация, м" }, ege: "Задание 3" },
-          { id: "e10", title: "Работа силы трения", latex: "A = -F_{тр} \\cdot s", symbols: { A: "работа, Дж", F_тр: "сила трения, Н", s: "перемещение, м" }, ege: "Задание 3" }
+          { id: "e7", title: "КПД", latex: "\\eta = \\frac{A_{полезная}}{A_{затраченная}} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", A_полезная: "полезная работа, Дж", A_затраченная: "затраченная работа, Дж" }, ege: "Задание 3" }
         ]
       }
     ]
@@ -548,8 +601,7 @@ const topics = [
         title: "Статика",
         formulas: [
           { id: "s1", title: "Момент силы", latex: "M = F \\cdot l", symbols: { M: "момент силы, Н·м", F: "сила, Н", l: "плечо силы, м" }, ege: "Задание 4" },
-          { id: "s2", title: "Условие равновесия рычага", latex: "F_1 l_1 = F_2 l_2", symbols: { F_1: "сила 1, Н", l_1: "плечо 1, м", F_2: "сила 2, Н", l_2: "плечо 2, м" }, ege: "Задание 4" },
-          { id: "s7", title: "Условие равновесия твёрдого тела", latex: "\\sum M_{по\\ часовой} = \\sum M_{против}", symbols: { M: "момент силы, Н·м" }, ege: "Задание 4" }
+          { id: "s2", title: "Условие равновесия рычага", latex: "F_1 l_1 = F_2 l_2", symbols: { F_1: "сила 1, Н", l_1: "плечо 1, м", F_2: "сила 2, Н", l_2: "плечо 2, м" }, ege: "Задание 4" }
         ]
       },
       {
@@ -558,8 +610,7 @@ const topics = [
           { id: "s3", title: "Давление", latex: "p = \\frac{F}{S}", symbols: { p: "давление, Па", F: "сила, Н", S: "площадь, м²" }, ege: "Задание 4" },
           { id: "s4", title: "Давление жидкости на глубине", latex: "p = \\rho g h", symbols: { p: "давление, Па", "\\rho": "плотность, кг/м³", g: "ускорение свободного падения", h: "глубина, м" }, ege: "Задание 4" },
           { id: "s5", title: "Сила Архимеда", latex: "F_A = \\rho_ж g V_т", symbols: { F_A: "сила Архимеда, Н", "\\rho_ж": "плотность жидкости, кг/м³", g: "ускорение свободного падения", V_т: "объём погружённой части, м³" }, ege: "Задание 4" },
-          { id: "s6", title: "Плотность вещества", latex: "\\rho = \\frac{m}{V}", symbols: { "\\rho": "плотность, кг/м³", m: "масса, кг", V: "объём, м³" }, ege: "Задание 4" },
-          { id: "s8", title: "Условие плавания тел", latex: "F_A = mg", symbols: { F_A: "сила Архимеда, Н", m: "масса, кг", g: "ускорение свободного падения" }, ege: "Задание 4" }
+          { id: "s6", title: "Плотность вещества", latex: "\\rho = \\frac{m}{V}", symbols: { "\\rho": "плотность, кг/м³", m: "масса, кг", V: "объём, м³" }, ege: "Задание 4" }
         ]
       }
     ]
@@ -575,32 +626,28 @@ const topics = [
           { id: "m1", title: "Количество вещества", latex: "\\nu = \\frac{m}{M} = \\frac{N}{N_A}", symbols: { "\\nu": "количество вещества, моль", m: "масса, кг", M: "молярная масса, кг/моль", N: "число молекул", N_A: "число Авогадро" }, ege: "Задание 7" },
           { id: "m2", title: "Концентрация молекул", latex: "n = \\frac{N}{V}", symbols: { n: "концентрация, м⁻³", N: "число молекул", V: "объём, м³" }, ege: "Задание 7" },
           { id: "m3", title: "Средняя кинетическая энергия молекул", latex: "\\bar{E}_k = \\frac{3}{2}kT", symbols: { E_k: "средняя кинетическая энергия, Дж", k: "постоянная Больцмана", T: "абсолютная температура, К" }, ege: "Задание 7" },
-          { id: "m4", title: "Основное уравнение МКТ", latex: "p = \\frac{1}{3}m_0 n \\bar{v}^2 = \\frac{2}{3}n\\bar{E}_k", symbols: { p: "давление, Па", m_0: "масса молекулы, кг", n: "концентрация, м⁻³", v: "средняя квадратичная скорость, м/с" }, ege: "Задание 7" },
-          { id: "m10", title: "Средняя квадратичная скорость молекул", latex: "\\bar{v} = \\sqrt{\\frac{3kT}{m_0}} = \\sqrt{\\frac{3RT}{M}}", symbols: { v: "средняя квадратичная скорость, м/с", k: "постоянная Больцмана", T: "температура, К", m_0: "масса молекулы, кг" }, ege: "Задание 7" },
-          { id: "m11", title: "Связь температуры и энергии", latex: "T = \\frac{2}{3k}\\bar{E}_k", symbols: { T: "температура, К", k: "постоянная Больцмана", E_k: "средняя кинетическая энергия, Дж" }, ege: "Задание 7" }
+          { id: "m4", title: "Основное уравнение МКТ", latex: "p = \\frac{1}{3}m_0 n \\bar{v}^2 = \\frac{2}{3}n\\bar{E}_k", symbols: { p: "давление, Па", m_0: "масса молекулы, кг", n: "концентрация, м⁻³", v: "средняя квадратичная скорость, м/с" }, ege: "Задание 7" }
         ]
       },
       {
         title: "Уравнение состояния идеального газа",
         formulas: [
           { id: "m5", title: "Уравнение Менделеева-Клапейрона", latex: "pV = \\nu RT", symbols: { p: "давление, Па", V: "объём, м³", "\\nu": "количество вещества, моль", R: "универсальная газовая постоянная", T: "температура, К" }, ege: "Задание 7" },
-          { id: "m12", title: "Объединённый газовый закон", latex: "\\frac{p_1 V_1}{T_1} = \\frac{p_2 V_2}{T_2}", symbols: { p: "давление, Па", V: "объём, м³", T: "температура, К" }, ege: "Задание 7" },
-          { id: "m13", title: "Связь давления и концентрации", latex: "p = nkT", symbols: { p: "давление, Па", n: "концентрация, м⁻³", k: "постоянная Больцмана", T: "температура, К" }, ege: "Задание 7" }
+          { id: "m12", title: "Объединённый газовый закон", latex: "\\frac{p_1 V_1}{T_1} = \\frac{p_2 V_2}{T_2}", symbols: { p: "давление, Па", V: "объём, м³", T: "температура, К" }, ege: "Задание 7" }
         ]
       },
       {
         title: "Изопроцессы",
         formulas: [
-          { id: "m6", title: "Закон Бойля-Мариотта (изотерма)", latex: "pV = const", symbols: { p: "давление, Па", V: "объём, м³" }, note: "T = const", ege: "Задание 7" },
-          { id: "m7", title: "Закон Гей-Люссака (изобара)", latex: "\\frac{V}{T} = const", symbols: { V: "объём, м³", T: "температура, К" }, note: "p = const", ege: "Задание 7" },
-          { id: "m8", title: "Закон Шарля (изохора)", latex: "\\frac{p}{T} = const", symbols: { p: "давление, Па", T: "температура, К" }, note: "V = const", ege: "Задание 7" }
+          { id: "m6", title: "Закон Бойля-Мариотта (изотерма)", latex: "pV = const", symbols: { p: "давление, Па", V: "объём, м³" }, note: "T = const", ege: "Задание 7", image: "images/iso1.jpg" },
+          { id: "m7", title: "Закон Гей-Люссака (изобара)", latex: "\\frac{V}{T} = const", symbols: { V: "объём, м³", T: "температура, К" }, note: "p = const", ege: "Задание 7", image: "images/iso6.jpg" },
+          { id: "m8", title: "Закон Шарля (изохора)", latex: "\\frac{p}{T} = const", symbols: { p: "давление, Па", T: "температура, К" }, note: "V = const", ege: "Задание 7", image: "images/iso8.jpg" }
         ]
       },
       {
         title: "Влажность",
         formulas: [
-          { id: "m9", title: "Относительная влажность", latex: "\\varphi = \\frac{p}{p_0} \\cdot 100\\% = \\frac{\\rho}{\\rho_0} \\cdot 100\\%", symbols: { "\\varphi": "относительная влажность, %", p: "парциальное давление пара, Па", p_0: "давление насыщенного пара, Па" }, ege: "Задание 8" },
-          { id: "m14", title: "Абсолютная влажность", latex: "\\rho = \\frac{m_{пара}}{V}", symbols: { "\\rho": "абсолютная влажность, кг/м³", m_пара: "масса пара, кг", V: "объём, м³" }, ege: "Задание 8" }
+          { id: "m9", title: "Относительная влажность", latex: "\\varphi = \\frac{p}{p_0} \\cdot 100\\% = \\frac{\\rho}{\\rho_0} \\cdot 100\\%", symbols: { "\\varphi": "относительная влажность, %", p: "парциальное давление пара, Па", p_0: "давление насыщенного пара, Па" }, ege: "Задание 8" }
         ]
       }
     ]
@@ -615,11 +662,7 @@ const topics = [
         formulas: [
           { id: "t1", title: "Внутренняя энергия идеального газа", latex: "U = \\frac{3}{2}\\nu RT", symbols: { U: "внутренняя энергия, Дж", "\\nu": "количество вещества, моль", R: "газовая постоянная", T: "температура, К" }, ege: "Задание 9" },
           { id: "t2", title: "Работа газа", latex: "A = p\\Delta V", symbols: { A: "работа, Дж", p: "давление, Па", "\\Delta V": "изменение объёма, м³" }, ege: "Задание 9" },
-          { id: "t3", title: "Первый закон термодинамики", latex: "\\Delta U = Q + A_{внеш}", symbols: { "\\Delta U": "изменение внутренней энергии, Дж", Q: "количество теплоты, Дж", A_внеш: "работа внешних сил, Дж" }, ege: "Задание 9" },
-          { id: "t9", title: "Первый закон термодинамики (через работу газа)", latex: "Q = \\Delta U + A_{газа}", symbols: { Q: "количество теплоты, Дж", "\\Delta U": "изменение внутренней энергии, Дж", A_газа: "работа газа, Дж" }, ege: "Задание 9" },
-          { id: "t10", title: "Работа при изобарном процессе", latex: "A = p\\Delta V = \\nu R \\Delta T", symbols: { A: "работа, Дж", p: "давление, Па", "\\Delta V": "изменение объёма, м³" }, ege: "Задание 9" },
-          { id: "t11", title: "Работа при изотермическом процессе", latex: "A = \\nu R T \\ln\\frac{V_2}{V_1}", symbols: { A: "работа, Дж", "\\nu": "количество вещества, моль", T: "температура, К" }, ege: "Задание 9" },
-          { id: "t12", title: "Изменение внутренней энергии", latex: "\\Delta U = \\frac{3}{2}\\nu R \\Delta T", symbols: { "\\Delta U": "изменение внутренней энергии, Дж", "\\nu": "количество вещества, моль", "\\Delta T": "изменение температуры, К" }, ege: "Задание 9" }
+          { id: "t3", title: "Первый закон термодинамики", latex: "\\Delta U = Q + A_{внеш}", symbols: { "\\Delta U": "изменение внутренней энергии, Дж", Q: "количество теплоты, Дж", A_внеш: "работа внешних сил, Дж" }, ege: "Задание 9" }
         ]
       },
       {
@@ -628,15 +671,7 @@ const topics = [
           { id: "t4", title: "Количество теплоты при нагревании", latex: "Q = cm\\Delta T", symbols: { Q: "количество теплоты, Дж", c: "удельная теплоёмкость, Дж/(кг·°C)", m: "масса, кг", "\\Delta T": "изменение температуры, °C" }, ege: "Задание 10" },
           { id: "t5", title: "Количество теплоты при плавлении", latex: "Q = \\lambda m", symbols: { Q: "количество теплоты, Дж", "\\lambda": "удельная теплота плавления, Дж/кг", m: "масса, кг" }, ege: "Задание 10" },
           { id: "t6", title: "Количество теплоты при парообразовании", latex: "Q = Lm", symbols: { Q: "количество теплоты, Дж", L: "удельная теплота парообразования, Дж/кг", m: "масса, кг" }, ege: "Задание 10" },
-          { id: "t7", title: "Количество теплоты при сгорании топлива", latex: "Q = qm", symbols: { Q: "количество теплоты, Дж", q: "удельная теплота сгорания, Дж/кг", m: "масса, кг" }, ege: "Задание 10" },
-          { id: "t13", title: "Уравнение теплового баланса", latex: "Q_{отд} = Q_{погл}", symbols: { Q_отд: "отданная теплота, Дж", Q_погл: "поглощённая теплота, Дж" }, ege: "Задание 10" }
-        ]
-      },
-      {
-        title: "Тепловые двигатели",
-        formulas: [
-          { id: "t8", title: "КПД теплового двигателя", latex: "\\eta = \\frac{Q_1 - Q_2}{Q_1} \\cdot 100\\% = \\frac{A_{полезная}}{Q_1} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", Q_1: "теплота от нагревателя, Дж", Q_2: "теплота холодильнику, Дж", A_полезная: "полезная работа, Дж" }, ege: "Задание 10" },
-          { id: "t14", title: "КПД идеального теплового двигателя (Карно)", latex: "\\eta = \\frac{T_1 - T_2}{T_1} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", T_1: "температура нагревателя, К", T_2: "температура холодильника, К" }, ege: "Задание 10" }
+          { id: "t8", title: "КПД теплового двигателя", latex: "\\eta = \\frac{Q_1 - Q_2}{Q_1} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", Q_1: "теплота от нагревателя, Дж", Q_2: "теплота холодильнику, Дж" }, ege: "Задание 10" }
         ]
       }
     ]
@@ -650,11 +685,7 @@ const topics = [
         title: "Электростатика",
         formulas: [
           { id: "el1", title: "Закон Кулона", latex: "F = k\\frac{|q_1||q_2|}{\\varepsilon r^2}", symbols: { F: "сила, Н", k: "коэффициент пропорциональности", q_1: "заряд 1, Кл", q_2: "заряд 2, Кл", "\\varepsilon": "диэлектрическая проницаемость", r: "расстояние, м" }, ege: "Задание 11" },
-          { id: "el2", title: "Напряжённость электрического поля", latex: "E = \\frac{F}{q}", symbols: { E: "напряжённость, В/м", F: "сила, Н", q: "заряд, Кл" }, ege: "Задание 11" },
-          { id: "el13", title: "Напряжённость точечного заряда", latex: "E = k\\frac{|q|}{\\varepsilon r^2}", symbols: { E: "напряжённость, В/м", k: "коэффициент пропорциональности", q: "заряд, Кл", r: "расстояние, м" }, ege: "Задание 11" },
-          { id: "el14", title: "Потенциал точечного заряда", latex: "\\varphi = k\\frac{q}{\\varepsilon r}", symbols: { "\\varphi": "потенциал, В", q: "заряд, Кл", r: "расстояние, м" }, ege: "Задание 11" },
-          { id: "el15", title: "Работа электрического поля", latex: "A = qU = q(\\varphi_1 - \\varphi_2)", symbols: { A: "работа, Дж", q: "заряд, Кл", U: "напряжение, В" }, ege: "Задание 11" },
-          { id: "el16", title: "Связь напряжения и напряжённости", latex: "U = Ed", symbols: { U: "напряжение, В", E: "напряжённость, В/м", d: "расстояние между пластинами, м" }, ege: "Задание 11", note: "Для однородного поля" }
+          { id: "el2", title: "Напряжённость электрического поля", latex: "E = \\frac{F}{q}", symbols: { E: "напряжённость, В/м", F: "сила, Н", q: "заряд, Кл" }, ege: "Задание 11" }
         ]
       },
       {
@@ -663,37 +694,28 @@ const topics = [
           { id: "el3", title: "Сила тока", latex: "I = \\frac{q}{t}", symbols: { I: "сила тока, А", q: "заряд, Кл", t: "время, с" }, ege: "Задание 11" },
           { id: "el4", title: "Закон Ома для участка цепи", latex: "I = \\frac{U}{R}", symbols: { I: "сила тока, А", U: "напряжение, В", R: "сопротивление, Ом" }, ege: "Задание 11" },
           { id: "el5", title: "Сопротивление проводника", latex: "R = \\frac{\\rho l}{S}", symbols: { R: "сопротивление, Ом", "\\rho": "удельное сопротивление, Ом·м", l: "длина, м", S: "площадь сечения, м²" }, ege: "Задание 12" },
-          { id: "el10", title: "Закон Ома для полной цепи", latex: "I = \\frac{\\varepsilon}{R + r}", symbols: { I: "сила тока, А", "\\varepsilon": "ЭДС, В", R: "внешнее сопротивление, Ом", r: "внутреннее сопротивление, Ом" }, ege: "Задание 15" },
-          { id: "el17", title: "Закон Джоуля-Ленца (через U)", latex: "Q = \\frac{U^2}{R}t", symbols: { Q: "количество теплоты, Дж", U: "напряжение, В", R: "сопротивление, Ом", t: "время, с" }, ege: "Задание 12" },
-          { id: "el18", title: "ЭДС источника", latex: "\\varepsilon = U + Ir", symbols: { "\\varepsilon": "ЭДС, В", U: "напряжение на внешней цепи, В", I: "сила тока, А", r: "внутреннее сопротивление, Ом" }, ege: "Задание 15" }
+          { id: "el10", title: "Закон Ома для полной цепи", latex: "I = \\frac{\\varepsilon}{R + r}", symbols: { I: "сила тока, А", "\\varepsilon": "ЭДС, В", R: "внешнее сопротивление, Ом", r: "внутреннее сопротивление, Ом" }, ege: "Задание 15" }
         ]
       },
       {
         title: "Соединение проводников",
         formulas: [
-          { id: "el6", title: "Последовательное соединение (R)", latex: "R_{общ} = R_1 + R_2 + ... + R_n", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12" },
-          { id: "el7", title: "Параллельное соединение (R)", latex: "\\frac{1}{R_{общ}} = \\frac{1}{R_1} + \\frac{1}{R_2} + ... + \\frac{1}{R_n}", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12" },
-          { id: "el19", title: "Последовательное соединение (I, U)", latex: "I = const, \\quad U = U_1 + U_2 + ...", symbols: { I: "сила тока, А", U: "напряжение, В" }, ege: "Задание 12" },
-          { id: "el20", title: "Параллельное соединение (I, U)", latex: "U = const, \\quad I = I_1 + I_2 + ...", symbols: { I: "сила тока, А", U: "напряжение, В" }, ege: "Задание 12" },
-          { id: "el21", title: "Параллельное соединение (2 резистора)", latex: "R_{общ} = \\frac{R_1 R_2}{R_1 + R_2}", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12" }
+          { id: "el6", title: "Последовательное соединение", latex: "R_{общ} = R_1 + R_2 + ... + R_n", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12", image: "images/circuit-series.jpg" },
+          { id: "el7", title: "Параллельное соединение", latex: "\\frac{1}{R_{общ}} = \\frac{1}{R_1} + \\frac{1}{R_2} + ... + \\frac{1}{R_n}", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12", image: "images/circuit-parallel.jpg" }
         ]
       },
       {
         title: "Работа и мощность тока",
         formulas: [
           { id: "el8", title: "Мощность электрического тока", latex: "P = UI = I^2R = \\frac{U^2}{R}", symbols: { P: "мощность, Вт", U: "напряжение, В", I: "сила тока, А", R: "сопротивление, Ом" }, ege: "Задание 14" },
-          { id: "el9", title: "Закон Джоуля-Ленца", latex: "Q = I^2Rt", symbols: { Q: "количество теплоты, Дж", I: "сила тока, А", R: "сопротивление, Ом", t: "время, с" }, ege: "Задание 14" },
-          { id: "el22", title: "Работа электрического тока", latex: "A = UIt = Pt", symbols: { A: "работа, Дж", U: "напряжение, В", I: "сила тока, А", t: "время, с" }, ege: "Задание 14" }
+          { id: "el9", title: "Закон Джоуля-Ленца", latex: "Q = I^2Rt", symbols: { Q: "количество теплоты, Дж", I: "сила тока, А", R: "сопротивление, Ом", t: "время, с" }, ege: "Задание 14" }
         ]
       },
       {
         title: "Конденсаторы",
         formulas: [
           { id: "el11", title: "Электроёмкость конденсатора", latex: "C = \\frac{q}{U}", symbols: { C: "электроёмкость, Ф", q: "заряд, Кл", U: "напряжение, В" }, ege: "Задание 14" },
-          { id: "el12", title: "Энергия конденсатора", latex: "W = \\frac{CU^2}{2} = \\frac{q^2}{2C}", symbols: { W: "энергия, Дж", C: "электроёмкость, Ф", U: "напряжение, В", q: "заряд, Кл" }, ege: "Задание 14" },
-          { id: "el23", title: "Ёмкость плоского конденсатора", latex: "C = \\frac{\\varepsilon \\varepsilon_0 S}{d}", symbols: { C: "электроёмкость, Ф", "\\varepsilon": "диэлектрическая проницаемость", S: "площадь пластин, м²", d: "расстояние между пластинами, м" }, ege: "Задание 14" },
-          { id: "el24", title: "Параллельное соединение конденсаторов", latex: "C_{общ} = C_1 + C_2 + ...", symbols: { C_общ: "общая ёмкость, Ф" }, ege: "Задание 14" },
-          { id: "el25", title: "Последовательное соединение конденсаторов", latex: "\\frac{1}{C_{общ}} = \\frac{1}{C_1} + \\frac{1}{C_2} + ...", symbols: { C_общ: "общая ёмкость, Ф" }, ege: "Задание 14" }
+          { id: "el12", title: "Энергия конденсатора", latex: "W = \\frac{CU^2}{2} = \\frac{q^2}{2C}", symbols: { W: "энергия, Дж", C: "электроёмкость, Ф", U: "напряжение, В", q: "заряд, Кл" }, ege: "Задание 14" }
         ]
       }
     ]
@@ -706,11 +728,8 @@ const topics = [
       {
         title: "Силы в магнитном поле",
         formulas: [
-          { id: "mg1", title: "Сила Ампера", latex: "F_A = BIl\\sin\\alpha", symbols: { F_A: "сила Ампера, Н", B: "индукция, Тл", I: "сила тока, А", l: "длина проводника, м", "\\alpha": "угол между B и I" }, ege: "Задание 15" },
-          { id: "mg2", title: "Сила Лоренца", latex: "F_L = |q|vB\\sin\\alpha", symbols: { F_L: "сила Лоренца, Н", q: "заряд, Кл", v: "скорость, м/с", B: "индукция, Тл" }, ege: "Задание 15" },
-          { id: "mg7", title: "Радиус траектории заряда в магнитном поле", latex: "R = \\frac{mv}{|q|B}", symbols: { R: "радиус, м", m: "масса, кг", v: "скорость, м/с", q: "заряд, Кл", B: "индукция, Тл" }, ege: "Задание 15" },
-          { id: "mg8", title: "Период обращения заряда в магнитном поле", latex: "T = \\frac{2\\pi m}{|q|B}", symbols: { T: "период, с", m: "масса, кг", q: "заряд, Кл", B: "индукция, Тл" }, ege: "Задание 15" },
-          { id: "mg9", title: "Момент силы, действующий на рамку с током", latex: "M = BIS\\sin\\alpha", symbols: { M: "момент, Н·м", B: "индукция, Тл", I: "сила тока, А", S: "площадь рамки, м²" }, ege: "Задание 15" }
+          { id: "mg1", title: "Сила Ампера", latex: "F_A = BIl\\sin\\alpha", symbols: { F_A: "сила Ампера, Н", B: "индукция, Тл", I: "сила тока, А", l: "длина проводника, м", "\\alpha": "угол между B и I" }, ege: "Задание 15", image: "images/hand-left.jpg" },
+          { id: "mg2", title: "Сила Лоренца", latex: "F_L = |q|vB\\sin\\alpha", symbols: { F_L: "сила Лоренца, Н", q: "заряд, Кл", v: "скорость, м/с", B: "индукция, Тл" }, ege: "Задание 15", image: "images/hand-right.jpg" }
         ]
       },
       {
@@ -718,14 +737,6 @@ const topics = [
         formulas: [
           { id: "mg3", title: "Магнитный поток", latex: "\\Phi = BS\\cos\\alpha", symbols: { "\\Phi": "магнитный поток, Вб", B: "индукция, Тл", S: "площадь, м²", "\\alpha": "угол между B и нормалью" }, ege: "Задание 16" },
           { id: "mg4", title: "Закон электромагнитной индукции (ЭДС)", latex: "\\varepsilon_i = -\\frac{\\Delta\\Phi}{\\Delta t}", symbols: { "\\varepsilon_i": "ЭДС индукции, В", "\\Delta\\Phi": "изменение потока, Вб", "\\Delta t": "время, с" }, ege: "Задание 16" },
-          { id: "mg5", title: "ЭДС индукции в движущемся проводнике", latex: "\\varepsilon = Bvl\\sin\\alpha", symbols: { "\\varepsilon": "ЭДС, В", B: "индукция, Тл", v: "скорость, м/с", l: "длина, м" }, ege: "Задание 16" },
-          { id: "mg10", title: "ЭДС самоиндукции", latex: "\\varepsilon_s = -L\\frac{\\Delta I}{\\Delta t}", symbols: { "\\varepsilon_s": "ЭДС самоиндукции, В", L: "индуктивность, Гн", "\\Delta I": "изменение силы тока, А" }, ege: "Задание 16" },
-          { id: "mg11", title: "Индуктивность катушки", latex: "L = \\frac{\\Phi}{I}", symbols: { L: "индуктивность, Гн", "\\Phi": "магнитный поток, Вб", I: "сила тока, А" }, ege: "Задание 16" }
-        ]
-      },
-      {
-        title: "Индуктивность и энергия",
-        formulas: [
           { id: "mg6", title: "Энергия магнитного поля", latex: "W = \\frac{LI^2}{2}", symbols: { W: "энергия, Дж", L: "индуктивность, Гн", I: "сила тока, А" }, ege: "Задание 15" }
         ]
       }
@@ -741,29 +752,19 @@ const topics = [
         formulas: [
           { id: "o1", title: "Период математического маятника", latex: "T = 2\\pi\\sqrt{\\frac{l}{g}}", symbols: { T: "период, с", l: "длина нити, м", g: "ускорение свободного падения, м/с²" }, ege: "Задание 13" },
           { id: "o2", title: "Период пружинного маятника", latex: "T = 2\\pi\\sqrt{\\frac{m}{k}}", symbols: { T: "период, с", m: "масса, кг", k: "жёсткость, Н/м" }, ege: "Задание 13" },
-          { id: "o3", title: "Связь периода и частоты", latex: "T = \\frac{1}{\\nu}", symbols: { T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 13" },
-          { id: "o5", title: "Уравнение гармонических колебаний", latex: "x = A\\cos(\\omega t + \\varphi_0)", symbols: { x: "смещение, м", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с", "\\varphi_0": "начальная фаза" }, ege: "Задание 13" },
-          { id: "o7", title: "Циклическая частота", latex: "\\omega = 2\\pi\\nu = \\frac{2\\pi}{T}", symbols: { "\\omega": "циклическая частота, рад/с", "\\nu": "частота, Гц", T: "период, с" }, ege: "Задание 13" },
-          { id: "o8", title: "Скорость при колебаниях", latex: "v = x' = -A\\omega\\sin(\\omega t + \\varphi_0)", symbols: { v: "скорость, м/с", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с" }, ege: "Задание 13" },
-          { id: "o9", title: "Ускорение при колебаниях", latex: "a = x'' = -A\\omega^2\\cos(\\omega t + \\varphi_0)", symbols: { a: "ускорение, м/с²", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с" }, ege: "Задание 13" },
-          { id: "o10", title: "Максимальная скорость при колебаниях", latex: "v_{max} = A\\omega", symbols: { v_max: "максимальная скорость, м/с", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с" }, ege: "Задание 13" },
-          { id: "o11", title: "Максимальное ускорение при колебаниях", latex: "a_{max} = A\\omega^2", symbols: { a_max: "максимальное ускорение, м/с²", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с" }, ege: "Задание 13" }
+          { id: "o5", title: "Уравнение гармонических колебаний", latex: "x = A\\cos(\\omega t + \\varphi_0)", symbols: { x: "смещение, м", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с", "\\varphi_0": "начальная фаза" }, ege: "Задание 13", image: "images/oscillation-graph.jpg" }
         ]
       },
       {
         title: "Волны",
         formulas: [
-          { id: "o4", title: "Длина волны", latex: "\\lambda = vT = \\frac{v}{\\nu}", symbols: { "\\lambda": "длина волны, м", v: "скорость волны, м/с", T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 13" },
-          { id: "o12", title: "Скорость волны в упругой среде", latex: "v = \\sqrt{\\frac{E}{\\rho}}", symbols: { v: "скорость, м/с", E: "модуль упругости, Па", "\\rho": "плотность, кг/м³" }, ege: "Задание 13" }
+          { id: "o4", title: "Длина волны", latex: "\\lambda = vT = \\frac{v}{\\nu}", symbols: { "\\lambda": "длина волны, м", v: "скорость волны, м/с", T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 13" }
         ]
       },
       {
         title: "Электромагнитные колебания",
         formulas: [
-          { id: "o6", title: "Формула Томсона", latex: "T = 2\\pi\\sqrt{LC}", symbols: { T: "период, с", L: "индуктивность, Гн", C: "электроёмкость, Ф" }, ege: "Задание 17" },
-          { id: "o13", title: "Собственная частота колебательного контура", latex: "\\nu = \\frac{1}{2\\pi\\sqrt{LC}}", symbols: { "\\nu": "частота, Гц", L: "индуктивность, Гн", C: "электроёмкость, Ф" }, ege: "Задание 17" },
-          { id: "o14", title: "Максимальная энергия конденсатора", latex: "W_C = \\frac{CU^2}{2}", symbols: { W_C: "энергия, Дж", C: "электроёмкость, Ф", U: "напряжение, В" }, ege: "Задание 17" },
-          { id: "o15", title: "Максимальная энергия катушки", latex: "W_L = \\frac{LI^2}{2}", symbols: { W_L: "энергия, Дж", L: "индуктивность, Гн", I: "сила тока, А" }, ege: "Задание 17" }
+          { id: "o6", title: "Формула Томсона", latex: "T = 2\\pi\\sqrt{LC}", symbols: { T: "период, с", L: "индуктивность, Гн", C: "электроёмкость, Ф" }, ege: "Задание 17" }
         ]
       }
     ]
@@ -777,26 +778,22 @@ const topics = [
         title: "Геометрическая оптика",
         formulas: [
           { id: "op1", title: "Закон отражения", latex: "\\alpha = \\beta", symbols: { "\\alpha": "угол падения", "\\beta": "угол отражения" }, ege: "Задание 17" },
-          { id: "op2", title: "Закон преломления (Снеллиуса)", latex: "\\frac{\\sin\\alpha}{\\sin\\beta} = \\frac{n_2}{n_1} = n_{21}", symbols: { "\\alpha": "угол падения", "\\beta": "угол преломления", n_1: "показатель преломления 1 среды", n_2: "показатель преломления 2 среды" }, ege: "Задание 17" },
-          { id: "op3", title: "Абсолютный показатель преломления", latex: "n = \\frac{c}{v}", symbols: { n: "показатель преломления", c: "скорость света в вакууме, м/с", v: "скорость света в среде, м/с" }, ege: "Задание 17" },
-          { id: "op8", title: "Предельный угол полного отражения", latex: "\\sin\\alpha_{пр} = \\frac{n_2}{n_1}", symbols: { "\\alpha_пр": "предельный угол", n_1: "показатель преломления 1 среды", n_2: "показатель преломления 2 среды" }, ege: "Задание 17", note: "При переходе из более плотной в менее плотную среду" }
+          { id: "op2", title: "Закон преломления (Снеллиуса)", latex: "\\frac{\\sin\\alpha}{\\sin\\beta} = \\frac{n_2}{n_1}", symbols: { "\\alpha": "угол падения", "\\beta": "угол преломления", n_1: "показатель преломления 1 среды", n_2: "показатель преломления 2 среды" }, ege: "Задание 17" },
+          { id: "op3", title: "Абсолютный показатель преломления", latex: "n = \\frac{c}{v}", symbols: { n: "показатель преломления", c: "скорость света в вакууме, м/с", v: "скорость света в среде, м/с" }, ege: "Задание 17" }
         ]
       },
       {
         title: "Линзы",
         formulas: [
           { id: "op4", title: "Оптическая сила линзы", latex: "D = \\frac{1}{F}", symbols: { D: "оптическая сила, дптр", F: "фокусное расстояние, м" }, ege: "Задание 17" },
-          { id: "op5", title: "Формула тонкой линзы", latex: "\\frac{1}{F} = \\frac{1}{d} + \\frac{1}{f}", symbols: { F: "фокусное расстояние, м", d: "расстояние до предмета, м", f: "расстояние до изображения, м" }, ege: "Задание 17" },
+          { id: "op5", title: "Формула тонкой линзы", latex: "\\frac{1}{F} = \\frac{1}{d} + \\frac{1}{f}", symbols: { F: "фокусное расстояние, м", d: "расстояние до предмета, м", f: "расстояние до изображения, м" }, ege: "Задание 17", image: "images/optics-lens.jpg" },
           { id: "op6", title: "Увеличение линзы", latex: "\\Gamma = \\frac{H}{h} = \\frac{f}{d}", symbols: { "\\Gamma": "увеличение", H: "высота изображения, м", h: "высота предмета, м" }, ege: "Задание 17" }
         ]
       },
       {
         title: "Волновая оптика",
         formulas: [
-          { id: "op7", title: "Условие дифракционного максимума", latex: "d\\sin\\varphi = k\\lambda", symbols: { d: "период решётки, м", "\\varphi": "угол дифракции", k: "порядок максимума", "\\lambda": "длина волны, м" }, ege: "Задание 18" },
-          { id: "op9", title: "Условие дифракционного минимума", latex: "d\\sin\\varphi = (2k+1)\\frac{\\lambda}{2}", symbols: { d: "период решётки, м", k: "порядок минимума", "\\lambda": "длина волны, м" }, ege: "Задание 18" },
-          { id: "op10", title: "Условие интерференционного максимума", latex: "\\Delta d = k\\lambda", symbols: { "\\Delta d": "разность хода, м", k: "целое число", "\\lambda": "длина волны, м" }, ege: "Задание 18" },
-          { id: "op11", title: "Условие интерференционного минимума", latex: "\\Delta d = (2k+1)\\frac{\\lambda}{2}", symbols: { "\\Delta d": "разность хода, м", "\\lambda": "длина волны, м" }, ege: "Задание 18" }
+          { id: "op7", title: "Условие дифракционного максимума", latex: "d\\sin\\varphi = k\\lambda", symbols: { d: "период решётки, м", "\\varphi": "угол дифракции", k: "порядок максимума", "\\lambda": "длина волны, м" }, ege: "Задание 18" }
         ]
       }
     ]
@@ -809,28 +806,21 @@ const topics = [
       {
         title: "Фотоны",
         formulas: [
-          { id: "q1", title: "Энергия фотона", latex: "E = h\\nu = \\frac{hc}{\\lambda}", symbols: { E: "энергия, Дж", h: "постоянная Планка", "\\nu": "частота, Гц", "\\lambda": "длина волны, м" }, ege: "Задание 19" },
-          { id: "q2", title: "Импульс фотона", latex: "p = \\frac{h}{\\lambda} = \\frac{E}{c}", symbols: { p: "импульс, кг·м/с", h: "постоянная Планка", "\\lambda": "длина волны, м" }, ege: "Задание 19" },
-          { id: "q7", title: "Масса фотона", latex: "m = \\frac{E}{c^2} = \\frac{h\\nu}{c^2}", symbols: { m: "масса, кг", E: "энергия, Дж", c: "скорость света, м/с" }, ege: "Задание 19" }
+          { id: "q1", title: "Энергия фотона", latex: "E = h\\nu = \\frac{hc}{\\lambda}", symbols: { E: "энергия, Дж", h: "постоянная Планка", "\\nu": "частота, Гц", "\\lambda": "длина волны, м" }, ege: "Задание 19" }
         ]
       },
       {
         title: "Фотоэффект",
         formulas: [
-          { id: "q3", title: "Уравнение Эйнштейна для фотоэффекта", latex: "h\\nu = A_{вых} + E_k", symbols: { h: "постоянная Планка", "\\nu": "частота, Гц", A_вых: "работа выхода, Дж", E_k: "кинетическая энергия, Дж" }, ege: "Задание 19" },
-          { id: "q4", title: "Красная граница фотоэффекта", latex: "\\nu_{min} = \\frac{A_{вых}}{h}", symbols: { "\\nu_min": "минимальная частота, Гц", A_вых: "работа выхода, Дж", h: "постоянная Планка" }, ege: "Задание 19" },
-          { id: "q8", title: "Максимальная кинетическая энергия фотоэлектрона", latex: "E_k = eU_{задерж}", symbols: { E_k: "кинетическая энергия, Дж", e: "заряд электрона, Кл", U_задерж: "задерживающее напряжение, В" }, ege: "Задание 19" }
+          { id: "q3", title: "Уравнение Эйнштейна для фотоэффекта", latex: "h\\nu = A_{вых} + E_k", symbols: { h: "постоянная Планка", "\\nu": "частота, Гц", A_вых: "работа выхода, Дж", E_k: "кинетическая энергия, Дж" }, ege: "Задание 19", image: "images/optics-photoeffect.jpg" },
+          { id: "q4", title: "Красная граница фотоэффекта", latex: "\\nu_{min} = \\frac{A_{вых}}{h}", symbols: { "\\nu_min": "минимальная частота, Гц", A_вых: "работа выхода, Дж", h: "постоянная Планка" }, ege: "Задание 19" }
         ]
       },
       {
         title: "Атом и ядро",
         formulas: [
           { id: "q5", title: "Связь массы и энергии", latex: "E = mc^2", symbols: { E: "энергия, Дж", m: "масса, кг", c: "скорость света, м/с" }, ege: "Задание 20" },
-          { id: "q6", title: "Закон радиоактивного распада", latex: "N = N_0 \\cdot 2^{-t/T}", symbols: { N: "число ядер, шт", N_0: "начальное число ядер", t: "время, с", T: "период полураспада, с" }, ege: "Задание 20" },
-          { id: "q9", title: "Энергия связи атомного ядра", latex: "E_{св} = \\Delta m c^2", symbols: { E_св: "энергия связи, Дж", "\\Delta m": "дефект массы, кг", c: "скорость света, м/с" }, ege: "Задание 20" },
-          { id: "q10", title: "Дефект массы", latex: "\\Delta m = Zm_p + Nm_n - M_{ядра}", symbols: { "\\Delta m": "дефект массы, кг", Z: "число протонов", m_p: "масса протона, кг", N: "число нейтронов", m_n: "масса нейтрона, кг", M_ядра: "масса ядра, кг" }, ege: "Задание 20" },
-          { id: "q11", title: "Энергия фотона при переходе атома", latex: "h\\nu = E_n - E_m", symbols: { h: "постоянная Планка", "\\nu": "частота, Гц", E_n: "энергия уровня n, Дж", E_m: "энергия уровня m, Дж" }, ege: "Задание 20" },
-          { id: "q12", title: "Период полураспада (через активность)", latex: "T = \\frac{\\ln 2}{\\lambda}", symbols: { T: "период полураспада, с", "\\lambda": "постоянная распада, с⁻¹" }, ege: "Задание 20" }
+          { id: "q6", title: "Закон радиоактивного распада", latex: "N = N_0 \\cdot 2^{-t/T}", symbols: { N: "число ядер, шт", N_0: "начальное число ядер", t: "время, с", T: "период полураспада, с" }, ege: "Задание 20" }
         ]
       }
     ]
@@ -842,6 +832,555 @@ const allFormulas = topics.flatMap(t =>
 );
 
 /* =========================================================
+   ЗАДАЧИ С АВТОПРОВЕРКОЙ (генерация чисел)
+   ---------------------------------------------------------
+   Каждая задача — объект с полями:
+     id, topic, title, ege,
+     generate() — возвращает { condition, options, correct, solution }
+   ========================================================= */
+
+// Утилиты для генерации чисел
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function round2(x) { return Math.round(x * 100) / 100; }
+
+// Формирует 4 варианта: правильный + 3 отвлекающих
+function makeOptions(correct, distractors) {
+  const opts = [correct, ...distractors];
+  const seen = new Set();
+  const unique = [];
+  for (const o of opts) {
+    const key = String(o);
+    if (!seen.has(key) && unique.length < 4) {
+      seen.add(key);
+      unique.push(o);
+    }
+  }
+  // Если после удаления дубликатов не хватает — добиваем случайными
+  while (unique.length < 4) {
+    const filler = round2(correct * (0.5 + Math.random()));
+    if (!seen.has(String(filler))) {
+      seen.add(String(filler));
+      unique.push(filler);
+    }
+  }
+  // Перемешиваем
+  const shuffled = [...unique].sort(() => Math.random() - 0.5);
+  return { options: shuffled, correctIndex: shuffled.indexOf(correct) };
+}
+
+const tasks = [
+  // 1. Равномерное движение: v = s / t
+  {
+    id: "task_v_st",
+    topic: "kinematics",
+    title: "Скорость при равномерном движении",
+    ege: "Задание 1",
+    generate() {
+      const v = randInt(2, 20);
+      const t = randInt(2, 15);
+      const s = v * t;
+      const correct = v;
+      const { options, correctIndex } = makeOptions(correct, [v + 2, v - 1, v + 5, v * 2]);
+      return {
+        condition: `Тело движется равномерно и прямолинейно. За время t = ${t} с оно проходит путь s = ${s} м. Найдите скорость тела.`,
+        options: options.map(o => `${o} м/с`),
+        correctIndex,
+        solution: [
+          `Формула скорости при равномерном движении: $v = \\frac{s}{t}$`,
+          `Подставляем значения: $v = \\frac{${s}}{${t}} = ${correct}$ м/с`
+        ],
+        answer: `${correct} м/с`
+      };
+    }
+  },
+
+  // 2. Путь: s = v * t
+  {
+    id: "task_s_vt",
+    topic: "kinematics",
+    title: "Путь при равномерном движении",
+    ege: "Задание 1",
+    generate() {
+      const v = randInt(3, 25);
+      const t = randInt(2, 12);
+      const s = v * t;
+      const correct = s;
+      const { options, correctIndex } = makeOptions(correct, [s + 5, s - 10, s * 2, Math.round(s / 2)]);
+      return {
+        condition: `Тело движется равномерно со скоростью v = ${v} м/с. Какой путь оно пройдёт за t = ${t} с?`,
+        options: options.map(o => `${o} м`),
+        correctIndex,
+        solution: [
+          `Формула пути: $s = v \\cdot t$`,
+          `Подставляем: $s = ${v} \\cdot ${t} = ${correct}$ м`
+        ],
+        answer: `${correct} м`
+      };
+    }
+  },
+
+  // 3. Ускорение: a = (v - v0) / t
+  {
+    id: "task_a",
+    topic: "kinematics",
+    title: "Ускорение",
+    ege: "Задание 1",
+    generate() {
+      const v0 = randInt(0, 10);
+      const a = randInt(1, 6);
+      const t = randInt(2, 10);
+      const v = v0 + a * t;
+      const correct = a;
+      const { options, correctIndex } = makeOptions(correct, [a + 1, a + 2, a * 2, Math.max(1, a - 1)]);
+      return {
+        condition: `Скорость тела за время t = ${t} с изменилась с v₀ = ${v0} м/с до v = ${v} м/с. Найдите ускорение тела.`,
+        options: options.map(o => `${o} м/с²`),
+        correctIndex,
+        solution: [
+          `Формула ускорения: $a = \\frac{v - v_0}{t}$`,
+          `Подставляем: $a = \\frac{${v} - ${v0}}{${t}} = \\frac{${v - v0}}{${t}} = ${correct}$ м/с²`
+        ],
+        answer: `${correct} м/с²`
+      };
+    }
+  },
+
+  // 4. Скорость при равноускоренном: v = v0 + at
+  {
+    id: "task_v_v0at",
+    topic: "kinematics",
+    title: "Скорость при равноускоренном движении",
+    ege: "Задание 1",
+    generate() {
+      const v0 = randInt(0, 10);
+      const a = randInt(1, 5);
+      const t = randInt(2, 10);
+      const v = v0 + a * t;
+      const correct = v;
+      const { options, correctIndex } = makeOptions(correct, [v + a, v - a, v * 2, v + 5]);
+      return {
+        condition: `Тело движется с начальной скоростью v₀ = ${v0} м/с и ускорением a = ${a} м/с². Найдите скорость тела через t = ${t} с.`,
+        options: options.map(o => `${o} м/с`),
+        correctIndex,
+        solution: [
+          `Формула скорости: $v = v_0 + at$`,
+          `Подставляем: $v = ${v0} + ${a} \\cdot ${t} = ${v0} + ${a * t} = ${correct}$ м/с`
+        ],
+        answer: `${correct} м/с`
+      };
+    }
+  },
+
+  // 5. Перемещение при равноускоренном: s = v0*t + at²/2
+  {
+    id: "task_s_v0at",
+    topic: "kinematics",
+    title: "Перемещение при равноускоренном движении",
+    ege: "Задание 1",
+    generate() {
+      const v0 = randInt(0, 8);
+      const a = randInt(1, 4);
+      const t = randInt(2, 8);
+      const s = v0 * t + (a * t * t) / 2;
+      const correct = round2(s);
+      const { options, correctIndex } = makeOptions(correct, [round2(s + 10), round2(s - 8), round2(s * 2), round2(s / 2)]);
+      return {
+        condition: `Тело начинает движение со скоростью v₀ = ${v0} м/с и движется с ускорением a = ${a} м/с². Найдите перемещение тела за t = ${t} с.`,
+        options: options.map(o => `${o} м`),
+        correctIndex,
+        solution: [
+          `Формула перемещения: $s = v_0 t + \\frac{at^2}{2}$`,
+          `Подставляем: $s = ${v0} \\cdot ${t} + \\frac{${a} \\cdot ${t}^2}{2} = ${v0 * t} + ${(a * t * t) / 2} = ${correct}$ м`
+        ],
+        answer: `${correct} м`
+      };
+    }
+  },
+
+  // 6. Второй закон Ньютона: F = ma
+  {
+    id: "task_f_ma",
+    topic: "dynamics",
+    title: "Второй закон Ньютона",
+    ege: "Задание 2",
+    generate() {
+      const m = randInt(1, 20);
+      const a = randInt(1, 10);
+      const F = m * a;
+      const correct = F;
+      const { options, correctIndex } = makeOptions(correct, [F + 5, F - 10, F * 2, Math.round(F / 2)]);
+      return {
+        condition: `Тело массой m = ${m} кг движется с ускорением a = ${a} м/с². Найдите равнодействующую силу, действующую на тело.`,
+        options: options.map(o => `${o} Н`),
+        correctIndex,
+        solution: [
+          `Второй закон Ньютона: $F = ma$`,
+          `Подставляем: $F = ${m} \\cdot ${a} = ${correct}$ Н`
+        ],
+        answer: `${correct} Н`
+      };
+    }
+  },
+
+  // 7. Сила тяжести: F = mg
+  {
+    id: "task_ft_mg",
+    topic: "dynamics",
+    title: "Сила тяжести",
+    ege: "Задание 2",
+    generate() {
+      const m = randInt(1, 30);
+      const g = 10;
+      const F = m * g;
+      const correct = F;
+      const { options, correctIndex } = makeOptions(correct, [F + 10, F - 20, F * 2, Math.round(F / 2)]);
+      return {
+        condition: `Найдите силу тяжести, действующую на тело массой m = ${m} кг. Ускорение свободного падения принять g = 10 м/с².`,
+        options: options.map(o => `${o} Н`),
+        correctIndex,
+        solution: [
+          `Формула силы тяжести: $F = mg$`,
+          `Подставляем: $F = ${m} \\cdot 10 = ${correct}$ Н`
+        ],
+        answer: `${correct} Н`
+      };
+    }
+  },
+
+  // 8. Закон Гука: F = kx
+  {
+    id: "task_hooke",
+    topic: "dynamics",
+    title: "Закон Гука",
+    ege: "Задание 2",
+    generate() {
+      const k = randInt(10, 200);
+      const x = randInt(1, 20) / 100;
+      const F = round2(k * x);
+      const correct = F;
+      const { options, correctIndex } = makeOptions(correct, [round2(F + 2), round2(F - 1), round2(F * 2), round2(F / 2)]);
+      return {
+        condition: `Пружина жёсткостью k = ${k} Н/м растянута на x = ${x} м. Найдите силу упругости.`,
+        options: options.map(o => `${o} Н`),
+        correctIndex,
+        solution: [
+          `Закон Гука: $F = kx$`,
+          `Подставляем: $F = ${k} \\cdot ${x} = ${correct}$ Н`
+        ],
+        answer: `${correct} Н`
+      };
+    }
+  },
+
+  // 9. Кинетическая энергия
+  {
+    id: "task_ek",
+    topic: "energy",
+    title: "Кинетическая энергия",
+    ege: "Задание 3",
+    generate() {
+      const m = randInt(1, 10);
+      const v = randInt(2, 20);
+      const Ek = round2((m * v * v) / 2);
+      const correct = Ek;
+      const { options, correctIndex } = makeOptions(correct, [round2(Ek * 2), round2(Ek / 2), round2(Ek + 20), round2(Ek - 15)]);
+      return {
+        condition: `Тело массой m = ${m} кг движется со скоростью v = ${v} м/с. Найдите кинетическую энергию тела.`,
+        options: options.map(o => `${o} Дж`),
+        correctIndex,
+        solution: [
+          `Формула кинетической энергии: $E_k = \\frac{mv^2}{2}$`,
+          `Подставляем: $E_k = \\frac{${m} \\cdot ${v}^2}{2} = \\frac{${m * v * v}}{2} = ${correct}$ Дж`
+        ],
+        answer: `${correct} Дж`
+      };
+    }
+  },
+
+  // 10. Работа силы
+  {
+    id: "task_work",
+    topic: "energy",
+    title: "Механическая работа",
+    ege: "Задание 3",
+    generate() {
+      const F = randInt(5, 100);
+      const s = randInt(1, 20);
+      const A = F * s;
+      const correct = A;
+      const { options, correctIndex } = makeOptions(correct, [A + 50, A - 30, A * 2, Math.round(A / 2)]);
+      return {
+        condition: `Сила F = ${F} Н действует на тело вдоль направления перемещения. Тело перемещается на s = ${s} м. Найдите работу силы.`,
+        options: options.map(o => `${o} Дж`),
+        correctIndex,
+        solution: [
+          `Работа силы: $A = Fs\\cos\\alpha$. Так как сила направлена вдоль перемещения, $\\cos\\alpha = 1$.`,
+          `Подставляем: $A = ${F} \\cdot ${s} = ${correct}$ Дж`
+        ],
+        answer: `${correct} Дж`
+      };
+    }
+  },
+
+  // 11. Мощность
+  {
+    id: "task_power",
+    topic: "energy",
+    title: "Мощность",
+    ege: "Задание 3",
+    generate() {
+      const A = randInt(50, 500);
+      const t = randInt(2, 20);
+      const P = round2(A / t);
+      const correct = P;
+      const { options, correctIndex } = makeOptions(correct, [round2(P * 2), round2(P / 2), round2(P + 5), round2(P - 3)]);
+      return {
+        condition: `За время t = ${t} с была совершена работа A = ${A} Дж. Найдите мощность.`,
+        options: options.map(o => `${o} Вт`),
+        correctIndex,
+        solution: [
+          `Формула мощности: $P = \\frac{A}{t}$`,
+          `Подставляем: $P = \\frac{${A}}{${t}} = ${correct}$ Вт`
+        ],
+        answer: `${correct} Вт`
+      };
+    }
+  },
+
+  // 12. Давление жидкости
+  {
+    id: "task_pressure",
+    topic: "statics",
+    title: "Давление жидкости на глубине",
+    ege: "Задание 4",
+    generate() {
+      const rho = pick([800, 1000, 13600]);
+      const g = 10;
+      const h = randInt(1, 10);
+      const p = rho * g * h;
+      const correct = p;
+      const { options, correctIndex } = makeOptions(correct, [p + 1000, p - 2000, p * 2, Math.round(p / 2)]);
+      return {
+        condition: `Найдите давление жидкости на глубине h = ${h} м. Плотность жидкости ρ = ${rho} кг/м³, g = 10 м/с².`,
+        options: options.map(o => `${o} Па`),
+        correctIndex,
+        solution: [
+          `Давление жидкости на глубине: $p = \\rho g h$`,
+          `Подставляем: $p = ${rho} \\cdot 10 \\cdot ${h} = ${correct}$ Па`
+        ],
+        answer: `${correct} Па`
+      };
+    }
+  },
+
+  // 13. Сила Архимеда
+  {
+    id: "task_archimedes",
+    topic: "statics",
+    title: "Сила Архимеда",
+    ege: "Задание 4",
+    generate() {
+      const rho = pick([800, 1000]);
+      const g = 10;
+      const V = randInt(1, 20) / 1000; // 0.001 - 0.020 м³
+      const F = round2(rho * g * V);
+      const correct = F;
+      const { options, correctIndex } = makeOptions(correct, [round2(F * 2), round2(F / 2), round2(F + 5), round2(F - 3)]);
+      return {
+        condition: `Тело объёмом V = ${V} м³ полностью погружено в жидкость плотностью ρ = ${rho} кг/м³. Найдите силу Архимеда. g = 10 м/с².`,
+        options: options.map(o => `${o} Н`),
+        correctIndex,
+        solution: [
+          `Сила Архимеда: $F_A = \\rho_ж g V_т$`,
+          `Подставляем: $F_A = ${rho} \\cdot 10 \\cdot ${V} = ${correct}$ Н`
+        ],
+        answer: `${correct} Н`
+      };
+    }
+  },
+
+  // 14. Количество теплоты при нагревании
+  {
+    id: "task_heat",
+    topic: "thermo",
+    title: "Количество теплоты при нагревании",
+    ege: "Задание 10",
+    generate() {
+      const c = pick([4200, 900, 500, 460]);
+      const m = randInt(1, 10);
+      const dT = randInt(5, 50);
+      const Q = c * m * dT;
+      const correct = Q;
+      const { options, correctIndex } = makeOptions(correct, [Q + 1000, Q - 2000, Q * 2, Math.round(Q / 2)]);
+      return {
+        condition: `Какое количество теплоты нужно, чтобы нагреть тело массой m = ${m} кг на Δt = ${dT} °C? Удельная теплоёмкость c = ${c} Дж/(кг·°C).`,
+        options: options.map(o => `${o} Дж`),
+        correctIndex,
+        solution: [
+          `Формула количества теплоты: $Q = cm\\Delta t$`,
+          `Подставляем: $Q = ${c} \\cdot ${m} \\cdot ${dT} = ${correct}$ Дж`
+        ],
+        answer: `${correct} Дж`
+      };
+    }
+  },
+
+  // 15. Закон Ома для участка цепи
+  {
+    id: "task_ohm",
+    topic: "electricity",
+    title: "Закон Ома для участка цепи",
+    ege: "Задание 11",
+    generate() {
+      const U = randInt(5, 100);
+      const R = randInt(2, 50);
+      const I = round2(U / R);
+      const correct = I;
+      const { options, correctIndex } = makeOptions(correct, [round2(I * 2), round2(I / 2), round2(I + 1), round2(I - 0.5)]);
+      return {
+        condition: `К участку цепи сопротивлением R = ${R} Ом приложено напряжение U = ${U} В. Найдите силу тока.`,
+        options: options.map(o => `${o} А`),
+        correctIndex,
+        solution: [
+          `Закон Ома: $I = \\frac{U}{R}$`,
+          `Подставляем: $I = \\frac{${U}}{${R}} = ${correct}$ А`
+        ],
+        answer: `${correct} А`
+      };
+    }
+  },
+
+  // 16. Мощность тока
+  {
+    id: "task_power_current",
+    topic: "electricity",
+    title: "Мощность электрического тока",
+    ege: "Задание 14",
+    generate() {
+      const U = randInt(10, 220);
+      const I = randInt(1, 5);
+      const P = U * I;
+      const correct = P;
+      const { options, correctIndex } = makeOptions(correct, [P + 50, P - 100, P * 2, Math.round(P / 2)]);
+      return {
+        condition: `При напряжении U = ${U} В через проводник протекает ток I = ${I} А. Найдите мощность тока.`,
+        options: options.map(o => `${o} Вт`),
+        correctIndex,
+        solution: [
+          `Мощность тока: $P = UI$`,
+          `Подставляем: $P = ${U} \\cdot ${I} = ${correct}$ Вт`
+        ],
+        answer: `${correct} Вт`
+      };
+    }
+  },
+
+  // 17. Последовательное соединение
+  {
+    id: "task_series",
+    topic: "electricity",
+    title: "Последовательное соединение",
+    ege: "Задание 12",
+    generate() {
+      const R1 = randInt(2, 30);
+      const R2 = randInt(2, 30);
+      const R = R1 + R2;
+      const correct = R;
+      const { options, correctIndex } = makeOptions(correct, [R + 5, R - 3, R * 2, Math.round(R / 2)]);
+      return {
+        condition: `Два резистора сопротивлением R₁ = ${R1} Ом и R₂ = ${R2} Ом соединены последовательно. Найдите общее сопротивление.`,
+        options: options.map(o => `${o} Ом`),
+        correctIndex,
+        solution: [
+          `При последовательном соединении: $R = R_1 + R_2$`,
+          `Подставляем: $R = ${R1} + ${R2} = ${correct}$ Ом`
+        ],
+        answer: `${correct} Ом`
+      };
+    }
+  },
+
+  // 18. Параллельное соединение (2 резистора)
+  {
+    id: "task_parallel",
+    topic: "electricity",
+    title: "Параллельное соединение",
+    ege: "Задание 12",
+    generate() {
+      const R1 = randInt(2, 30);
+      const R2 = randInt(2, 30);
+      const R = round2((R1 * R2) / (R1 + R2));
+      const correct = R;
+      const { options, correctIndex } = makeOptions(correct, [round2(R * 2), round2(R / 2), round2(R + 5), round2(R1 + R2)]);
+      return {
+        condition: `Два резистора сопротивлением R₁ = ${R1} Ом и R₂ = ${R2} Ом соединены параллельно. Найдите общее сопротивление.`,
+        options: options.map(o => `${o} Ом`),
+        correctIndex,
+        solution: [
+          `При параллельном соединении двух резисторов: $R = \\frac{R_1 R_2}{R_1 + R_2}$`,
+          `Подставляем: $R = \\frac{${R1} \\cdot ${R2}}{${R1} + ${R2}} = \\frac{${R1 * R2}}{${R1 + R2}} = ${correct}$ Ом`
+        ],
+        answer: `${correct} Ом`
+      };
+    }
+  },
+
+  // 19. Период математического маятника
+  {
+    id: "task_pendulum",
+    topic: "oscillations",
+    title: "Период математического маятника",
+    ege: "Задание 13",
+    generate() {
+      const l = randInt(1, 10);
+      const g = 10;
+      const T = round2(2 * Math.PI * Math.sqrt(l / g));
+      const correct = T;
+      const { options, correctIndex } = makeOptions(correct, [round2(T * 2), round2(T / 2), round2(T + 1), round2(T - 0.5)]);
+      return {
+        condition: `Найдите период колебаний математического маятника длиной l = ${l} м. g = 10 м/с², π ≈ 3,14.`,
+        options: options.map(o => `${o} с`),
+        correctIndex,
+        solution: [
+          `Формула периода: $T = 2\\pi\\sqrt{\\frac{l}{g}}$`,
+          `Подставляем: $T = 2 \\cdot 3{,}14 \\cdot \\sqrt{\\frac{${l}}{10}} = 6{,}28 \\cdot ${round2(Math.sqrt(l / 10))} = ${correct}$ с`
+        ],
+        answer: `${correct} с`
+      };
+    }
+  },
+
+  // 20. Энергия фотона
+  {
+    id: "task_photon",
+    topic: "quantum",
+    title: "Энергия фотона",
+    ege: "Задание 19",
+    generate() {
+      const lambda = randInt(400, 700); // нм
+      const h = 6.62e-34;
+      const c = 3e8;
+      const E = round2((h * c) / (lambda * 1e-9) * 1e19) / 1e19; // округление для читаемости
+      // Упростим: дадим ответ в эВ для удобства
+      const E_eV = round2((1240 / lambda));
+      const correct = E_eV;
+      const { options, correctIndex } = makeOptions(correct, [round2(correct * 2), round2(correct / 2), round2(correct + 0.5), round2(correct - 0.3)]);
+      return {
+        condition: `Найдите энергию фотона с длиной волны λ = ${lambda} нм. Постоянная Планка h = 6,62·10⁻³⁴ Дж·с, скорость света c = 3·10⁸ м/с. Ответ дайте в эВ (1 эВ = 1,6·10⁻¹⁹ Дж).`,
+        options: options.map(o => `${o} эВ`),
+        correctIndex,
+        solution: [
+          `Энергия фотона: $E = \\frac{hc}{\\lambda}$`,
+          `$E = \\frac{6{,}62 \\cdot 10^{-34} \\cdot 3 \\cdot 10^8}{${lambda} \\cdot 10^{-9}} = ${round2((h * c) / (lambda * 1e-9) / 1.6e-19)}$ эВ ≈ ${correct} эВ`
+        ],
+        answer: `${correct} эВ`
+      };
+    }
+  }
+];
+
+/* =========================================================
    ЛОГИКА
    ========================================================= */
 
@@ -849,8 +1388,9 @@ const app = document.getElementById("app");
 const searchInput = document.getElementById("search");
 const themeBtn = document.getElementById("btnTheme");
 
-let currentView = { type: "menu" };
+let currentView = { type: "home" };
 let currentRefTab = "constants";
+let currentTask = null;
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
@@ -864,7 +1404,7 @@ function toggleTheme() {
 applyTheme(localStorage.getItem("phys_theme") || "light");
 
 function exportPDF() {
-  document.querySelectorAll(".symbols").forEach(el => el.classList.add("open"));
+  document.querySelectorAll(".symbols, .task-solution, .task-answer").forEach(el => el.classList.add("open"));
   setTimeout(() => window.print(), 100);
 }
 
@@ -880,30 +1420,43 @@ function renderLatex(el) {
   }
 }
 
-function renderMenu() {
-  currentView = { type: "menu" };
-
+/* ========== ГЛАВНЫЙ ЭКРАН: 2 части ========== */
+function renderHome() {
+  currentView = { type: "home" };
   app.innerHTML = `
+    <div class="home-split">
+      <div class="home-block" onclick="renderTheory()">
+        <div class="icon">📘</div>
+        <div class="title">Теория</div>
+        <div class="desc">Формулы по разделам, справочные материалы</div>
+      </div>
+      <div class="home-block" onclick="renderPractice()">
+        <div class="icon">🧪</div>
+        <div class="title">Практика</div>
+        <div class="desc">Флеш-карты, тренажёры, задачи ЕГЭ</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ========== ТЕОРИЯ ========== */
+function renderTheory() {
+  currentView = { type: "theory" };
+  app.innerHTML = `
+    <div class="section-header">
+      <button class="back-btn" onclick="renderHome()">← На главную</button>
+      <h2>📘 Теория</h2>
+    </div>
     <div class="menu">
       ${topics.map(t => {
         const count = t.subsections.reduce((s, sub) => s + sub.formulas.length, 0);
-        const subs = t.subsections.length;
         return `
           <button onclick="openTopic('${t.id}')">
             <span>${t.title}</span>
-            <span class="count">${count} формул · ${subs} подразд. · ЕГЭ: ${t.ege}</span>
+            <span class="count">${count} формул · ЕГЭ: ${t.ege}</span>
           </button>
         `;
       }).join("")}
-      <button onclick="startFlashcards()" style="border-color:var(--accent); color:var(--accent);">
-        🧠 Режим флеш-карт (${allFormulas.length} карточек)
-      </button>
-      <button onclick="startQuiz()" style="border-color:var(--green); color:var(--green);">
-        🎯 Тренажёр «выбери формулу»
-      </button>
-      <button onclick="startReverseQuiz()" style="border-color:#8b5cf6; color:#8b5cf6;">
-        🔄 Тренажёр «выбери название»
-      </button>
     </div>
   `;
 }
@@ -915,7 +1468,7 @@ function openTopic(id) {
 
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderMenu()">← Назад</button>
+      <button class="back-btn" onclick="renderTheory()">← К теории</button>
       <h2>${topic.title}</h2>
       <span class="ege-info">ЕГЭ: ${topic.ege}</span>
     </div>
@@ -940,6 +1493,7 @@ function makeFormulaCard(f) {
   card.innerHTML = `
     <div class="formula-title">${f.title}</div>
     <div class="formula-body">$$${f.latex}$$</div>
+    ${f.image ? `<img src="${f.image}" alt="${f.title}" class="formula-image" onerror="this.style.display='none'">` : ""}
     <button class="toggle-btn" onclick="toggleSymbols('${symId}', this)">
       <span class="arrow">▶</span> Показать величины
     </button>
@@ -964,6 +1518,126 @@ function toggleSymbols(id, btn) {
   renderLatex(el);
 }
 
+/* ========== ПРАКТИКА ========== */
+function renderPractice() {
+  currentView = { type: "practice" };
+  app.innerHTML = `
+    <div class="section-header">
+      <button class="back-btn" onclick="renderHome()">← На главную</button>
+      <h2>🧪 Практика</h2>
+    </div>
+    <div class="menu">
+      <button onclick="startTasks()">
+        <span>📝 Задачи 1 части ЕГЭ</span>
+        <span class="count">${tasks.length} задач с автопроверкой</span>
+      </button>
+      <button onclick="startFlashcards()">
+        <span>🧠 Режим флеш-карт</span>
+        <span class="count">${allFormulas.length} карточек</span>
+      </button>
+      <button onclick="startQuiz()">
+        <span>🎯 Тренажёр «выбери формулу»</span>
+        <span class="count">по названию</span>
+      </button>
+      <button onclick="startReverseQuiz()">
+        <span>🔄 Тренажёр «выбери название»</span>
+        <span class="count">по формуле</span>
+      </button>
+    </div>
+  `;
+}
+
+/* ========== ЗАДАЧИ ЕГЭ ========== */
+let taskPool = [];
+let taskIndex = 0;
+let taskAnswered = false;
+
+function startTasks() {
+  currentView = { type: "tasks" };
+  taskPool = [...tasks].sort(() => Math.random() - 0.5);
+  taskIndex = 0;
+  showTask();
+}
+
+function showTask() {
+  if (taskPool.length === 0) { renderPractice(); return; }
+  if (taskIndex >= taskPool.length) taskIndex = 0;
+
+  const tpl = taskPool[taskIndex];
+  currentTask = { ...tpl.generate(), template: tpl };
+  taskAnswered = false;
+  const solId = "task_sol";
+  const ansId = "task_ans";
+
+  app.innerHTML = `
+    <div class="section-header">
+      <button class="back-btn" onclick="renderPractice()">← К практике</button>
+      <h2>📝 Задача ${taskIndex + 1} из ${taskPool.length}</h2>
+      <span class="ege-info">${currentTask.template.ege}</span>
+    </div>
+    <div class="task-card">
+      <div class="task-condition">${currentTask.condition}</div>
+      <div class="task-options" id="task-options">
+        ${currentTask.options.map((opt, i) => `
+          <button onclick="checkTask(${i})" data-i="${i}">${opt}</button>
+        `).join("")}
+      </div>
+      <div class="task-actions">
+        <button class="primary" onclick="toggleTaskSolution('${solId}', this)">📖 Показать решение</button>
+        <button onclick="toggleTaskAnswer('${ansId}', this)">✅ Показать ответ</button>
+        <button onclick="nextTask()">Другая задача →</button>
+      </div>
+      <div class="task-solution" id="${solId}">
+        ${currentTask.solution.map((s, i) => `
+          <div class="step"><span class="step-num">${i + 1}</span>${s}</div>
+        `).join("")}
+      </div>
+      <div class="task-answer" id="${ansId}">
+        <b>Ответ:</b> ${currentTask.answer}
+      </div>
+    </div>
+  `;
+  renderLatex(app);
+}
+
+function checkTask(chosenIndex) {
+  if (taskAnswered) return;
+  taskAnswered = true;
+  document.querySelectorAll("#task-options button").forEach((b, i) => {
+    if (i === currentTask.correctIndex) b.classList.add("correct");
+    else if (i === chosenIndex) b.classList.add("wrong");
+  });
+  // Автоматически показываем решение после ответа
+  setTimeout(() => {
+    const sol = document.getElementById("task_sol");
+    const ans = document.getElementById("task_ans");
+    if (sol) { sol.classList.add("open"); renderLatex(sol); }
+    if (ans) ans.classList.add("open");
+  }, 400);
+}
+
+function toggleTaskSolution(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle("open");
+  btn.textContent = el.classList.contains("open") ? "📕 Скрыть решение" : "📖 Показать решение";
+  if (el.classList.contains("open")) renderLatex(el);
+}
+
+function toggleTaskAnswer(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle("open");
+  btn.textContent = el.classList.contains("open") ? "❌ Скрыть ответ" : "✅ Показать ответ";
+}
+
+function nextTask() {
+  taskIndex = (taskIndex + 1) % taskPool.length;
+  if (taskIndex === 0) taskPool = [...tasks].sort(() => Math.random() - 0.5);
+  showTask();
+}
+
+/* ========== СПРАВОЧНЫЕ ========== */
 function showReferences() {
   currentView = { type: "references" };
   currentRefTab = "constants";
@@ -988,7 +1662,7 @@ function renderReferences() {
 
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderMenu()">← Назад</button>
+      <button class="back-btn" onclick="renderHome()">← На главную</button>
       <h2>📌 Справочные материалы</h2>
     </div>
     <div class="ref-tabs">
@@ -999,7 +1673,6 @@ function renderReferences() {
     </div>
     <div id="ref-content"></div>
   `;
-
   document.getElementById("ref-content").innerHTML = renderRefTable(currentRefTab);
 }
 
@@ -1043,9 +1716,10 @@ function renderRefTable(tab) {
   }
 }
 
+/* ========== ПОИСК ========== */
 searchInput.addEventListener("input", () => {
   const q = searchInput.value.trim().toLowerCase();
-  if (!q) { renderMenu(); return; }
+  if (!q) { renderHome(); return; }
   currentView = { type: "search" };
 
   const found = allFormulas.filter(f =>
@@ -1057,7 +1731,7 @@ searchInput.addEventListener("input", () => {
 
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="searchInput.value=''; renderMenu();">← Назад</button>
+      <button class="back-btn" onclick="searchInput.value=''; renderHome();">← На главную</button>
       <h2>Поиск: «${q}»</h2>
     </div>
     <div id="cards"></div>
@@ -1071,6 +1745,7 @@ searchInput.addEventListener("input", () => {
   renderLatex(box);
 });
 
+/* ========== ФЛЕШ-КАРТЫ ========== */
 let flashDeck = [], flashIndex = 0, flashRevealed = false;
 
 function startFlashcards() {
@@ -1081,11 +1756,11 @@ function startFlashcards() {
   renderFlashcard();
 }
 function renderFlashcard() {
-  if (flashDeck.length === 0) { renderMenu(); return; }
+  if (flashDeck.length === 0) { renderPractice(); return; }
   const f = flashDeck[flashIndex];
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderMenu()">← Меню</button>
+      <button class="back-btn" onclick="renderPractice()">← К практике</button>
       <h2>🧠 Флеш-карты (${flashIndex + 1} / ${flashDeck.length})</h2>
     </div>
     <div class="flashcard">
@@ -1116,6 +1791,7 @@ function flashReveal() { flashRevealed = true; renderFlashcard(); }
 function flashNext() { flashIndex = (flashIndex + 1) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
 function flashPrev() { flashIndex = (flashIndex - 1 + flashDeck.length) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
 
+/* ========== ТРЕНАЖЁРЫ ========== */
 let quizCorrect = null, quizAnswered = false, reverseQuizCorrect = null, reverseQuizAnswered = false;
 
 function startQuiz() {
@@ -1127,7 +1803,7 @@ function startQuiz() {
 
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderMenu()">← Меню</button>
+      <button class="back-btn" onclick="renderPractice()">← К практике</button>
       <h2>🎯 Выбери формулу</h2>
     </div>
     <div class="quiz-card">
@@ -1164,7 +1840,7 @@ function startReverseQuiz() {
 
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderMenu()">← Меню</button>
+      <button class="back-btn" onclick="renderPractice()">← К практике</button>
       <h2>🔄 Выбери название</h2>
     </div>
     <div class="quiz-card">
@@ -1192,7 +1868,7 @@ function answerReverseQuiz(id) {
   else { r.className = "quiz-result bad"; r.textContent = "❌ Неверно. Правильный вариант выделен зелёным."; }
 }
 
-renderMenu();
+renderHome();
 </script>
 </body>
 </html>
