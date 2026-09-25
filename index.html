@@ -157,7 +157,13 @@
     display: none;
   }
   .symbols.open { display: block; }
-  .symbols div { margin-bottom: 6px; }
+  .symbols .sym-row {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .symbols .sym-row .katex {
+    display: inline;
+  }
   .symbols b { color: var(--accent); font-weight: 600; }
 
   .note {
@@ -205,8 +211,17 @@
   .flashcard .content { font-size: 30px; }
   .flashcard .answer { font-size: 18px; line-height: 1.8; }
   .flashcard .answer .sym-list {
-    font-size: 14px; color: var(--text); text-align: left;
+    font-size: 14px; color: var(--text);
     display: inline-block; margin-top: 10px;
+    text-align: center;
+  }
+  .flashcard .answer .sym-list .sym-row {
+    display: block;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .flashcard .answer .sym-list .sym-row .katex {
+    display: inline;
   }
   .flashcard .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .flashcard button {
@@ -837,7 +852,6 @@ const themeBtn = document.getElementById("btnTheme");
 let currentView = { type: "menu" };
 let currentRefTab = "constants";
 
-/* ТЕМА */
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
@@ -849,7 +863,6 @@ function toggleTheme() {
 }
 applyTheme(localStorage.getItem("phys_theme") || "light");
 
-/* ЭКСПОРТ В PDF */
 function exportPDF() {
   document.querySelectorAll(".symbols").forEach(el => el.classList.add("open"));
   setTimeout(() => window.print(), 100);
@@ -932,7 +945,7 @@ function makeFormulaCard(f) {
     </button>
     <div class="symbols" id="${symId}">
       ${Object.entries(f.symbols).map(([k, v]) =>
-        `<div><b>$$${k}$$</b> - ${v}</div>`
+        `<div class="sym-row"><b>$$${k}$$</b> - ${v}</div>`
       ).join("")}
     </div>
     ${f.note ? `<div class="note">${f.note}</div>` : ""}
@@ -951,7 +964,6 @@ function toggleSymbols(id, btn) {
   renderLatex(el);
 }
 
-/* Справочные материалы */
 function showReferences() {
   currentView = { type: "references" };
   currentRefTab = "constants";
@@ -1031,7 +1043,6 @@ function renderRefTable(tab) {
   }
 }
 
-/* Поиск */
 searchInput.addEventListener("input", () => {
   const q = searchInput.value.trim().toLowerCase();
   if (!q) { renderMenu(); return; }
@@ -1060,7 +1071,6 @@ searchInput.addEventListener("input", () => {
   renderLatex(box);
 });
 
-/* Флеш-карты */
 let flashDeck = [], flashIndex = 0, flashRevealed = false;
 
 function startFlashcards() {
@@ -1086,7 +1096,7 @@ function renderFlashcard() {
           <b>${f.title}</b>
           <div class="sym-list">
             ${Object.entries(f.symbols).map(([k, v]) =>
-              `<div><b>$$${k}$$</b> - ${v}</div>`
+              `<div class="sym-row"><b>$$${k}$$</b> - ${v}</div>`
             ).join("")}
           </div>
           <div style="font-size:13px;color:var(--text-soft);margin-top:8px;">📍 ${f.ege}</div>
@@ -1106,7 +1116,6 @@ function flashReveal() { flashRevealed = true; renderFlashcard(); }
 function flashNext() { flashIndex = (flashIndex + 1) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
 function flashPrev() { flashIndex = (flashIndex - 1 + flashDeck.length) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
 
-/* Тренажёры */
 let quizCorrect = null, quizAnswered = false, reverseQuizCorrect = null, reverseQuizAnswered = false;
 
 function startQuiz() {
