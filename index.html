@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Формулы ЕГЭ по физике</title>
+<title>Задание №25 ЕГЭ по физике</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -13,28 +13,22 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #ffffff;
+    --bg: #f8f9fc;
     --text: #1a1a2e;
     --text-muted: #6b7280;
     --text-soft: #9aa3b2;
     --border: #e0e4ec;
     --border-soft: #edf0f7;
-    --border-dashed: #e0e4ec;
-    --card-bg: #ffffff;
-    --block-bg: #f8f9fc;
+    --card-bg: rgba(255, 255, 255, 0.88);
+    --block-bg: #f0f4ff;
     --hover-bg: #f5f8ff;
     --accent: #4a6cf7;
-    --accent-hover: #2d4fd6;
-    --accent-soft: #f0f4ff;
-    --accent-fade: #eef1f8;
+    --accent-soft: #eef1f8;
     --green: #1e9e5a;
     --green-bg: #e3f7ec;
     --red: #d63b3b;
     --red-bg: #fde8e8;
-    --purple: #8b5cf6;
     --shadow: rgba(74,108,247,0.08);
-    --shadow-btn: rgba(74,108,247,0.3);
-    --shadow-btn-hover: rgba(74,108,247,0.4);
   }
 
   html[data-theme="dark"] {
@@ -44,22 +38,31 @@
     --text-soft: #6b7280;
     --border: #2a2e3d;
     --border-soft: #232735;
-    --border-dashed: #2a2e3d;
-    --card-bg: #1a1d28;
+    --card-bg: rgba(26, 29, 40, 0.88);
     --block-bg: #232735;
     --hover-bg: #232735;
     --accent: #6b8aff;
-    --accent-hover: #8aa3ff;
     --accent-soft: #1e2440;
-    --accent-fade: #232735;
     --green: #34c27a;
     --green-bg: #1a3327;
     --red: #ef5a5a;
     --red-bg: #3a1f1f;
-    --purple: #a78bfa;
     --shadow: rgba(107,138,255,0.1);
-    --shadow-btn: rgba(107,138,255,0.35);
-    --shadow-btn-hover: rgba(107,138,255,0.5);
+  }
+
+  /* Фоновый рисунок */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://fons.grizly.club/uploads/posts/2025-06/25/17508494403004.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.07;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(0.5px);
   }
 
   body {
@@ -72,1196 +75,518 @@
   }
   .container { max-width: 900px; margin: 0 auto; }
 
-  h1 { font-size: 28px; margin-bottom: 8px; text-align: center; }
+  h1 { font-size: 26px; margin-bottom: 8px; text-align: center; }
   .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 24px; font-size: 15px; }
 
   .topbar {
     display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;
-    align-items: center;
+    align-items: center; justify-content: flex-start;
   }
-  .topbar input {
-    flex: 1; min-width: 180px; padding: 12px 16px; font-size: 16px;
-    border: 2px solid var(--border); border-radius: 12px; outline: none;
-    background: var(--card-bg); color: var(--text);
-  }
-  .topbar input:focus { border-color: var(--accent); }
   .topbar button {
-    padding: 12px 18px; font-size: 15px; border: 2px solid var(--border);
+    padding: 8px 14px; font-size: 14px; border: 2px solid var(--border);
     background: var(--card-bg); color: var(--text);
-    border-radius: 12px; cursor: pointer; transition: .15s;
-    white-space: nowrap;
+    border-radius: 10px; cursor: pointer; transition: .15s;
+    display: flex; align-items: center; gap: 6px;
+    backdrop-filter: blur(4px);
   }
   .topbar button:hover { border-color: var(--accent); background: var(--hover-bg); }
-  .topbar button.icon-btn { padding: 12px 14px; font-size: 18px; }
+  .topbar .icon-btn { padding: 8px 12px; font-size: 16px; }
 
-  .home-split {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  .main-section {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 12px var(--shadow);
+    backdrop-filter: blur(6px);
   }
-  @media (max-width: 600px) { .home-split { grid-template-columns: 1fr; } }
+  .main-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-  .home-block {
-    padding: 28px 24px; border-radius: 16px; cursor: pointer;
-    border: 2px solid var(--border); background: var(--card-bg);
-    text-align: center; transition: .2s;
+  .grid-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
   }
-  .home-block:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadow); }
-  .home-block .icon { font-size: 42px; margin-bottom: 10px; }
-  .home-block .title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
-  .home-block .desc { font-size: 14px; color: var(--text-muted); }
+  .grid-menu button {
+    padding: 16px 20px;
+    font-size: 16px;
+    background: var(--block-bg);
+    color: var(--text);
+    border: 2px solid var(--border-soft);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .15s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    text-align: left;
+  }
+  .grid-menu button:hover {
+    border-color: var(--accent);
+    background: var(--hover-bg);
+    transform: translateY(-2px);
+  }
+  .grid-menu button .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .grid-menu button .desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: normal;
+  }
 
-  .menu { display: grid; gap: 12px; }
-  .menu button {
-    padding: 18px 20px; font-size: 18px; background: var(--card-bg); color: var(--text);
-    border: 2px solid var(--border); border-radius: 12px; cursor: pointer;
-    text-align: left; transition: .15s; display: flex; justify-content: space-between;
-    align-items: center; gap: 12px;
-  }
-  .menu button:hover { border-color: var(--accent); background: var(--hover-bg); }
-  .menu .count { color: var(--text-soft); font-size: 14px; text-align: right; }
-
-  .section-header {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .section-header h2 { font-size: 24px; }
-  .section-header .ege-info {
-    font-size: 14px; color: var(--text-muted); background: var(--accent-soft);
-    padding: 4px 12px; border-radius: 20px;
-  }
   .back-btn {
     padding: 8px 16px; font-size: 15px; background: var(--card-bg); color: var(--text);
     border: 2px solid var(--border); border-radius: 10px; cursor: pointer;
+    backdrop-filter: blur(4px);
   }
   .back-btn:hover { border-color: var(--accent); }
 
-  .subsection-title {
-    font-size: 17px; font-weight: 600; color: var(--accent);
-    margin: 28px 0 14px; padding-bottom: 8px;
-    border-bottom: 2px solid var(--accent-fade);
-  }
-  .subsection-title:first-child { margin-top: 0; }
-
-  .formula-card {
-    background: var(--card-bg); border-radius: 14px; padding: 20px;
-    margin-bottom: 14px; border: 2px solid var(--border-soft);
-    transition: box-shadow .2s, background .2s;
-  }
-  .formula-card:hover { box-shadow: 0 4px 12px var(--shadow); }
-  .formula-title { font-size: 17px; font-weight: 600; margin-bottom: 12px; }
-  .formula-body {
-    font-size: 24px; text-align: center; padding: 16px 0;
-    background: var(--block-bg); border-radius: 10px; margin-bottom: 12px;
-    color: var(--text);
-  }
-
-  .formula-image {
-    width: 100%; max-width: 480px; margin: 12px auto;
-    display: block; border-radius: 10px;
-    border: 2px solid var(--border-soft);
-  }
-
-  .toggle-btn {
-    display: flex; align-items: center; gap: 8px;
-    background: none; border: none; cursor: pointer;
-    font-size: 14px; color: var(--accent); font-weight: 600;
-    padding: 6px 0; transition: .15s;
-  }
-  .toggle-btn:hover { color: var(--accent-hover); }
-  .toggle-btn .arrow {
-    display: inline-block; transition: transform .2s;
-    font-size: 12px;
-  }
-  .toggle-btn.open .arrow { transform: rotate(90deg); }
-
-  .symbols {
-    font-size: 15px; color: var(--text);
-    margin-top: 10px; padding-top: 12px;
-    border-top: 1px dashed var(--border-dashed);
-    display: none;
-  }
-  .symbols.open { display: block; }
-  .symbols .sym-row { display: block; margin-bottom: 4px; }
-  .symbols .sym-row .katex { display: inline; }
-  .symbols b { color: var(--accent); font-weight: 600; }
-
-  .note {
-    margin-top: 10px; font-size: 13px; color: var(--text-muted);
-    font-style: italic; border-left: 3px solid var(--border); padding-left: 12px;
-  }
-  .ege-badge {
-    display: inline-block; margin-top: 10px;
-    font-size: 13px; color: var(--text-muted); background: var(--accent-soft);
-    padding: 3px 10px; border-radius: 12px;
-  }
-
-  .ref-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .ref-tabs button {
-    padding: 9px 14px; font-size: 14px; border: 2px solid var(--border);
-    background: var(--card-bg); color: var(--text);
-    border-radius: 20px; cursor: pointer; transition: .15s;
-  }
-  .ref-tabs button:hover { border-color: var(--accent); background: var(--hover-bg); }
-  .ref-tabs button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  .ref-table {
-    width: 100%; border-collapse: collapse;
-    background: var(--card-bg); border-radius: 12px; overflow: hidden;
-    border: 2px solid var(--border-soft);
-  }
-  .ref-table th, .ref-table td {
-    padding: 12px 16px; text-align: left;
-    border-bottom: 1px solid var(--accent-fade); font-size: 15px;
-  }
-  .ref-table th {
-    background: var(--block-bg); font-weight: 600; font-size: 14px; color: var(--accent);
-  }
-  .ref-table tr:last-child td { border-bottom: none; }
-  .ref-table td:last-child { text-align: right; font-family: monospace; color: var(--text); }
-
-  .flashcard {
-    background: var(--card-bg); border-radius: 16px; padding: 48px 28px;
-    text-align: center; border: 2px solid var(--border-soft); min-height: 280px;
-    display: flex; flex-direction: column; justify-content: center; gap: 24px;
-  }
-  .flashcard .question { font-size: 16px; color: var(--text-muted); }
-  .flashcard .content { font-size: 30px; }
-  .flashcard .answer { font-size: 18px; line-height: 1.8; }
-  .flashcard .answer .sym-list {
-    font-size: 14px; color: var(--text);
-    display: inline-block; margin-top: 10px; text-align: center;
-  }
-  .flashcard .answer .sym-list .sym-row {
-    display: block; margin-bottom: 4px; text-align: center;
-  }
-  .flashcard .answer .sym-list .sym-row .katex { display: inline; }
-  .flashcard .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .flashcard button {
-    padding: 14px 26px; font-size: 16px; border: none; border-radius: 10px;
-    cursor: pointer; background: var(--accent); color: #fff; transition: .15s;
-  }
-  .flashcard button.secondary { background: var(--accent-fade); color: var(--text); }
-  .flashcard button:hover { opacity: .9; }
-
-  .quiz-card {
-    background: var(--card-bg); border-radius: 16px; padding: 28px;
-    border: 2px solid var(--border-soft);
-  }
-  .quiz-question { font-size: 18px; margin-bottom: 20px; line-height: 1.7; }
-  .quiz-options { display: grid; gap: 12px; }
-  .quiz-options button {
-    padding: 16px 20px; font-size: 18px; text-align: center;
-    background: var(--block-bg); color: var(--text);
-    border: 2px solid var(--border-soft); border-radius: 10px;
-    cursor: pointer; transition: .15s;
-  }
-  .quiz-options button:hover { border-color: var(--accent); background: var(--hover-bg); }
-  .quiz-options button.correct { background: var(--green-bg); border-color: var(--green); }
-  .quiz-options button.wrong { background: var(--red-bg); border-color: var(--red); }
-  .quiz-result { margin-top: 16px; font-weight: 600; font-size: 17px; }
-  .quiz-result.ok { color: var(--green); }
-  .quiz-result.bad { color: var(--red); }
-
   .task-card {
     background: var(--card-bg); border-radius: 16px; padding: 28px;
-    border: 2px solid var(--border-soft);
+    border: 2px solid var(--border-soft); margin-bottom: 20px;
+    backdrop-filter: blur(6px);
   }
   .task-condition {
-    font-size: 17px; line-height: 1.8; margin-bottom: 20px;
+    font-size: 17px; line-height: 1.8; margin-bottom: 16px;
   }
-  .task-options { display: grid; gap: 12px; margin-bottom: 18px; }
-  .task-options button {
-    padding: 16px 20px; font-size: 17px; text-align: left;
-    background: var(--block-bg); color: var(--text);
-    border: 2px solid var(--border-soft); border-radius: 10px;
-    cursor: pointer; transition: .15s;
+  .task-image {
+    max-width: 100%; height: auto; border-radius: 10px;
+    border: 2px solid var(--border-soft); margin: 16px 0;
+    display: block;
   }
-  .task-options button:hover { border-color: var(--accent); background: var(--hover-bg); }
-  .task-options button.correct { background: var(--green-bg); border-color: var(--green); }
-  .task-options button.wrong { background: var(--red-bg); border-color: var(--red); }
-
   .task-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
   .task-actions button {
     padding: 12px 22px; font-size: 15px; border-radius: 10px;
     cursor: pointer; border: 2px solid var(--border);
-    background: var(--card-bg); color: var(--text);
-    transition: .15s;
+    background: var(--card-bg); color: var(--text); transition: .15s;
+    backdrop-filter: blur(4px);
   }
   .task-actions button:hover { border-color: var(--accent); background: var(--hover-bg); }
   .task-actions button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .task-actions button.primary:hover { background: var(--accent-hover); }
+  .task-actions button.success { background: var(--green); color: #fff; border-color: var(--green); }
 
-  .task-solution {
+  .task-solution, .task-answer {
     margin-top: 18px; padding: 18px 20px;
     background: var(--block-bg); border-radius: 12px;
     border-left: 4px solid var(--accent);
     display: none;
   }
-  .task-solution.open { display: block; }
-  .task-solution .step { margin-bottom: 12px; font-size: 15px; line-height: 1.7; }
-  .task-solution .step-num {
-    display: inline-block; width: 24px; height: 24px;
-    background: var(--accent); color: #fff; border-radius: 50%;
-    text-align: center; line-height: 24px; font-size: 13px; font-weight: 600;
-    margin-right: 8px;
-  }
-  .task-answer {
-    margin-top: 14px; padding: 14px 18px;
-    background: var(--green-bg); border-radius: 12px;
-    display: none; font-size: 16px;
-  }
-  .task-answer.open { display: block; }
-  .task-answer b { color: var(--green); }
+  .task-answer { border-left-color: var(--green); background: var(--green-bg); }
+  .task-solution.open, .task-answer.open { display: block; }
+  
+  .task-solution .step { margin-bottom: 14px; font-size: 16px; line-height: 1.7; }
+  .task-solution .step:last-child { margin-bottom: 0; }
+  .task-answer b { color: var(--green); font-size: 18px; }
 
-  .support {
-    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  .options { display: grid; gap: 12px; margin-bottom: 20px; }
+  .options button {
+    padding: 16px 20px; font-size: 17px; text-align: left;
+    background: var(--block-bg); color: var(--text);
+    border: 2px solid var(--border-soft); border-radius: 10px;
+    cursor: pointer; transition: .15s;
   }
-  .support a {
-    display: flex; align-items: center; gap: 8px;
-    padding: 14px 20px; background: var(--accent); color: #fff;
-    border-radius: 50px; text-decoration: none; font-size: 15px;
-    font-weight: 600; box-shadow: 0 4px 16px var(--shadow-btn);
-    transition: .2s;
-  }
-  .support a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow-btn-hover); }
+  .options button:hover { border-color: var(--accent); background: var(--hover-bg); }
+  .options button.correct { background: var(--green-bg); border-color: var(--green); }
+  .options button.wrong { background: var(--red-bg); border-color: var(--red); }
 
-  .empty { text-align: center; color: var(--text-soft); padding: 60px 0; font-size: 16px; }
+  .theory-block {
+    background: var(--card-bg); border-radius: 16px; padding: 24px;
+    border: 2px solid var(--border-soft); margin-bottom: 20px;
+    backdrop-filter: blur(6px);
+  }
+  .theory-title {
+    font-size: 20px; font-weight: 600; color: var(--accent);
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-soft);
+  }
+  .theory-text {
+    font-size: 16px; line-height: 1.7; margin-bottom: 12px;
+  }
+  .theory-text li { margin-left: 20px; margin-bottom: 8px; }
+  .formula-item {
+    margin-bottom: 20px; padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .formula-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .formula-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .formula-latex {
+    font-size: 22px; text-align: center; padding: 12px 0;
+    background: var(--block-bg); border-radius: 8px; margin-bottom: 12px;
+  }
+  .formula-desc { font-size: 14px; color: var(--text-muted); }
+
+  .ref-section {
+    margin-bottom: 30px;
+    border: 2px solid var(--border-soft); border-radius: 12px; overflow: hidden;
+    background: var(--card-bg); backdrop-filter: blur(6px);
+  }
+  .ref-title {
+    background: var(--block-bg); padding: 12px 18px; font-size: 16px;
+    font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--border-soft);
+  }
+  .ref-table {
+    width: 100%; border-collapse: collapse; background: transparent;
+  }
+  .ref-table td, .ref-table th {
+    padding: 10px 16px; border-bottom: 1px solid var(--border-soft); font-size: 15px;
+  }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .ref-table td:last-child { text-align: right; font-family: monospace; }
+  .ref-table.split td:first-child { width: 50%; border-right: 1px solid var(--border-soft); }
+  .ref-table.split td:nth-child(2) { border-right: 1px solid var(--border-soft); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .section-header h2 { font-size: 24px; }
 
   .katex { font-size: 1.1em; }
-
-  @media print {
-    body { background: #fff !important; color: #000 !important; padding: 0; }
-    .topbar, .support, .toggle-btn, .task-actions,
-    .back-btn, .section-header .ege-info, .ref-tabs { display: none !important; }
-
-    .container { max-width: 100%; }
-    h1 { font-size: 22px; margin-bottom: 4px; }
-    .subtitle { font-size: 12px; margin-bottom: 16px; }
-
-    .formula-card, .task-card {
-      border: 1px solid #ccc !important;
-      box-shadow: none !important;
-      page-break-inside: avoid;
-      margin-bottom: 10px;
-      padding: 12px;
-    }
-    .formula-body {
-      background: #f5f5f5 !important;
-      font-size: 18px;
-      padding: 10px 0;
-      margin-bottom: 8px;
-    }
-    .formula-title { font-size: 14px; }
-    .symbols { display: block !important; font-size: 12px; }
-    .task-solution, .task-answer { display: block !important; }
-
-    .subsection-title {
-      font-size: 14px; color: #000 !important;
-      border-bottom: 1px solid #999;
-      margin: 16px 0 8px;
-      page-break-after: avoid;
-    }
-    .ege-badge { background: transparent !important; padding: 0; font-size: 11px; }
-    .note { font-size: 11px; }
-    .ref-table { font-size: 12px; }
-    .ref-table th, .ref-table td { padding: 6px 10px; }
-  }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>⚛️ Формулы ЕГЭ по физике</h1>
-  <p class="subtitle">Теория · Практика · Справочные материалы</p>
-
   <div class="topbar">
-    <input type="text" id="search" placeholder="Поиск формулы...">
-    <button onclick="showReferences()">📌 Справочные</button>
-    <button onclick="exportPDF()">🖨️ В PDF</button>
-    <button id="btnTheme" class="icon-btn" onclick="toggleTheme()" title="Переключить тему">🌙</button>
+    <button onclick="renderReferences()">📌 Справочные материалы</button>
+    <button id="btnTheme" class="icon-btn" onclick="toggleTheme()" title="Сменить тему">🌙</button>
+    <button onclick="renderHome()">🏠 На главную</button>
   </div>
+
+  <h1>Задание №25 ЕГЭ по физике</h1>
+  <p class="subtitle">Теория и практика для подготовки к экзамену</p>
 
   <div id="app"></div>
 </div>
 
-<div class="support">
-  <a href="https://t.me/donkgoatcs2" target="_blank" rel="noopener">
-    💬 Поддержка
-  </a>
-</div>
-
 <script>
 /* =========================================================
-   СПРАВОЧНЫЕ МАТЕРИАЛЫ
+   ТЕОРИЯ (ПОЛНАЯ БАЗА ПО КУРСОВОЙ)
    ========================================================= */
-
-const decimalPrefixes = [
-  { name: "тера",  symbol: "Т",  power: "10¹²",  value: "1 000 000 000 000" },
-  { name: "гига",  symbol: "Г",  power: "10⁹",   value: "1 000 000 000" },
-  { name: "мега",  symbol: "М",  power: "10⁶",   value: "1 000 000" },
-  { name: "кило",  symbol: "к",  power: "10³",   value: "1 000" },
-  { name: "гекто", symbol: "г",  power: "10²",   value: "100" },
-  { name: "деци",  symbol: "д",  power: "10⁻¹",  value: "0,1" },
-  { name: "санти", symbol: "с",  power: "10⁻²",  value: "0,01" },
-  { name: "милли", symbol: "м",  power: "10⁻³",  value: "0,001" },
-  { name: "микро", symbol: "мк", power: "10⁻⁶",  value: "0,000001" },
-  { name: "нано",  symbol: "н",  power: "10⁻⁹",  value: "0,000000001" },
-  { name: "пико",  symbol: "п",  power: "10⁻¹²", value: "0,000000000001" },
-  { name: "фемто", symbol: "ф",  power: "10⁻¹⁵", value: "0,000000000000001" }
-];
-
-const constants = [
-  { name: "Число π", value: "π = 3,14", unit: "" },
-  { name: "Ускорение свободного падения", value: "g = 10", unit: "м/с²" },
-  { name: "Гравитационная постоянная", value: "G = 6,7·10⁻¹¹", unit: "Н·м²/кг²" },
-  { name: "Газовая постоянная", value: "R = 8,31", unit: "Дж/(моль·К)" },
-  { name: "Постоянная Больцмана", value: "k = 1,38·10⁻²³", unit: "Дж/К" },
-  { name: "Постоянная Авогадро", value: "Nₐ = 6,02·10²³", unit: "1/моль" },
-  { name: "Скорость света в вакууме", value: "c = 3·10⁸", unit: "м/с" },
-  { name: "Коэффициент в законе Кулона", value: "k = 1/(4πε₀) = 9·10⁹", unit: "Н·м²/Кл²" },
-  { name: "Модуль заряда электрона", value: "e = 1,6·10⁻¹⁹", unit: "Кл" },
-  { name: "Масса электрона", value: "mₑ = 9,1·10⁻³¹", unit: "кг" },
-  { name: "Масса протона", value: "mₚ = 1,67·10⁻²⁷", unit: "кг" },
-  { name: "Постоянная Планка", value: "h = 6,62·10⁻³⁴", unit: "Дж·с" },
-  { name: "Радиус Солнца", value: "6,96·10⁸", unit: "м" },
-  { name: "Температура поверхности Солнца", value: "T = 6000", unit: "К" },
-  { name: "Радиус Земли", value: "6370", unit: "км" }
-];
-
-const unitConversions = [
-  { name: "Температура", value: "0 К = -273 °C", unit: "" },
-  { name: "Атомная единица массы", value: "1 а.е.м. = 1,66·10⁻²⁷", unit: "кг" },
-  { name: "Энергия 1 а.е.м.", value: "1 а.е.м. = 931,5", unit: "МэВ" },
-  { name: "Электронвольт", value: "1 эВ = 1,6·10⁻¹⁹", unit: "Дж" },
-  { name: "Астрономическая единица", value: "1 а.е. ≈ 150 000 000", unit: "км" },
-  { name: "Световой год", value: "1 св. год ≈ 9,46·10¹⁵", unit: "м" },
-  { name: "Парсек", value: "1 пк ≈ 3,26 св. года", unit: "" }
-];
-
-const particleMasses = [
-  { name: "Электрон", value: "9,1·10⁻³¹ кг ≈ 5,5·10⁻⁴ а.е.м.", unit: "" },
-  { name: "Протон", value: "1,673·10⁻²⁷ кг ≈ 1,007 а.е.м.", unit: "" },
-  { name: "Нейтрон", value: "1,675·10⁻²⁷ кг ≈ 1,008 а.е.м.", unit: "" }
-];
-
-const densities = [
-  { name: "Вода", value: "1000", unit: "кг/м³" },
-  { name: "Древесина (сосна)", value: "400", unit: "кг/м³" },
-  { name: "Керосин", value: "800", unit: "кг/м³" },
-  { name: "Подсолнечное масло", value: "900", unit: "кг/м³" },
-  { name: "Парафин", value: "900", unit: "кг/м³" },
-  { name: "Алюминий", value: "2700", unit: "кг/м³" },
-  { name: "Железо", value: "7800", unit: "кг/м³" },
-  { name: "Ртуть", value: "13 600", unit: "кг/м³" }
-];
-
-const heatCapacities = [
-  { name: "Вода", value: "4,2·10³", unit: "Дж/(кг·К)" },
-  { name: "Лёд", value: "2,1·10³", unit: "Дж/(кг·К)" },
-  { name: "Железо", value: "460", unit: "Дж/(кг·К)" },
-  { name: "Свинец", value: "130", unit: "Дж/(кг·К)" },
-  { name: "Алюминий", value: "900", unit: "Дж/(кг·К)" },
-  { name: "Медь", value: "380", unit: "Дж/(кг·К)" },
-  { name: "Чугун", value: "500", unit: "Дж/(кг·К)" }
-];
-
-const latentHeats = [
-  { name: "Парообразование воды", value: "2,3·10⁶", unit: "Дж/кг" },
-  { name: "Плавление свинца", value: "2,5·10⁴", unit: "Дж/кг" },
-  { name: "Плавление льда", value: "3,3·10⁵", unit: "Дж/кг" }
-];
-
-const normalConditions = [
-  { name: "Давление", value: "10⁵", unit: "Па" },
-  { name: "Температура", value: "0", unit: "°C" }
-];
-
-const molarMasses = [
-  { name: "Азот", value: "28·10⁻³", unit: "кг/моль" },
-  { name: "Аргон", value: "40·10⁻³", unit: "кг/моль" },
-  { name: "Водород", value: "2·10⁻³", unit: "кг/моль" },
-  { name: "Воздух", value: "29·10⁻³", unit: "кг/моль" },
-  { name: "Вода", value: "18·10⁻³", unit: "кг/моль" },
-  { name: "Гелий", value: "4·10⁻³", unit: "кг/моль" },
-  { name: "Кислород", value: "32·10⁻³", unit: "кг/моль" },
-  { name: "Литий", value: "6·10⁻³", unit: "кг/моль" },
-  { name: "Неон", value: "20·10⁻³", unit: "кг/моль" },
-  { name: "Углекислый газ", value: "44·10⁻³", unit: "кг/моль" }
-];
-
-/* =========================================================
-   ФОРМУЛЫ
-   ========================================================= */
-
-const topics = [
+const theoryBlocks = [
   {
-    id: "kinematics",
-    title: "Кинематика",
-    ege: "Задания 1, 2",
-    subsections: [
-      {
-        title: "Прямолинейное равномерное движение",
-        formulas: [
-          { id: "k1", title: "Скорость при равномерном движении", latex: "v = \\frac{s}{t}", symbols: { v: "скорость, м/с", s: "путь, м", t: "время, с" }, ege: "Задание 1", note: "Только для равномерного прямолинейного движения" },
-          { id: "k2", title: "Путь при равномерном движении", latex: "s = vt", symbols: { s: "путь, м", v: "скорость, м/с", t: "время, с" }, ege: "Задание 1" }
-        ]
-      },
-      {
-        title: "Прямолинейное равноускоренное движение",
-        formulas: [
-          { id: "k3", title: "Ускорение", latex: "a = \\frac{v - v_0}{t}", symbols: { a: "ускорение, м/с²", v: "конечная скорость, м/с", v_0: "начальная скорость, м/с", t: "время, с" }, ege: "Задание 1" },
-          { id: "k4", title: "Скорость при равноускоренном движении", latex: "v = v_0 + at", symbols: { v: "скорость, м/с", v_0: "начальная скорость, м/с", a: "ускорение, м/с²", t: "время, с" }, ege: "Задание 1" },
-          { id: "k5", title: "Перемещение при равноускоренном движении", latex: "s = v_0 t + \\frac{at^2}{2}", symbols: { s: "перемещение, м", v_0: "начальная скорость, м/с", a: "ускорение, м/с²", t: "время, с" }, ege: "Задание 1" },
-          { id: "k6", title: "Перемещение без времени", latex: "s = \\frac{v^2 - v_0^2}{2a}", symbols: { s: "перемещение, м", v: "конечная скорость, м/с", v_0: "начальная скорость, м/с", a: "ускорение, м/с²" }, ege: "Задание 1" },
-          { id: "k13", title: "Средняя скорость (путь)", latex: "v_{ср} = \\frac{s_1 + s_2 + ...}{t_1 + t_2 + ...}", symbols: { v_ср: "средняя скорость, м/с", s: "путь на участке, м", t: "время на участке, с" }, ege: "Задание 1" }
-        ]
-      },
-      {
-        title: "Баллистика",
-        formulas: [
-          { id: "k7", title: "Дальность полёта тела, брошенного под углом", latex: "L = \\frac{v_0^2 \\sin 2\\alpha}{g}", symbols: { L: "дальность полёта, м", v_0: "начальная скорость, м/с", "\\alpha": "угол бросания", g: "ускорение свободного падения, м/с²" }, ege: "Задание 1" },
-          { id: "k8", title: "Максимальная высота подъёма", latex: "h_{max} = \\frac{v_0^2 \\sin^2\\alpha}{2g}", symbols: { h_max: "высота, м", v_0: "начальная скорость, м/с", "\\alpha": "угол бросания", g: "ускорение свободного падения, м/с²" }, ege: "Задание 1" },
-          { id: "k9", title: "Время полёта", latex: "t = \\frac{2v_0 \\sin\\alpha}{g}", symbols: { t: "время полёта, с", v_0: "начальная скорость, м/с", "\\alpha": "угол бросания", g: "ускорение свободного падения, м/с²" }, ege: "Задание 1" },
-          { id: "k15", title: "Высота свободного падения", latex: "h = \\frac{gt^2}{2}", symbols: { h: "высота, м", g: "ускорение свободного падения, м/с²", t: "время, с" }, ege: "Задание 1" },
-          { id: "k16", title: "Скорость при свободном падении", latex: "v = gt", symbols: { v: "скорость, м/с", g: "ускорение свободного падения, м/с²", t: "время, с" }, ege: "Задание 1" }
-        ]
-      },
-      {
-        title: "Движение по окружности",
-        formulas: [
-          { id: "k10", title: "Центростремительное ускорение", latex: "a_{цс} = \\frac{v^2}{R} = \\omega^2 R", symbols: { a_цс: "центростремительное ускорение, м/с²", v: "линейная скорость, м/с", R: "радиус, м", "\\omega": "угловая скорость, рад/с" }, ege: "Задание 1" },
-          { id: "k11", title: "Угловая скорость", latex: "\\omega = \\frac{2\\pi}{T} = 2\\pi\\nu", symbols: { "\\omega": "угловая скорость, рад/с", T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 1" },
-          { id: "k18", title: "Связь линейной и угловой скорости", latex: "v = \\omega R", symbols: { v: "линейная скорость, м/с", "\\omega": "угловая скорость, рад/с", R: "радиус, м" }, ege: "Задание 1" }
-        ]
-      }
+    id: "criteria",
+    title: "1.1 Критерии проверки (3 балла)",
+    text: `
+      <p class="theory-text"><b>3 балла:</b> Приведено полное правильное решение: верно записаны формулы, проведены математические преобразования, получен правильный числовой ответ с единицами измерения.</p>
+      <p class="theory-text"><b>2 балла:</b> Решение содержит п.1, но допущена ошибка в математических преобразованиях ИЛИ не закончены вычисления.</p>
+      <p class="theory-text"><b>1 балл:</b> Представлены только положения и формулы без преобразований ИЛИ отсутствует ОДНА из исходных формул.</p>
+      <p class="theory-text"><b>0 баллов:</b> Все случаи, не соответствующие вышеуказанным критериям.</p>
+    `
+  },
+  {
+    id: "mistakes",
+    title: "1.2 Типичные ошибки",
+    text: `
+      <ul class="theory-text">
+        <li><b>Некорректное использование формул:</b> применение законов, не соответствующих частному случаю.</li>
+        <li><b>Игнорирование единиц измерения:</b> расчёты без перевода величин в СИ.</li>
+        <li><b>Математические ошибки:</b> арифметические просчёты, неправильное выражение искомой величины.</li>
+        <li><b>Отсутствие промежуточных законов:</b> использование конечной формулы без записи исходных законов.</li>
+      </ul>
+    `
+  },
+  {
+    id: "formulas_electro",
+    title: "1.3 Электростатика",
+    formulas: [
+      { name: "Закон Кулона", latex: "F = k\\frac{|q_1||q_2|}{\\varepsilon r^2}", desc: "k = 9·10⁹ Н·м²/Кл²" },
+      { name: "Напряжённость поля", latex: "E = \\frac{F}{q}", desc: "В/м" },
+      { name: "Потенциал", latex: "\\varphi = \\frac{W}{q}", desc: "В" },
+      { name: "Разность потенциалов (напряжение)", latex: "U = \\varphi_1 - \\varphi_2", desc: "Работа поля: A = qU" },
+      { name: "Связь напряжения и напряжённости", latex: "U = Ed", desc: "Для однородного поля" },
+      { name: "Электроёмкость", latex: "C = \\frac{q}{U}", desc: "Ф" },
+      { name: "Ёмкость плоского конденсатора", latex: "C = \\frac{\\varepsilon \\varepsilon_0 S}{d}", desc: "ε₀ = 8,85·10⁻¹² Ф/м" },
+      { name: "Энергия конденсатора", latex: "W = \\frac{qU}{2} = \\frac{CU^2}{2} = \\frac{q^2}{2C}", desc: "Дж" }
     ]
   },
   {
-    id: "dynamics",
-    title: "Динамика",
-    ege: "Задания 2, 3",
-    subsections: [
-      {
-        title: "Законы Ньютона",
-        formulas: [
-          { id: "d1", title: "Второй закон Ньютона", latex: "\\vec{F} = m\\vec{a}", symbols: { F: "равнодействующая сила, Н", m: "масса, кг", a: "ускорение, м/с²" }, ege: "Задание 2" },
-          { id: "d2", title: "Третий закон Ньютона", latex: "\\vec{F}_{12} = -\\vec{F}_{21}", symbols: { F_12: "сила действия, Н", F_21: "сила противодействия, Н" }, ege: "Задание 2" }
-        ]
-      },
-      {
-        title: "Силы в природе",
-        formulas: [
-          { id: "d3", title: "Сила тяжести", latex: "F_{т} = mg", symbols: { F_т: "сила тяжести, Н", m: "масса, кг", g: "ускорение свободного падения, м/с²" }, ege: "Задание 2" },
-          { id: "d4", title: "Закон Гука", latex: "F_{упр} = kx", symbols: { F_упр: "сила упругости, Н", k: "жёсткость, Н/м", x: "деформация, м" }, ege: "Задание 2" },
-          { id: "d5", title: "Сила трения", latex: "F_{тр} = \\mu N", symbols: { F_тр: "сила трения, Н", "\\mu": "коэффициент трения", N: "сила нормального давления, Н" }, ege: "Задание 2" },
-          { id: "d6", title: "Закон всемирного тяготения", latex: "F = G\\frac{m_1 m_2}{r^2}", symbols: { F: "сила притяжения, Н", G: "гравитационная постоянная", m_1: "масса 1 тела, кг", m_2: "масса 2 тела, кг", r: "расстояние, м" }, ege: "Задание 2" }
-        ]
-      },
-      {
-        title: "Импульс",
-        formulas: [
-          { id: "d8", title: "Импульс тела", latex: "p = mv", symbols: { p: "импульс, кг·м/с", m: "масса, кг", v: "скорость, м/с" }, ege: "Задание 3" },
-          { id: "d9", title: "Изменение импульса (импульс силы)", latex: "\\Delta p = F\\Delta t", symbols: { "\\Delta p": "изменение импульса, кг·м/с", F: "сила, Н", "\\Delta t": "время, с" }, ege: "Задание 3" }
-        ]
-      }
+    id: "formulas_current",
+    title: "1.4 Законы постоянного тока",
+    formulas: [
+      { name: "Сила тока", latex: "I = \\frac{\\Delta q}{\\Delta t}", desc: "А" },
+      { name: "Закон Ома для участка цепи", latex: "I = \\frac{U}{R}", desc: "Ом" },
+      { name: "Сопротивление проводника", latex: "R = \\rho\\frac{l}{S}", desc: "Удельное сопротивление ρ" },
+      { name: "Закон Ома для полной цепи", latex: "I = \\frac{\\varepsilon}{R + r}", desc: "ЭДС и внутреннее сопротивление r" },
+      { name: "Работа тока", latex: "A = IUt", desc: "Дж" },
+      { name: "Закон Джоуля-Ленца", latex: "Q = I^2Rt", desc: "Дж" },
+      { name: "Мощность тока", latex: "P = IU = I^2R = \\frac{U^2}{R}", desc: "Вт" }
     ]
   },
   {
-    id: "energy",
-    title: "Работа, мощность, энергия",
-    ege: "Задания 3, 4",
-    subsections: [
-      {
-        title: "Работа и мощность",
-        formulas: [
-          { id: "e1", title: "Механическая работа", latex: "A = Fs\\cos\\alpha", symbols: { A: "работа, Дж", F: "сила, Н", s: "перемещение, м", "\\alpha": "угол между силой и перемещением" }, ege: "Задание 3" },
-          { id: "e2", title: "Мощность", latex: "P = \\frac{A}{t} = Fv", symbols: { P: "мощность, Вт", A: "работа, Дж", t: "время, с", F: "сила, Н", v: "скорость, м/с" }, ege: "Задание 3" }
-        ]
-      },
-      {
-        title: "Энергия",
-        formulas: [
-          { id: "e3", title: "Кинетическая энергия", latex: "E_k = \\frac{mv^2}{2}", symbols: { E_k: "кинетическая энергия, Дж", m: "масса, кг", v: "скорость, м/с" }, ege: "Задание 3" },
-          { id: "e4", title: "Потенциальная энергия (гравитация)", latex: "E_p = mgh", symbols: { E_p: "потенциальная энергия, Дж", m: "масса, кг", g: "ускорение свободного падения", h: "высота, м" }, ege: "Задание 3" },
-          { id: "e5", title: "Потенциальная энергия (упругая деформация)", latex: "E_p = \\frac{kx^2}{2}", symbols: { E_p: "потенциальная энергия, Дж", k: "жёсткость, Н/м", x: "деформация, м" }, ege: "Задание 3" },
-          { id: "e6", title: "Закон сохранения механической энергии", latex: "E_k + E_p = const", symbols: { E_k: "кинетическая энергия, Дж", E_p: "потенциальная энергия, Дж" }, ege: "Задание 3" },
-          { id: "e7", title: "КПД", latex: "\\eta = \\frac{A_{полезная}}{A_{затраченная}} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", A_полезная: "полезная работа, Дж", A_затраченная: "затраченная работа, Дж" }, ege: "Задание 3" }
-        ]
-      }
+    id: "formulas_magnetic",
+    title: "1.5 Магнитное поле",
+    formulas: [
+      { name: "Сила Ампера", latex: "F_A = BIl\\sin\\alpha", desc: "α - угол между B и током I" },
+      { name: "Сила Лоренца", latex: "F_L = |q|vB\\sin\\alpha", desc: "α - угол между B и скоростью v" },
+      { name: "Радиус траектории заряда", latex: "R = \\frac{mv}{|q|B}", desc: "Движение по окружности" }
     ]
   },
   {
-    id: "statics",
-    title: "Статика и гидростатика",
-    ege: "Задание 4",
-    subsections: [
-      {
-        title: "Статика",
-        formulas: [
-          { id: "s1", title: "Момент силы", latex: "M = F \\cdot l", symbols: { M: "момент силы, Н·м", F: "сила, Н", l: "плечо силы, м" }, ege: "Задание 4" },
-          { id: "s2", title: "Условие равновесия рычага", latex: "F_1 l_1 = F_2 l_2", symbols: { F_1: "сила 1, Н", l_1: "плечо 1, м", F_2: "сила 2, Н", l_2: "плечо 2, м" }, ege: "Задание 4" }
-        ]
-      },
-      {
-        title: "Гидростатика",
-        formulas: [
-          { id: "s3", title: "Давление", latex: "p = \\frac{F}{S}", symbols: { p: "давление, Па", F: "сила, Н", S: "площадь, м²" }, ege: "Задание 4" },
-          { id: "s4", title: "Давление жидкости на глубине", latex: "p = \\rho g h", symbols: { p: "давление, Па", "\\rho": "плотность, кг/м³", g: "ускорение свободного падения", h: "глубина, м" }, ege: "Задание 4" },
-          { id: "s5", title: "Сила Архимеда", latex: "F_A = \\rho_ж g V_т", symbols: { F_A: "сила Архимеда, Н", "\\rho_ж": "плотность жидкости, кг/м³", g: "ускорение свободного падения", V_т: "объём погружённой части, м³" }, ege: "Задание 4" },
-          { id: "s6", title: "Плотность вещества", latex: "\\rho = \\frac{m}{V}", symbols: { "\\rho": "плотность, кг/м³", m: "масса, кг", V: "объём, м³" }, ege: "Задание 4" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "molecular",
-    title: "Молекулярная физика",
-    ege: "Задания 7, 8",
-    subsections: [
-      {
-        title: "Основы МКТ",
-        formulas: [
-          { id: "m1", title: "Количество вещества", latex: "\\nu = \\frac{m}{M} = \\frac{N}{N_A}", symbols: { "\\nu": "количество вещества, моль", m: "масса, кг", M: "молярная масса, кг/моль", N: "число молекул", N_A: "число Авогадро" }, ege: "Задание 7" },
-          { id: "m2", title: "Концентрация молекул", latex: "n = \\frac{N}{V}", symbols: { n: "концентрация, м⁻³", N: "число молекул", V: "объём, м³" }, ege: "Задание 7" },
-          { id: "m3", title: "Средняя кинетическая энергия молекул", latex: "\\bar{E}_k = \\frac{3}{2}kT", symbols: { E_k: "средняя кинетическая энергия, Дж", k: "постоянная Больцмана", T: "абсолютная температура, К" }, ege: "Задание 7" },
-          { id: "m4", title: "Основное уравнение МКТ", latex: "p = \\frac{1}{3}m_0 n \\bar{v}^2 = \\frac{2}{3}n\\bar{E}_k", symbols: { p: "давление, Па", m_0: "масса молекулы, кг", n: "концентрация, м⁻³", v: "средняя квадратичная скорость, м/с" }, ege: "Задание 7" }
-        ]
-      },
-      {
-        title: "Уравнение состояния",
-        formulas: [
-          { id: "m5", title: "Уравнение Менделеева-Клапейрона", latex: "pV = \\nu RT", symbols: { p: "давление, Па", V: "объём, м³", "\\nu": "количество вещества, моль", R: "универсальная газовая постоянная", T: "температура, К" }, ege: "Задание 7" },
-          { id: "m12", title: "Объединённый газовый закон", latex: "\\frac{p_1 V_1}{T_1} = \\frac{p_2 V_2}{T_2}", symbols: { p: "давление, Па", V: "объём, м³", T: "температура, К" }, ege: "Задание 7" }
-        ]
-      },
-      {
-        title: "Изопроцессы",
-        formulas: [
-          { id: "m6", title: "Закон Бойля-Мариотта (изотерма)", latex: "pV = const", symbols: { p: "давление, Па", V: "объём, м³" }, note: "T = const", ege: "Задание 7", image: "iso1.jpg" },
-          { id: "m7", title: "Закон Гей-Люссака (изобара)", latex: "\\frac{V}{T} = const", symbols: { V: "объём, м³", T: "температура, К" }, note: "p = const", ege: "Задание 7", image: "iso6.jpg" },
-          { id: "m8", title: "Закон Шарля (изохора)", latex: "\\frac{p}{T} = const", symbols: { p: "давление, Па", T: "температура, К" }, note: "V = const", ege: "Задание 7", image: "iso8.jpg" }
-        ]
-      },
-      {
-        title: "Влажность",
-        formulas: [
-          { id: "m9", title: "Относительная влажность", latex: "\\varphi = \\frac{p}{p_0} \\cdot 100\\% = \\frac{\\rho}{\\rho_0} \\cdot 100\\%", symbols: { "\\varphi": "относительная влажность, %", p: "парциальное давление пара, Па", p_0: "давление насыщенного пара, Па" }, ege: "Задание 8" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "thermo",
-    title: "Термодинамика",
-    ege: "Задания 9, 10",
-    subsections: [
-      {
-        title: "Внутренняя энергия и работа",
-        formulas: [
-          { id: "t1", title: "Внутренняя энергия идеального газа", latex: "U = \\frac{3}{2}\\nu RT", symbols: { U: "внутренняя энергия, Дж", "\\nu": "количество вещества, моль", R: "газовая постоянная", T: "температура, К" }, ege: "Задание 9" },
-          { id: "t2", title: "Работа газа", latex: "A = p\\Delta V", symbols: { A: "работа, Дж", p: "давление, Па", "\\Delta V": "изменение объёма, м³" }, ege: "Задание 9" },
-          { id: "t3", title: "Первый закон термодинамики", latex: "\\Delta U = Q + A_{внеш}", symbols: { "\\Delta U": "изменение внутренней энергии, Дж", Q: "количество теплоты, Дж", A_внеш: "работа внешних сил, Дж" }, ege: "Задание 9" }
-        ]
-      },
-      {
-        title: "Тепловые явления",
-        formulas: [
-          { id: "t4", title: "Количество теплоты при нагревании", latex: "Q = cm\\Delta T", symbols: { Q: "количество теплоты, Дж", c: "удельная теплоёмкость, Дж/(кг·°C)", m: "масса, кг", "\\Delta T": "изменение температуры, °C" }, ege: "Задание 10" },
-          { id: "t5", title: "Количество теплоты при плавлении", latex: "Q = \\lambda m", symbols: { Q: "количество теплоты, Дж", "\\lambda": "удельная теплота плавления, Дж/кг", m: "масса, кг" }, ege: "Задание 10" },
-          { id: "t6", title: "Количество теплоты при парообразовании", latex: "Q = Lm", symbols: { Q: "количество теплоты, Дж", L: "удельная теплота парообразования, Дж/кг", m: "масса, кг" }, ege: "Задание 10" },
-          { id: "t8", title: "КПД теплового двигателя", latex: "\\eta = \\frac{Q_1 - Q_2}{Q_1} \\cdot 100\\%", symbols: { "\\eta": "КПД, %", Q_1: "теплота от нагревателя, Дж", Q_2: "теплота холодильнику, Дж" }, ege: "Задание 10" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "electricity",
-    title: "Электричество",
-    ege: "Задания 11, 12, 14, 15",
-    subsections: [
-      {
-        title: "Электростатика",
-        formulas: [
-          { id: "el1", title: "Закон Кулона", latex: "F = k\\frac{|q_1||q_2|}{\\varepsilon r^2}", symbols: { F: "сила, Н", k: "коэффициент пропорциональности", q_1: "заряд 1, Кл", q_2: "заряд 2, Кл", "\\varepsilon": "диэлектрическая проницаемость", r: "расстояние, м" }, ege: "Задание 11" },
-          { id: "el2", title: "Напряжённость электрического поля", latex: "E = \\frac{F}{q}", symbols: { E: "напряжённость, В/м", F: "сила, Н", q: "заряд, Кл" }, ege: "Задание 11" }
-        ]
-      },
-      {
-        title: "Постоянный ток",
-        formulas: [
-          { id: "el3", title: "Сила тока", latex: "I = \\frac{q}{t}", symbols: { I: "сила тока, А", q: "заряд, Кл", t: "время, с" }, ege: "Задание 11" },
-          { id: "el4", title: "Закон Ома для участка цепи", latex: "I = \\frac{U}{R}", symbols: { I: "сила тока, А", U: "напряжение, В", R: "сопротивление, Ом" }, ege: "Задание 11" },
-          { id: "el5", title: "Сопротивление проводника", latex: "R = \\frac{\\rho l}{S}", symbols: { R: "сопротивление, Ом", "\\rho": "удельное сопротивление, Ом·м", l: "длина, м", S: "площадь сечения, м²" }, ege: "Задание 12" },
-          { id: "el10", title: "Закон Ома для полной цепи", latex: "I = \\frac{\\varepsilon}{R + r}", symbols: { I: "сила тока, А", "\\varepsilon": "ЭДС, В", R: "внешнее сопротивление, Ом", r: "внутреннее сопротивление, Ом" }, ege: "Задание 15" }
-        ]
-      },
-      {
-        title: "Соединение проводников",
-        formulas: [
-          { id: "el6", title: "Последовательное соединение", latex: "R_{общ} = R_1 + R_2 + ... + R_n", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12", image: "circuit-series.jpg" },
-          { id: "el7", title: "Параллельное соединение", latex: "\\frac{1}{R_{общ}} = \\frac{1}{R_1} + \\frac{1}{R_2} + ... + \\frac{1}{R_n}", symbols: { R_общ: "общее сопротивление, Ом" }, ege: "Задание 12", image: "circuit-parallel.jpg" }
-        ]
-      },
-      {
-        title: "Работа и мощность тока",
-        formulas: [
-          { id: "el8", title: "Мощность электрического тока", latex: "P = UI = I^2R = \\frac{U^2}{R}", symbols: { P: "мощность, Вт", U: "напряжение, В", I: "сила тока, А", R: "сопротивление, Ом" }, ege: "Задание 14" },
-          { id: "el9", title: "Закон Джоуля-Ленца", latex: "Q = I^2Rt", symbols: { Q: "количество теплоты, Дж", I: "сила тока, А", R: "сопротивление, Ом", t: "время, с" }, ege: "Задание 14" }
-        ]
-      },
-      {
-        title: "Конденсаторы",
-        formulas: [
-          { id: "el11", title: "Электроёмкость конденсатора", latex: "C = \\frac{q}{U}", symbols: { C: "электроёмкость, Ф", q: "заряд, Кл", U: "напряжение, В" }, ege: "Задание 14" },
-          { id: "el12", title: "Энергия конденсатора", latex: "W = \\frac{CU^2}{2} = \\frac{q^2}{2C}", symbols: { W: "энергия, Дж", C: "электроёмкость, Ф", U: "напряжение, В", q: "заряд, Кл" }, ege: "Задание 14" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "magnetic",
-    title: "Магнитное поле",
-    ege: "Задания 15, 16",
-    subsections: [
-      {
-        title: "Силы в магнитном поле",
-        formulas: [
-          { id: "mg1", title: "Сила Ампера", latex: "F_A = BIl\\sin\\alpha", symbols: { F_A: "сила Ампера, Н", B: "индукция, Тл", I: "сила тока, А", l: "длина проводника, м", "\\alpha": "угол между B и I" }, ege: "Задание 15", image: "hand-left.jpg" },
-          { id: "mg2", title: "Сила Лоренца", latex: "F_L = |q|vB\\sin\\alpha", symbols: { F_L: "сила Лоренца, Н", q: "заряд, Кл", v: "скорость, м/с", B: "индукция, Тл" }, ege: "Задание 15", image: "hand-right.jpg" }
-        ]
-      },
-      {
-        title: "Электромагнитная индукция",
-        formulas: [
-          { id: "mg3", title: "Магнитный поток", latex: "\\Phi = BS\\cos\\alpha", symbols: { "\\Phi": "магнитный поток, Вб", B: "индукция, Тл", S: "площадь, м²", "\\alpha": "угол между B и нормалью" }, ege: "Задание 16" },
-          { id: "mg4", title: "Закон электромагнитной индукции (ЭДС)", latex: "\\varepsilon_i = -\\frac{\\Delta\\Phi}{\\Delta t}", symbols: { "\\varepsilon_i": "ЭДС индукции, В", "\\Delta\\Phi": "изменение потока, Вб", "\\Delta t": "время, с" }, ege: "Задание 16" },
-          { id: "mg6", title: "Энергия магнитного поля", latex: "W = \\frac{LI^2}{2}", symbols: { W: "энергия, Дж", L: "индуктивность, Гн", I: "сила тока, А" }, ege: "Задание 15" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "oscillations",
-    title: "Колебания и волны",
-    ege: "Задания 13, 17",
-    subsections: [
-      {
-        title: "Механические колебания",
-        formulas: [
-          { id: "o1", title: "Период математического маятника", latex: "T = 2\\pi\\sqrt{\\frac{l}{g}}", symbols: { T: "период, с", l: "длина нити, м", g: "ускорение свободного падения, м/с²" }, ege: "Задание 13" },
-          { id: "o2", title: "Период пружинного маятника", latex: "T = 2\\pi\\sqrt{\\frac{m}{k}}", symbols: { T: "период, с", m: "масса, кг", k: "жёсткость, Н/м" }, ege: "Задание 13" },
-          { id: "o5", title: "Уравнение гармонических колебаний", latex: "x = A\\cos(\\omega t + \\varphi_0)", symbols: { x: "смещение, м", A: "амплитуда, м", "\\omega": "циклическая частота, рад/с", "\\varphi_0": "начальная фаза" }, ege: "Задание 13", image: "oscillation-graph.jpg" }
-        ]
-      },
-      {
-        title: "Волны",
-        formulas: [
-          { id: "o4", title: "Длина волны", latex: "\\lambda = vT = \\frac{v}{\\nu}", symbols: { "\\lambda": "длина волны, м", v: "скорость волны, м/с", T: "период, с", "\\nu": "частота, Гц" }, ege: "Задание 13" }
-        ]
-      },
-      {
-        title: "Электромагнитные колебания",
-        formulas: [
-          { id: "o6", title: "Формула Томсона", latex: "T = 2\\pi\\sqrt{LC}", symbols: { T: "период, с", L: "индуктивность, Гн", C: "электроёмкость, Ф" }, ege: "Задание 17" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "optics",
-    title: "Оптика",
-    ege: "Задания 17, 18",
-    subsections: [
-      {
-        title: "Геометрическая оптика",
-        formulas: [
-          { id: "op1", title: "Закон отражения", latex: "\\alpha = \\beta", symbols: { "\\alpha": "угол падения", "\\beta": "угол отражения" }, ege: "Задание 17" },
-          { id: "op2", title: "Закон преломления (Снеллиуса)", latex: "\\frac{\\sin\\alpha}{\\sin\\beta} = \\frac{n_2}{n_1}", symbols: { "\\alpha": "угол падения", "\\beta": "угол преломления", n_1: "показатель преломления 1 среды", n_2: "показатель преломления 2 среды" }, ege: "Задание 17" },
-          { id: "op3", title: "Абсолютный показатель преломления", latex: "n = \\frac{c}{v}", symbols: { n: "показатель преломления", c: "скорость света в вакууме, м/с", v: "скорость света в среде, м/с" }, ege: "Задание 17" }
-        ]
-      },
-      {
-        title: "Линзы",
-        formulas: [
-          { id: "op4", title: "Оптическая сила линзы", latex: "D = \\frac{1}{F}", symbols: { D: "оптическая сила, дптр", F: "фокусное расстояние, м" }, ege: "Задание 17" },
-          { id: "op5", title: "Формула тонкой линзы", latex: "\\frac{1}{F} = \\frac{1}{d} + \\frac{1}{f}", symbols: { F: "фокусное расстояние, м", d: "расстояние до предмета, м", f: "расстояние до изображения, м" }, ege: "Задание 17", image: "optics-lens.jpg" },
-          { id: "op6", title: "Увеличение линзы", latex: "\\Gamma = \\frac{H}{h} = \\frac{f}{d}", symbols: { "\\Gamma": "увеличение", H: "высота изображения, м", h: "высота предмета, м" }, ege: "Задание 17" }
-        ]
-      },
-      {
-        title: "Волновая оптика",
-        formulas: [
-          { id: "op7", title: "Условие дифракционного максимума", latex: "d\\sin\\varphi = k\\lambda", symbols: { d: "период решётки, м", "\\varphi": "угол дифракции", k: "порядок максимума", "\\lambda": "длина волны, м" }, ege: "Задание 18" }
-        ]
-      }
-    ]
-  },
-  {
-    id: "quantum",
-    title: "Квантовая физика",
-    ege: "Задания 19, 20",
-    subsections: [
-      {
-        title: "Фотоны",
-        formulas: [
-          { id: "q1", title: "Энергия фотона", latex: "E = h\\nu = \\frac{hc}{\\lambda}", symbols: { E: "энергия, Дж", h: "постоянная Планка", "\\nu": "частота, Гц", "\\lambda": "длина волны, м" }, ege: "Задание 19" }
-        ]
-      },
-      {
-        title: "Фотоэффект",
-        formulas: [
-          { id: "q3", title: "Уравнение Эйнштейна для фотоэффекта", latex: "h\\nu = A_{вых} + E_k", symbols: { h: "постоянная Планка", "\\nu": "частота, Гц", A_вых: "работа выхода, Дж", E_k: "кинетическая энергия, Дж" }, ege: "Задание 19", image: "optics-photoeffect.jpg" },
-          { id: "q4", title: "Красная граница фотоэффекта", latex: "\\nu_{min} = \\frac{A_{вых}}{h}", symbols: { "\\nu_min": "минимальная частота, Гц", A_вых: "работа выхода, Дж", h: "постоянная Планка" }, ege: "Задание 19" }
-        ]
-      },
-      {
-        title: "Атом и ядро",
-        formulas: [
-          { id: "q5", title: "Связь массы и энергии", latex: "E = mc^2", symbols: { E: "энергия, Дж", m: "масса, кг", c: "скорость света, м/с" }, ege: "Задание 20" },
-          { id: "q6", title: "Закон радиоактивного распада", latex: "N = N_0 \\cdot 2^{-t/T}", symbols: { N: "число ядер, шт", N_0: "начальное число ядер", t: "время, с", T: "период полураспада, с" }, ege: "Задание 20" }
-        ]
-      }
+    id: "formulas_emi",
+    title: "1.6 Электромагнитная индукция и колебания",
+    formulas: [
+      { name: "Магнитный поток", latex: "\\Phi = BS\\cos\\alpha", desc: "Вб" },
+      { name: "Закон ЭМИ (Фарадея)", latex: "\\varepsilon = \\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right|", desc: "В" },
+      { name: "ЭДС в движущемся проводнике", latex: "\\varepsilon = Bvl\\sin\\alpha", desc: "α - угол между B и скоростью v" },
+      { name: "Энергия магнитного поля", latex: "W = \\frac{LI^2}{2}", desc: "Дж" },
+      { name: "Формула Томсона", latex: "T = 2\\pi\\sqrt{LC}", desc: "Период колебательного контура" }
     ]
   }
 ];
 
-const allFormulas = topics.flatMap(t =>
-  t.subsections.flatMap(sub => sub.formulas.map(f => ({ ...f, topicTitle: t.title, subTitle: sub.title })))
-);
+/* =========================================================
+   ЗАДАЧИ №25 (ИЗ КУРСОВОЙ)
+   ========================================================= */
+const tasks25 = [
+  {
+    id: "method_1",
+    title: "Динамический метод (проводник на наклонной плоскости)",
+    condition: `На шероховатой плоскости, наклонённой под углом $\\alpha = 30^\\circ$ к горизонту, находится однородный цилиндрический проводник массой $m = 100$ г и длиной $l = 57{,}7$ см. По проводнику пропускают ток «от нас». Вся система находится в однородном магнитном поле с индукцией $B = 1$ Тл, направленной вертикально вниз. При каком токе цилиндр будет находиться в равновесии?`,
+    image: "",
+    solution: [
+      `Нарисуем силы: силу тяжести $m\\vec{g}$, силу нормального давления $\\vec{N}$, силу Ампера $\\vec{F_A} = I B l$ (направлена горизонтально влево).`,
+      `По второму закону Ньютона: $\\vec{N} + m\\vec{g} + \\vec{F_A} = 0$.`,
+      `Спроецируем силы на направление вдоль плоскости: $F_A \\cos\\alpha - mg\\sin\\alpha = 0$.`,
+      `Откуда: $I B l \\cos\\alpha = mg\\sin\\alpha$.`,
+      `Выразим силу тока: $I = \\frac{mg}{B l} \\tan\\alpha$.`,
+      `Подставим значения: $I = \\frac{0{,}1 \\cdot 10}{1 \\cdot 0{,}577} \\tan 30^\\circ \\approx 1$ А.`
+    ],
+    answer: "1 А"
+  },
+  {
+    id: "method_2",
+    title: "Алгоритмический метод (рамка в магнитном поле)",
+    condition: `В плоской электрической цепи квадратной формы со стороной $a = 1$ м сопротивления резисторов равны $R_1 = 0{,}5$ Ом и $R_2 = 9{,}5$ Ом. Цепь помещают в однородное магнитное поле, перпендикулярное плоскости цепи, модуль которого возрастает по закону $B = kt$, где $k = 0{,}1$ Тл/с. Какая тепловая мощность будет выделяться в резисторе $R_1$?`,
+    image: "",
+    solution: [
+      `При возрастании индукции увеличивается магнитный поток: $\\Delta\\Phi = \\Delta B \\cdot S = \\Delta B \\cdot a^2$.`,
+      `По закону ЭМИ в контуре возникает ЭДС: $\\varepsilon = \\frac{\\Delta\\Phi}{\\Delta t} = k a^2$.`,
+      `По закону Джоуля-Ленца тепловая мощность на $R_1$: $P = I^2 R_1$.`,
+      `Сила тока в цепи: $I = \\frac{\\varepsilon}{R_1 + R_2}$.`,
+      `Объединяя формулы: $P = \\left( \\frac{k a^2}{R_1 + R_2} \\right)^2 R_1$.`,
+      `Подставляем: $P = \\left( \\frac{0{,}1 \\cdot 1^2}{0{,}5 + 9{,}5} \\right)^2 \\cdot 0{,}5 = (0{,}01)^2 \\cdot 0{,}5 = 0{,}00005$ Вт $= 50$ мкВт.`
+    ],
+    answer: "50 мкВт"
+  }
+];
 
 /* =========================================================
-   ЗАДАЧИ С АВТОПРОВЕРКОЙ
+   ГЕНЕРАТОРЫ ЗАДАЧ 11-15
    ========================================================= */
-
 function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function round2(x) { return Math.round(x * 100) / 100; }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-function makeOptions(correct, distractors) {
-  const opts = [correct, ...distractors];
-  const seen = new Set();
-  const unique = [];
-  for (const o of opts) {
-    const key = String(o);
-    if (!seen.has(key) && unique.length < 4) {
-      seen.add(key);
-      unique.push(o);
+const generators = [
+  // ====== 11 ЗАДАНИЕ ======
+  { id: 11, generate() {
+      const q1 = randInt(2, 9); const q2 = randInt(2, 9); const r = randInt(1, 5);
+      const F = (9 * q1 * q2) / (r * r); const correct = round2(F * 1000);
+      const opts = [correct, round2(correct * 2), round2(correct / 2), round2(correct + 5)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Два точечных заряда $q_1 = ${q1}$ нКл и $q_2 = ${q2}$ нКл находятся на расстоянии $r = ${r}$ м друг от друга. Найдите силу их взаимодействия. Ответ дайте в мН.`,
+        options: opts.map(o => `${o} мН`), correctIndex: opts.indexOf(correct),
+        solution: [`Закон Кулона: $F = k\\frac{|q_1||q_2|}{r^2}$`, `$F = 9 \\cdot 10^9 \\cdot \\frac{${q1} \\cdot 10^{-9} \\cdot ${q2} \\cdot 10^{-9}}{${r}^2} = ${correct}$ мН.`],
+        answer: `${correct} мН`
+      };
     }
-  }
-  while (unique.length < 4) {
-    const filler = round2(correct * (0.5 + Math.random()));
-    if (!seen.has(String(filler))) {
-      seen.add(String(filler));
-      unique.push(filler);
+  },
+  { id: 11, generate() {
+      const U = randInt(10, 220); const P = randInt(2, 15) * 100; const I = round2(P / U);
+      const opts = [I, round2(I * 2), round2(I / 2), round2(I + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `На корпусе электроприбора имеется надпись: «${U} В, ${P} Вт». Найдите силу тока, потребляемого прибором.`,
+        options: opts.map(o => `${o} А`), correctIndex: opts.indexOf(I),
+        solution: [`Мощность: $P = UI$.`, `$I = \\frac{P}{U} = \\frac{${P}}{${U}} \\approx ${I}$ А.`],
+        answer: `${I} А`
+      };
     }
-  }
-  const shuffled = [...unique].sort(() => Math.random() - 0.5);
-  return { options: shuffled, correctIndex: shuffled.indexOf(correct) };
-}
+  },
+  { id: 11, generate() {
+      const F1 = randInt(10, 40); const k1 = randInt(2, 4); const k2 = randInt(2, 4); const r = randInt(2, 4);
+      const F2 = round2(F1 * k1 / k2 * (r * r));
+      const opts = [F2, round2(F2 * 2), round2(F2 / 2), round2(F2 + 5)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Между двумя заряженными телами сила взаимодействия равна ${F1} мН. Если заряд одного тела увеличить в ${k1} раза, а заряд другого уменьшить в ${k2} раза, и расстояние уменьшить в ${r} раза, то какова будет сила?`,
+        options: opts.map(o => `${o} мН`), correctIndex: opts.indexOf(F2),
+        solution: [`$F = k\\frac{q_1 q_2}{r^2}$`, `$F' = k\\frac{${k1}q_1 \\cdot (q_2/${k2})}{(r/${r})^2} = \\frac{${k1}}{${k2}} \\cdot ${r*r} \\cdot F = ${F2}$ мН.`],
+        answer: `${F2} мН`
+      };
+    }
+  },
+  { id: 11, generate() {
+      const F = randInt(2, 20) / 10; const q = randInt(2, 20) / 10; const E = round2(F / q);
+      const opts = [E, round2(E * 2), round2(E / 2), round2(E + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `На заряд $q = ${q}$ Кл в электрическом поле действует сила $F = ${F}$ Н. Найдите напряжённость поля.`,
+        options: opts.map(o => `${o} В/м`), correctIndex: opts.indexOf(E),
+        solution: [`$E = \\frac{F}{q}$`, `$E = \\frac{${F}}{${q}} = ${E}$ В/м.`],
+        answer: `${E} В/м`
+      };
+    }
+  },
 
-const tasks = [
-  {
-    id: "task_v_st", topic: "kinematics", title: "Скорость при равномерном движении", ege: "Задание 1",
-    generate() {
-      const v = randInt(2, 20);
-      const t = randInt(2, 15);
-      const s = v * t;
-      const correct = v;
-      const { options, correctIndex } = makeOptions(correct, [v + 2, v - 1, v + 5, v * 2]);
+  // ====== 12 ЗАДАНИЕ ======
+  { id: 12, generate() {
+      const R = randInt(2, 20); const U = randInt(6, 60); const I = round2(U / R);
+      const opts = [I, round2(I * 2), round2(I / 2), round2(I + 1)].sort(() => Math.random() - 0.5);
       return {
-        condition: `Тело движется равномерно и прямолинейно. За время t = ${t} с оно проходит путь s = ${s} м. Найдите скорость тела.`,
-        options: options.map(o => `${o} м/с`),
-        correctIndex,
-        solution: [
-          `Формула скорости при равномерном движении: $v = \\frac{s}{t}$`,
-          `Подставляем значения: $v = \\frac{${s}}{${t}} = ${correct}$ м/с`
-        ],
-        answer: `${correct} м/с`
+        condition: `К резистору сопротивлением $R = ${R}$ Ом приложено напряжение $U = ${U}$ В. Найдите силу тока в цепи.`,
+        options: opts.map(o => `${o} А`), correctIndex: opts.indexOf(I),
+        solution: [`Закон Ома: $I = \\frac{U}{R}$`, `$I = \\frac{${U}}{${R}} = ${I}$ А.`],
+        answer: `${I} А`
       };
     }
   },
-  {
-    id: "task_s_vt", topic: "kinematics", title: "Путь при равномерном движении", ege: "Задание 1",
-    generate() {
-      const v = randInt(3, 25);
-      const t = randInt(2, 12);
-      const s = v * t;
-      const correct = s;
-      const { options, correctIndex } = makeOptions(correct, [s + 5, s - 10, s * 2, Math.round(s / 2)]);
+  { id: 12, generate() {
+      const E = randInt(2, 10); const dt = randInt(2, 5);
+      const dPhi = round2(E * dt);
+      const opts = [dPhi, round2(dPhi * 2), round2(dPhi / 2), round2(dPhi + 5)].sort(() => Math.random() - 0.5);
       return {
-        condition: `Тело движется равномерно со скоростью v = ${v} м/с. Какой путь оно пройдёт за t = ${t} с?`,
-        options: options.map(o => `${o} м`),
-        correctIndex,
-        solution: [
-          `Формула пути: $s = v \\cdot t$`,
-          `Подставляем: $s = ${v} \\cdot ${t} = ${correct}$ м`
-        ],
-        answer: `${correct} м`
+        condition: `За время $\\Delta t = ${dt}$ с магнитный поток изменился на $\\Delta\\Phi$. В рамке генерируется ЭДС, равная ${E} В. Чему равно изменение магнитного потока $\\Delta\\Phi$?`,
+        options: opts.map(o => `${o} Вб`), correctIndex: opts.indexOf(dPhi),
+        solution: [`Закон ЭМИ: $\\varepsilon = \\frac{\\Delta\\Phi}{\\Delta t}$.`, `$\\Delta\\Phi = \\varepsilon \\cdot \\Delta t = ${E} \\cdot ${dt} = ${dPhi}$ Вб.`],
+        answer: `${dPhi} Вб`
       };
     }
   },
-  {
-    id: "task_a", topic: "kinematics", title: "Ускорение", ege: "Задание 1",
-    generate() {
-      const v0 = randInt(0, 10);
-      const a = randInt(1, 6);
-      const t = randInt(2, 10);
-      const v = v0 + a * t;
-      const correct = a;
-      const { options, correctIndex } = makeOptions(correct, [a + 1, a + 2, a * 2, Math.max(1, a - 1)]);
-      return {
-        condition: `Скорость тела за время t = ${t} с изменилась с v₀ = ${v0} м/с до v = ${v} м/с. Найдите ускорение тела.`,
-        options: options.map(o => `${o} м/с²`),
-        correctIndex,
-        solution: [
-          `Формула ускорения: $a = \\frac{v - v_0}{t}$`,
-          `Подставляем: $a = \\frac{${v} - ${v0}}{${t}} = \\frac{${v - v0}}{${t}} = ${correct}$ м/с²`
-        ],
-        answer: `${correct} м/с²`
-      };
-    }
-  },
-  {
-    id: "task_v_v0at", topic: "kinematics", title: "Скорость при равноускоренном движении", ege: "Задание 1",
-    generate() {
-      const v0 = randInt(0, 10);
-      const a = randInt(1, 5);
-      const t = randInt(2, 10);
-      const v = v0 + a * t;
-      const correct = v;
-      const { options, correctIndex } = makeOptions(correct, [v + a, v - a, v * 2, v + 5]);
-      return {
-        condition: `Тело движется с начальной скоростью v₀ = ${v0} м/с и ускорением a = ${a} м/с². Найдите скорость тела через t = ${t} с.`,
-        options: options.map(o => `${o} м/с`),
-        correctIndex,
-        solution: [
-          `Формула скорости: $v = v_0 + at$`,
-          `Подставляем: $v = ${v0} + ${a} \\cdot ${t} = ${v0} + ${a * t} = ${correct}$ м/с`
-        ],
-        answer: `${correct} м/с`
-      };
-    }
-  },
-  {
-    id: "task_s_v0at", topic: "kinematics", title: "Перемещение при равноускоренном движении", ege: "Задание 1",
-    generate() {
-      const v0 = randInt(0, 8);
-      const a = randInt(1, 4);
-      const t = randInt(2, 8);
-      const s = v0 * t + (a * t * t) / 2;
-      const correct = round2(s);
-      const { options, correctIndex } = makeOptions(correct, [round2(s + 10), round2(s - 8), round2(s * 2), round2(s / 2)]);
-      return {
-        condition: `Тело начинает движение со скоростью v₀ = ${v0} м/с и движется с ускорением a = ${a} м/с². Найдите перемещение тела за t = ${t} с.`,
-        options: options.map(o => `${o} м`),
-        correctIndex,
-        solution: [
-          `Формула перемещения: $s = v_0 t + \\frac{at^2}{2}$`,
-          `Подставляем: $s = ${v0} \\cdot ${t} + \\frac{${a} \\cdot ${t}^2}{2} = ${v0 * t} + ${(a * t * t) / 2} = ${correct}$ м`
-        ],
-        answer: `${correct} м`
-      };
-    }
-  },
-  {
-    id: "task_f_ma", topic: "dynamics", title: "Второй закон Ньютона", ege: "Задание 2",
-    generate() {
-      const m = randInt(1, 20);
-      const a = randInt(1, 10);
-      const F = m * a;
-      const correct = F;
-      const { options, correctIndex } = makeOptions(correct, [F + 5, F - 10, F * 2, Math.round(F / 2)]);
-      return {
-        condition: `Тело массой m = ${m} кг движется с ускорением a = ${a} м/с². Найдите равнодействующую силу, действующую на тело.`,
-        options: options.map(o => `${o} Н`),
-        correctIndex,
-        solution: [
-          `Второй закон Ньютона: $F = ma$`,
-          `Подставляем: $F = ${m} \\cdot ${a} = ${correct}$ Н`
-        ],
-        answer: `${correct} Н`
-      };
-    }
-  },
-  {
-    id: "task_ft_mg", topic: "dynamics", title: "Сила тяжести", ege: "Задание 2",
-    generate() {
-      const m = randInt(1, 30);
-      const g = 10;
-      const F = m * g;
-      const correct = F;
-      const { options, correctIndex } = makeOptions(correct, [F + 10, F - 20, F * 2, Math.round(F / 2)]);
-      return {
-        condition: `Найдите силу тяжести, действующую на тело массой m = ${m} кг. Ускорение свободного падения принять g = 10 м/с².`,
-        options: options.map(o => `${o} Н`),
-        correctIndex,
-        solution: [
-          `Формула силы тяжести: $F = mg$`,
-          `Подставляем: $F = ${m} \\cdot 10 = ${correct}$ Н`
-        ],
-        answer: `${correct} Н`
-      };
-    }
-  },
-  {
-    id: "task_hooke", topic: "dynamics", title: "Закон Гука", ege: "Задание 2",
-    generate() {
-      const k = randInt(10, 200);
-      const x = randInt(1, 20) / 100;
-      const F = round2(k * x);
-      const correct = F;
-      const { options, correctIndex } = makeOptions(correct, [round2(F + 2), round2(F - 1), round2(F * 2), round2(F / 2)]);
-      return {
-        condition: `Пружина жёсткостью k = ${k} Н/м растянута на x = ${x} м. Найдите силу упругости.`,
-        options: options.map(o => `${o} Н`),
-        correctIndex,
-        solution: [
-          `Закон Гука: $F = kx$`,
-          `Подставляем: $F = ${k} \\cdot ${x} = ${correct}$ Н`
-        ],
-        answer: `${correct} Н`
-      };
-    }
-  },
-  {
-    id: "task_ek", topic: "energy", title: "Кинетическая энергия", ege: "Задание 3",
-    generate() {
-      const m = randInt(1, 10);
-      const v = randInt(2, 20);
-      const Ek = round2((m * v * v) / 2);
-      const correct = Ek;
-      const { options, correctIndex } = makeOptions(correct, [round2(Ek * 2), round2(Ek / 2), round2(Ek + 20), round2(Ek - 15)]);
-      return {
-        condition: `Тело массой m = ${m} кг движется со скоростью v = ${v} м/с. Найдите кинетическую энергию тела.`,
-        options: options.map(o => `${o} Дж`),
-        correctIndex,
-        solution: [
-          `Формула кинетической энергии: $E_k = \\frac{mv^2}{2}$`,
-          `Подставляем: $E_k = \\frac{${m} \\cdot ${v}^2}{2} = \\frac{${m * v * v}}{2} = ${correct}$ Дж`
-        ],
-        answer: `${correct} Дж`
-      };
-    }
-  },
-  {
-    id: "task_work", topic: "energy", title: "Механическая работа", ege: "Задание 3",
-    generate() {
-      const F = randInt(5, 100);
-      const s = randInt(1, 20);
-      const A = F * s;
-      const correct = A;
-      const { options, correctIndex } = makeOptions(correct, [A + 50, A - 30, A * 2, Math.round(A / 2)]);
-      return {
-        condition: `Сила F = ${F} Н действует на тело вдоль направления перемещения. Тело перемещается на s = ${s} м. Найдите работу силы.`,
-        options: options.map(o => `${o} Дж`),
-        correctIndex,
-        solution: [
-          `Работа силы: $A = Fs\\cos\\alpha$. Сила направлена вдоль перемещения, значит $\\cos\\alpha = 1$.`,
-          `Подставляем: $A = ${F} \\cdot ${s} = ${correct}$ Дж`
-        ],
-        answer: `${correct} Дж`
-      };
-    }
-  },
-  {
-    id: "task_power", topic: "energy", title: "Мощность", ege: "Задание 3",
-    generate() {
-      const A = randInt(50, 500);
-      const t = randInt(2, 20);
-      const P = round2(A / t);
-      const correct = P;
-      const { options, correctIndex } = makeOptions(correct, [round2(P * 2), round2(P / 2), round2(P + 5), round2(P - 3)]);
-      return {
-        condition: `За время t = ${t} с была совершена работа A = ${A} Дж. Найдите мощность.`,
-        options: options.map(o => `${o} Вт`),
-        correctIndex,
-        solution: [
-          `Формула мощности: $P = \\frac{A}{t}$`,
-          `Подставляем: $P = \\frac{${A}}{${t}} = ${correct}$ Вт`
-        ],
-        answer: `${correct} Вт`
-      };
-    }
-  },
-  {
-    id: "task_pressure", topic: "statics", title: "Давление жидкости на глубине", ege: "Задание 4",
-    generate() {
-      const rho = pick([800, 1000, 13600]);
-      const g = 10;
-      const h = randInt(1, 10);
-      const p = rho * g * h;
-      const correct = p;
-      const { options, correctIndex } = makeOptions(correct, [p + 1000, p - 2000, p * 2, Math.round(p / 2)]);
-      return {
-        condition: `Найдите давление жидкости на глубине h = ${h} м. Плотность жидкости ρ = ${rho} кг/м³, g = 10 м/с².`,
-        options: options.map(o => `${o} Па`),
-        correctIndex,
-        solution: [
-          `Давление жидкости на глубине: $p = \\rho g h$`,
-          `Подставляем: $p = ${rho} \\cdot 10 \\cdot ${h} = ${correct}$ Па`
-        ],
-        answer: `${correct} Па`
-      };
-    }
-  },
-  {
-    id: "task_archimedes", topic: "statics", title: "Сила Архимеда", ege: "Задание 4",
-    generate() {
-      const rho = pick([800, 1000]);
-      const g = 10;
-      const V = randInt(1, 20) / 1000;
-      const F = round2(rho * g * V);
-      const correct = F;
-      const { options, correctIndex } = makeOptions(correct, [round2(F * 2), round2(F / 2), round2(F + 5), round2(F - 3)]);
-      return {
-        condition: `Тело объёмом V = ${V} м³ полностью погружено в жидкость плотностью ρ = ${rho} кг/м³. Найдите силу Архимеда. g = 10 м/с².`,
-        options: options.map(o => `${o} Н`),
-        correctIndex,
-        solution: [
-          `Сила Архимеда: $F_A = \\rho_ж g V_т$`,
-          `Подставляем: $F_A = ${rho} \\cdot 10 \\cdot ${V} = ${correct}$ Н`
-        ],
-        answer: `${correct} Н`
-      };
-    }
-  },
-  {
-    id: "task_heat", topic: "thermo", title: "Количество теплоты при нагревании", ege: "Задание 10",
-    generate() {
-      const c = pick([4200, 900, 500, 460]);
-      const m = randInt(1, 10);
-      const dT = randInt(5, 50);
-      const Q = c * m * dT;
-      const correct = Q;
-      const { options, correctIndex } = makeOptions(correct, [Q + 1000, Q - 2000, Q * 2, Math.round(Q / 2)]);
-      return {
-        condition: `Какое количество теплоты нужно, чтобы нагреть тело массой m = ${m} кг на Δt = ${dT} °C? Удельная теплоёмкость c = ${c} Дж/(кг·°C).`,
-        options: options.map(o => `${o} Дж`),
-        correctIndex,
-        solution: [
-          `Формула количества теплоты: $Q = cm\\Delta t$`,
-          `Подставляем: $Q = ${c} \\cdot ${m} \\cdot ${dT} = ${correct}$ Дж`
-        ],
-        answer: `${correct} Дж`
-      };
-    }
-  },
-  {
-    id: "task_ohm", topic: "electricity", title: "Закон Ома для участка цепи", ege: "Задание 11",
-    generate() {
-      const U = randInt(5, 100);
-      const R = randInt(2, 50);
-      const I = round2(U / R);
-      const correct = I;
-      const { options, correctIndex } = makeOptions(correct, [round2(I * 2), round2(I / 2), round2(I + 1), round2(I - 0.5)]);
-      return {
-        condition: `К участку цепи сопротивлением R = ${R} Ом приложено напряжение U = ${U} В. Найдите силу тока.`,
-        options: options.map(o => `${o} А`),
-        correctIndex,
-        solution: [
-          `Закон Ома: $I = \\frac{U}{R}$`,
-          `Подставляем: $I = \\frac{${U}}{${R}} = ${correct}$ А`
-        ],
-        answer: `${correct} А`
-      };
-    }
-  },
-  {
-    id: "task_power_current", topic: "electricity", title: "Мощность электрического тока", ege: "Задание 14",
-    generate() {
-      const U = randInt(10, 220);
-      const I = randInt(1, 5);
-      const P = U * I;
-      const correct = P;
-      const { options, correctIndex } = makeOptions(correct, [P + 50, P - 100, P * 2, Math.round(P / 2)]);
-      return {
-        condition: `При напряжении U = ${U} В через проводник протекает ток I = ${I} А. Найдите мощность тока.`,
-        options: options.map(o => `${o} Вт`),
-        correctIndex,
-        solution: [
-          `Мощность тока: $P = UI$`,
-          `Подставляем: $P = ${U} \\cdot ${I} = ${correct}$ Вт`
-        ],
-        answer: `${correct} Вт`
-      };
-    }
-  },
-  {
-    id: "task_series", topic: "electricity", title: "Последовательное соединение", ege: "Задание 12",
-    generate() {
-      const R1 = randInt(2, 30);
-      const R2 = randInt(2, 30);
-      const R = R1 + R2;
-      const correct = R;
-      const { options, correctIndex } = makeOptions(correct, [R + 5, R - 3, R * 2, Math.round(R / 2)]);
-      return {
-        condition: `Два резистора сопротивлением R₁ = ${R1} Ом и R₂ = ${R2} Ом соединены последовательно. Найдите общее сопротивление.`,
-        options: options.map(o => `${o} Ом`),
-        correctIndex,
-        solution: [
-          `При последовательном соединении: $R = R_1 + R_2$`,
-          `Подставляем: $R = ${R1} + ${R2} = ${correct}$ Ом`
-        ],
-        answer: `${correct} Ом`
-      };
-    }
-  },
-  {
-    id: "task_parallel", topic: "electricity", title: "Параллельное соединение", ege: "Задание 12",
-    generate() {
-      const R1 = randInt(2, 30);
-      const R2 = randInt(2, 30);
+  { id: 12, generate() {
+      const R1 = randInt(2, 10); const R2 = randInt(2, 10);
       const R = round2((R1 * R2) / (R1 + R2));
-      const correct = R;
-      const { options, correctIndex } = makeOptions(correct, [round2(R * 2), round2(R / 2), round2(R + 5), round2(R1 + R2)]);
+      const opts = [R, R1 + R2, R1 * R2, round2(R * 2)].sort(() => Math.random() - 0.5);
       return {
-        condition: `Два резистора сопротивлением R₁ = ${R1} Ом и R₂ = ${R2} Ом соединены параллельно. Найдите общее сопротивление.`,
-        options: options.map(o => `${o} Ом`),
-        correctIndex,
-        solution: [
-          `При параллельном соединении двух резисторов: $R = \\frac{R_1 R_2}{R_1 + R_2}$`,
-          `Подставляем: $R = \\frac{${R1} \\cdot ${R2}}{${R1} + ${R2}} = \\frac{${R1 * R2}}{${R1 + R2}} = ${correct}$ Ом`
-        ],
-        answer: `${correct} Ом`
+        condition: `Два резистора сопротивлением $R_1 = ${R1}$ Ом и $R_2 = ${R2}$ Ом соединены параллельно. Найдите их общее сопротивление.`,
+        options: opts.map(o => `${o} Ом`), correctIndex: opts.indexOf(R),
+        solution: [`$\\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}$`, `$R = \\frac{R_1 R_2}{R_1 + R_2} = \\frac{${R1} \\cdot ${R2}}{${R1} + ${R2}} = ${R}$ Ом.`],
+        answer: `${R} Ом`
       };
     }
   },
-  {
-    id: "task_pendulum", topic: "oscillations", title: "Период математического маятника", ege: "Задание 13",
-    generate() {
-      const l = randInt(1, 10);
-      const g = 10;
-      const T = round2(2 * Math.PI * Math.sqrt(l / g));
-      const correct = T;
-      const { options, correctIndex } = makeOptions(correct, [round2(T * 2), round2(T / 2), round2(T + 1), round2(T - 0.5)]);
+  { id: 12, generate() {
+      const I = randInt(2, 10); const R = randInt(2, 20); const t = randInt(5, 30);
+      const Q = I * I * R * t;
+      const opts = [Q, Q * 2, round2(Q / 2), Q + 50].sort(() => Math.random() - 0.5);
       return {
-        condition: `Найдите период колебаний математического маятника длиной l = ${l} м. g = 10 м/с², π ≈ 3,14.`,
-        options: options.map(o => `${o} с`),
-        correctIndex,
-        solution: [
-          `Формула периода: $T = 2\\pi\\sqrt{\\frac{l}{g}}$`,
-          `Подставляем: $T = 2 \\cdot 3{,}14 \\cdot \\sqrt{\\frac{${l}}{10}} = 6{,}28 \\cdot ${round2(Math.sqrt(l / 10))} = ${correct}$ с`
-        ],
-        answer: `${correct} с`
+        condition: `Сила тока в проводнике сопротивлением $R = ${R}$ Ом равна $I = ${I}$ А. Какое количество теплоты выделится за $t = ${t}$ с?`,
+        options: opts.map(o => `${o} Дж`), correctIndex: opts.indexOf(Q),
+        solution: [`Закон Джоуля-Ленца: $Q = I^2 R t$.`, `$Q = ${I}^2 \\cdot ${R} \\cdot ${t} = ${Q}$ Дж.`],
+        answer: `${Q} Дж`
       };
     }
   },
-  {
-    id: "task_photon", topic: "quantum", title: "Энергия фотона", ege: "Задание 19",
-    generate() {
-      const lambda = randInt(400, 700);
-      const E_eV = round2(1240 / lambda);
-      const correct = E_eV;
-      const { options, correctIndex } = makeOptions(correct, [round2(correct * 2), round2(correct / 2), round2(correct + 0.5), round2(correct - 0.3)]);
+
+  // ====== 13 ЗАДАНИЕ ======
+  { id: 13, generate() {
+      const alpha = pick([30, 45, 60]); const beta = pick([30, 45, 60].filter(a => a !== alpha));
+      const n = round2(Math.sin(beta * Math.PI / 180) / Math.sin(alpha * Math.PI / 180));
+      const opts = [n, round2(n * 2), round2(n / 2), round2(n + 0.5)].sort(() => Math.random() - 0.5);
       return {
-        condition: `Найдите энергию фотона с длиной волны λ = ${lambda} нм. Ответ дайте в эВ.`,
-        options: options.map(o => `${o} эВ`),
-        correctIndex,
-        solution: [
-          `Энергия фотона: $E = \\frac{hc}{\\lambda}$`,
-          `Удобно пользоваться формулой $E(\\text{эВ}) = \\frac{1240}{\\lambda(\\text{нм})}$`,
-          `Подставляем: $E = \\frac{1240}{${lambda}} = ${correct}$ эВ`
-        ],
-        answer: `${correct} эВ`
+        condition: `При переходе луча света из одной среды в другую угол падения равен $${alpha}^\\circ$, а угол преломления $${beta}^\\circ$. Каков относительный показатель преломления первой среды относительно второй?`,
+        options: opts.map(o => `${o}`), correctIndex: opts.indexOf(n),
+        solution: [`Закон преломления: $\\frac{\\sin\\alpha}{\\sin\\beta} = \\frac{n_2}{n_1}$.`, `$n = \\frac{\\sin ${beta}^\\circ}{\\sin ${alpha}^\\circ} = ${n}$.`],
+        answer: `${n}`
+      };
+    }
+  },
+  { id: 13, generate() {
+      const gamma = pick([40, 50, 60, 80]); const turn = pick([5, 10, 15]);
+      const alpha = gamma / 2; const newGamma = gamma + 2 * turn;
+      const res = 90 - newGamma / 2;
+      const opts = [res, round2(res * 2), round2(res / 2), round2(res + 5)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Луч света падает на плоское зеркало. Угол между падающим и отражённым лучами равен $${gamma}^\\circ$. Каким будет угол между падающим лучом и плоскостью зеркала, если повернуть зеркало на $${turn}^\\circ$?`,
+        options: opts.map(o => `${o}°`), correctIndex: opts.indexOf(res),
+        solution: [`Угол падения: $\\alpha = \\frac{${gamma}}{2} = ${alpha}^\\circ$.`, `При повороте зеркала на $${turn}^\\circ$ угол падения увеличится на $${turn}^\\circ$: $\\alpha' = ${alpha + turn}^\\circ$.`, `Угол с плоскостью зеркала: $90^\\circ - ${alpha + turn}^\\circ = ${res}^\\circ$.`],
+        answer: `${res}°`
+      };
+    }
+  },
+  { id: 13, generate() {
+      const F = pick([1, 1.5, 2, 2.5, 3]);
+      const a = randInt(2, 4) * F;
+      const f = round2(1 / (1/F - 1/a));
+      const opts = [f, round2(f * 2), round2(f / 2), round2(f + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Фокусное расстояние тонкой собирающей линзы равно $F = ${F}$ м. На главной оптической оси слева от линзы на расстоянии $a = ${a}$ м находится предмет. Какое расстояние от линзы до изображения?`,
+        options: opts.map(o => `${o} м`), correctIndex: opts.indexOf(f),
+        solution: [`Формула тонкой линзы: $\\frac{1}{F} = \\frac{1}{d} + \\frac{1}{f}$.`, `$\\frac{1}{f} = \\frac{1}{${F}} - \\frac{1}{${a}} = \\frac{${a-F}}{${round2(F*a)}}$.`, `$f = \\frac{${round2(F*a)}}{${round2(a-F)}} = ${f}$ м.`],
+        answer: `${f} м`
+      };
+    }
+  },
+
+  // ====== 14 ЗАДАНИЕ ======
+  { id: 14, generate() {
+      const E0 = randInt(10, 50); const k = randInt(2, 4); const r = randInt(2, 4);
+      const E = round2(E0 * k / (r * r));
+      const opts = [E, round2(E * 2), round2(E / 2), round2(E + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Протон движется по окружности в магнитном поле. Во сколько раз увеличится ускорение протона, если его кинетическую энергию увеличить в ${k} раза, а индукцию магнитного поля уменьшить в ${r} раза?`,
+        options: opts.map(o => `в ${o} раз`), correctIndex: opts.indexOf(E),
+        solution: [`Ускорение $a = \\frac{v^2}{R}$, $R = \\frac{mv}{qB}$, значит $a = \\frac{qvB}{m}$.`, `$v \\sim \\sqrt{E_k}$, значит $a \\sim \\sqrt{E_k} \\cdot B$.`, `$a' = \\sqrt{${k}} \\cdot \\frac{1}{${r}} = ${E}$ раз.`],
+        answer: `в ${E} раз`
+      };
+    }
+  },
+  { id: 14, generate() {
+      const B = randInt(1, 10) / 10; const v = randInt(2, 10); const L = randInt(1, 10) / 10;
+      const E = round2(B * v * L);
+      const opts = [E, round2(E * 2), round2(E / 2), round2(E + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Проводник длиной $l = ${L}$ м движется со скоростью $v = ${v}$ м/с перпендикулярно линиям магнитного поля с индукцией $B = ${B}$ Тл. Найдите ЭДС индукции в проводнике.`,
+        options: opts.map(o => `${o} В`), correctIndex: opts.indexOf(E),
+        solution: [`$\\varepsilon = Bvl\\sin 90^\\circ$`, `$\\varepsilon = ${B} \\cdot ${v} \\cdot ${L} = ${E}$ В.`],
+        answer: `${E} В`
+      };
+    }
+  },
+  { id: 14, generate() {
+      const R = randInt(2, 10); const dPhi = randInt(2, 20) / 10;
+      const q = round2(dPhi / R);
+      const opts = [q, round2(q * 2), round2(q / 2), round2(q + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Магнитный поток через контур сопротивлением $R = ${R}$ Ом изменился на $\\Delta\\Phi = ${dPhi}$ Вб. Какой заряд прошёл по контуру?`,
+        options: opts.map(o => `${o} Кл`), correctIndex: opts.indexOf(q),
+        solution: [`$q = \\frac{\\Delta\\Phi}{R}$`, `$q = \\frac{${dPhi}}{${R}} = ${q}$ Кл.`],
+        answer: `${q} Кл`
+      };
+    }
+  },
+
+  // ====== 15 ЗАДАНИЕ ======
+  { id: 15, generate() {
+      const T0 = pick([10, 20, 40]); const k = pick([2, 4, 9]);
+      const T = round2(T0 * Math.sqrt(k));
+      const opts = [T, round2(T * 2), round2(T / 2), round2(T + 10)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `На рисунке приведён график гармонических колебаний тока в колебательном контуре с периодом $T_0 = ${T0}$ мкс. Если ёмкость конденсатора в контуре увеличить в ${k} раза, то каков будет период колебаний? (Ответ дать в мкс.)`,
+        options: opts.map(o => `${o} мкс`), correctIndex: opts.indexOf(T),
+        solution: [`Формула Томсона: $T = 2\\pi\\sqrt{LC}$.`, `При увеличении ёмкости в ${k} раза период увеличится в $\\sqrt{${k}} = ${Math.sqrt(k)}$ раза.`, `Новый период: $T = ${T0} \\cdot ${Math.sqrt(k)} = ${T}$ мкс.`],
+        answer: `${T} мкс`
+      };
+    }
+  },
+  { id: 15, generate() {
+      const m = randInt(1, 10); const k = randInt(10, 100);
+      const T = round2(2 * 3.14 * Math.sqrt(m / k));
+      const opts = [T, round2(T * 2), round2(T / 2), round2(T + 1)].sort(() => Math.random() - 0.5);
+      return {
+        condition: `Найдите период колебаний пружинного маятника массой $m = ${m}$ кг на пружине жёсткостью $k = ${k}$ Н/м. $\\pi \\approx 3{,}14$.`,
+        options: opts.map(o => `${o} с`), correctIndex: opts.indexOf(T),
+        solution: [`$T = 2\\pi\\sqrt{\\frac{m}{k}}$`, `$T = 2 \\cdot 3.14 \\cdot \\sqrt{\\frac{${m}}{${k}}} \\approx ${T}$ с.`],
+        answer: `${T} с`
       };
     }
   }
@@ -1272,12 +597,7 @@ const tasks = [
    ========================================================= */
 
 const app = document.getElementById("app");
-const searchInput = document.getElementById("search");
 const themeBtn = document.getElementById("btnTheme");
-
-let currentView = { type: "home" };
-let currentRefTab = "constants";
-let currentTask = null;
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
@@ -1289,11 +609,6 @@ function toggleTheme() {
   applyTheme(current === "dark" ? "light" : "dark");
 }
 applyTheme(localStorage.getItem("phys_theme") || "light");
-
-function exportPDF() {
-  document.querySelectorAll(".symbols, .task-solution, .task-answer").forEach(el => el.classList.add("open"));
-  setTimeout(() => window.print(), 100);
-}
 
 function renderLatex(el) {
   if (window.renderMathInElement) {
@@ -1308,202 +623,149 @@ function renderLatex(el) {
   }
 }
 
-/* ГЛАВНЫЙ ЭКРАН */
+/* Главный экран */
 function renderHome() {
-  currentView = { type: "home" };
   app.innerHTML = `
-    <div class="home-split">
-      <div class="home-block" onclick="renderTheory()">
-        <div class="icon">📘</div>
-        <div class="title">Теория</div>
-        <div class="desc">Формулы по разделам, справочные материалы</div>
+    <div class="main-section">
+      <div class="main-title">📘 Теория</div>
+      <div class="grid-menu">
+        <button onclick="renderTheory()" style="grid-column: 1 / -1; padding: 20px;">
+          <span style="font-size: 18px; font-weight: 600;">Открыть теорию</span>
+          <span class="desc">Формулы, критерии, ошибки</span>
+        </button>
       </div>
-      <div class="home-block" onclick="renderPractice()">
-        <div class="icon">🧪</div>
-        <div class="title">Практика</div>
-        <div class="desc">Флеш-карты, тренажёры, задачи ЕГЭ</div>
+    </div>
+
+    <div class="main-section">
+      <div class="main-title">🧪 Практика</div>
+      <div class="grid-menu">
+        <button onclick="startGen(11)">
+          <span class="num">11</span>
+          <span class="desc">Электростатика, ток</span>
+        </button>
+        <button onclick="startGen(12)">
+          <span class="num">12</span>
+          <span class="desc">Магнитное поле</span>
+        </button>
+        <button onclick="startGen(13)">
+          <span class="num">13</span>
+          <span class="desc">Оптика</span>
+        </button>
+        <button onclick="startGen(14)">
+          <span class="num">14</span>
+          <span class="desc">ЭМИ, линзы</span>
+        </button>
+        <button onclick="startGen(15)">
+          <span class="num">15</span>
+          <span class="desc">Колебания</span>
+        </button>
+        <button onclick="renderTasks25List()" style="background: var(--block-bg); border-color: var(--accent);">
+          <span class="num" style="color: var(--accent);">25</span>
+          <span class="desc" style="color: var(--accent); font-weight: 600;">Развёрнутые задачи</span>
+        </button>
       </div>
     </div>
   `;
 }
 
-/* ТЕОРИЯ */
-function renderTheory() {
-  currentView = { type: "theory" };
+/* Генератор */
+let currentGenTask = null;
+let genAnswered = false;
+
+function startGen(id) {
+  const allForId = generators.filter(g => g.id === id);
+  const gen = pick(allForId);
+  
+  currentGenTask = { ...gen.generate(), id: gen.id };
+  genAnswered = false;
+
   app.innerHTML = `
     <div class="section-header">
       <button class="back-btn" onclick="renderHome()">← На главную</button>
-      <h2>📘 Теория</h2>
+      <h2>Задание ${id}</h2>
     </div>
-    <div class="menu">
-      ${topics.map(t => {
-        const count = t.subsections.reduce((s, sub) => s + sub.formulas.length, 0);
-        return `
-          <button onclick="openTopic('${t.id}')">
-            <span>${t.title}</span>
-            <span class="count">${count} формул · ЕГЭ: ${t.ege}</span>
-          </button>
-        `;
-      }).join("")}
-    </div>
-  `;
-}
 
-function openTopic(id) {
-  const topic = topics.find(t => t.id === id);
-  if (!topic) return;
-  currentView = { type: "topic", id };
-
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="renderTheory()">← К теории</button>
-      <h2>${topic.title}</h2>
-      <span class="ege-info">ЕГЭ: ${topic.ege}</span>
-    </div>
-    <div id="cards"></div>
-  `;
-  const box = document.getElementById("cards");
-  topic.subsections.forEach(sub => {
-    const h = document.createElement("div");
-    h.className = "subsection-title";
-    h.textContent = sub.title;
-    box.appendChild(h);
-    sub.formulas.forEach(f => box.appendChild(makeFormulaCard(f)));
-  });
-  renderLatex(box);
-}
-
-function makeFormulaCard(f) {
-  const card = document.createElement("div");
-  card.className = "formula-card";
-  const symId = "sym_" + f.id;
-
-  card.innerHTML = `
-    <div class="formula-title">${f.title}</div>
-    <div class="formula-body">$$${f.latex}$$</div>
-    ${f.image ? `<img src="${f.image}" alt="${f.title}" class="formula-image" onerror="this.style.display='none'">` : ""}
-    <button class="toggle-btn" onclick="toggleSymbols('${symId}', this)">
-      <span class="arrow">▶</span> Показать величины
-    </button>
-    <div class="symbols" id="${symId}">
-      ${Object.entries(f.symbols).map(([k, v]) =>
-        `<div class="sym-row"><b>$$${k}$$</b> - ${v}</div>`
-      ).join("")}
-    </div>
-    ${f.note ? `<div class="note">${f.note}</div>` : ""}
-    <div class="ege-badge">📍 ${f.ege}</div>
-  `;
-  return card;
-}
-
-function toggleSymbols(id, btn) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.toggle("open");
-  btn.classList.toggle("open");
-  btn.querySelector(".arrow").textContent = el.classList.contains("open") ? "▼" : "▶";
-  btn.childNodes[2].textContent = el.classList.contains("open") ? " Скрыть величины" : " Показать величины";
-  renderLatex(el);
-}
-
-/* ПРАКТИКА */
-function renderPractice() {
-  currentView = { type: "practice" };
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="renderHome()">← На главную</button>
-      <h2>🧪 Практика</h2>
-    </div>
-    <div class="menu">
-      <button onclick="startTasks()">
-        <span>📝 Задачи 1 части ЕГЭ</span>
-        <span class="count">${tasks.length} задач с автопроверкой</span>
-      </button>
-      <button onclick="startFlashcards()">
-        <span>🧠 Режим флеш-карт</span>
-        <span class="count">${allFormulas.length} карточек</span>
-      </button>
-      <button onclick="startQuiz()">
-        <span>🎯 Тренажёр «выбери формулу»</span>
-        <span class="count">по названию</span>
-      </button>
-      <button onclick="startReverseQuiz()">
-        <span>🔄 Тренажёр «выбери название»</span>
-        <span class="count">по формуле</span>
-      </button>
-    </div>
-  `;
-}
-
-/* ЗАДАЧИ */
-let taskPool = [];
-let taskIndex = 0;
-let taskAnswered = false;
-
-function startTasks() {
-  currentView = { type: "tasks" };
-  taskPool = [...tasks].sort(() => Math.random() - 0.5);
-  taskIndex = 0;
-  showTask();
-}
-
-function showTask() {
-  if (taskPool.length === 0) { renderPractice(); return; }
-  if (taskIndex >= taskPool.length) taskIndex = 0;
-
-  const tpl = taskPool[taskIndex];
-  currentTask = { ...tpl.generate(), template: tpl };
-  taskAnswered = false;
-  const solId = "task_sol";
-  const ansId = "task_ans";
-
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="renderPractice()">← К практике</button>
-      <h2>📝 Задача ${taskIndex + 1} из ${taskPool.length}</h2>
-      <span class="ege-info">${currentTask.template.ege}</span>
-    </div>
     <div class="task-card">
-      <div class="task-condition">${currentTask.condition}</div>
-      <div class="task-options" id="task-options">
-        ${currentTask.options.map((opt, i) => `
-          <button onclick="checkTask(${i})" data-i="${i}">${opt}</button>
+      <div class="task-condition">${currentGenTask.condition}</div>
+      <div class="options" id="gen-options">
+        ${currentGenTask.options.map((opt, i) => `
+          <button onclick="checkGenTask(${i})" data-i="${i}">${opt}</button>
         `).join("")}
       </div>
       <div class="task-actions">
-        <button class="primary" onclick="toggleTaskSolution('${solId}', this)">📖 Показать решение</button>
-        <button onclick="toggleTaskAnswer('${ansId}', this)">✅ Показать ответ</button>
-        <button onclick="nextTask()">Другая задача →</button>
+        <button class="primary" onclick="toggleSolution('gen-sol', this)">📖 Показать решение</button>
+        <button onclick="startGen(${id})">🔄 Другая задача</button>
       </div>
-      <div class="task-solution" id="${solId}">
-        ${currentTask.solution.map((s, i) => `
-          <div class="step"><span class="step-num">${i + 1}</span>${s}</div>
-        `).join("")}
-      </div>
-      <div class="task-answer" id="${ansId}">
-        <b>Ответ:</b> ${currentTask.answer}
+      <div class="task-solution" id="gen-sol">
+        ${currentGenTask.solution.map(step => `<div class="step">${step}</div>`).join("")}
+        <div class="step" style="margin-top:16px; color:var(--green); font-weight:600;">Ответ: ${currentGenTask.answer}</div>
       </div>
     </div>
   `;
   renderLatex(app);
 }
 
-function checkTask(chosenIndex) {
-  if (taskAnswered) return;
-  taskAnswered = true;
-  document.querySelectorAll("#task-options button").forEach((b, i) => {
-    if (i === currentTask.correctIndex) b.classList.add("correct");
+function checkGenTask(chosenIndex) {
+  if (genAnswered) return;
+  genAnswered = true;
+  document.querySelectorAll("#gen-options button").forEach((b, i) => {
+    if (i === currentGenTask.correctIndex) b.classList.add("correct");
     else if (i === chosenIndex) b.classList.add("wrong");
   });
   setTimeout(() => {
-    const sol = document.getElementById("task_sol");
-    const ans = document.getElementById("task_ans");
-    if (sol) { sol.classList.add("open"); renderLatex(sol); }
-    if (ans) ans.classList.add("open");
-  }, 400);
+    const sol = document.getElementById("gen-sol");
+    if (sol && !sol.classList.contains("open")) {
+      sol.classList.add("open");
+      document.querySelector(".task-actions button.primary").textContent = "📕 Скрыть решение";
+      renderLatex(sol);
+    }
+  }, 500);
 }
 
-function toggleTaskSolution(id, btn) {
+/* Задачи №25 */
+function renderTasks25List() {
+  app.innerHTML = `
+    <div class="section-header">
+      <button class="back-btn" onclick="renderHome()">← На главную</button>
+      <h2>📖 Задачи №25</h2>
+    </div>
+    <div style="display: grid; gap: 16px;">
+      ${tasks25.map((t, i) => `
+        <button style="padding: 20px; font-size: 18px; text-align: left; border: 2px solid var(--border); border-radius: 16px; background: var(--card-bg); color: var(--text); cursor: pointer; transition: .15s;" onclick="openTask25(${i})" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <span>${t.title}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function openTask25(index) {
+  const t = tasks25[index];
+  app.innerHTML = `
+    <div class="section-header">
+      <button class="back-btn" onclick="renderTasks25List()">← К списку</button>
+      <h2>Задача №25</h2>
+    </div>
+    <div class="task-card">
+      <div class="task-condition">${t.condition}</div>
+      ${t.image ? `<img src="${t.image}" alt="Рисунок" class="task-image" onerror="this.style.display='none'">` : ""}
+      <div class="task-actions">
+        <button class="primary" onclick="toggleSolution('sol-${t.id}', this)">📖 Показать решение</button>
+        <button class="success" onclick="toggleAnswer('ans-${t.id}', this)">✅ Показать ответ</button>
+      </div>
+      <div class="task-solution" id="sol-${t.id}">
+        ${t.solution.map(step => `<div class="step">${step}</div>`).join("")}
+      </div>
+      <div class="task-answer" id="ans-${t.id}">
+        <b>Ответ:</b> ${t.answer}
+      </div>
+    </div>
+  `;
+  renderLatex(app);
+}
+
+/* --- Общие функции --- */
+function toggleSolution(id, btn) {
   const el = document.getElementById(id);
   if (!el) return;
   el.classList.toggle("open");
@@ -1511,248 +773,149 @@ function toggleTaskSolution(id, btn) {
   if (el.classList.contains("open")) renderLatex(el);
 }
 
-function toggleTaskAnswer(id, btn) {
+function toggleAnswer(id, btn) {
   const el = document.getElementById(id);
   if (!el) return;
   el.classList.toggle("open");
   btn.textContent = el.classList.contains("open") ? "❌ Скрыть ответ" : "✅ Показать ответ";
 }
 
-function nextTask() {
-  taskIndex = (taskIndex + 1) % taskPool.length;
-  if (taskIndex === 0) taskPool = [...tasks].sort(() => Math.random() - 0.5);
-  showTask();
-}
-
-/* СПРАВОЧНЫЕ */
-function showReferences() {
-  currentView = { type: "references" };
-  currentRefTab = "constants";
-  renderReferences();
-}
-function switchRefTab(tab) {
-  currentRefTab = tab;
-  renderReferences();
-}
-function renderReferences() {
-  const tabs = [
-    { id: "constants", name: "Постоянные" },
-    { id: "prefixes", name: "Приставки" },
-    { id: "units", name: "Единицы" },
-    { id: "particles", name: "Частицы" },
-    { id: "densities", name: "Плотности" },
-    { id: "heat", name: "Теплоёмкости" },
-    { id: "latent", name: "Теплоты" },
-    { id: "normal", name: "Норм. условия" },
-    { id: "molar", name: "Молярные массы" }
-  ];
-
+/* Теория */
+function renderTheory() {
   app.innerHTML = `
     <div class="section-header">
       <button class="back-btn" onclick="renderHome()">← На главную</button>
-      <h2>📌 Справочные материалы</h2>
+      <h2>📘 Теория</h2>
     </div>
-    <div class="ref-tabs">
-      ${tabs.map(t => `
-        <button class="${currentRefTab === t.id ? "active" : ""}"
-                onclick="switchRefTab('${t.id}')">${t.name}</button>
+    <div id="theory-container">
+      ${theoryBlocks.map(block => `
+        <div class="theory-block">
+          <div class="theory-title">${block.title}</div>
+          ${block.text ? block.text : ""}
+          ${block.formulas ? block.formulas.map(f => `
+            <div class="formula-item">
+              <div class="formula-name">${f.name}</div>
+              <div class="formula-latex">$$${f.latex}$$</div>
+              <div class="formula-desc">${f.desc}</div>
+            </div>
+          `).join("") : ""}
+        </div>
       `).join("")}
     </div>
-    <div id="ref-content"></div>
-  `;
-  document.getElementById("ref-content").innerHTML = renderRefTable(currentRefTab);
-}
-
-function renderRefTable(tab) {
-  const renderTable = (rows) => `
-    <table class="ref-table">
-      <thead><tr><th>Величина</th><th>Значение</th></tr></thead>
-      <tbody>
-        ${rows.map(r => `<tr><td>${r.name}</td><td>${r.value} ${r.unit || ""}</td></tr>`).join("")}
-      </tbody>
-    </table>
-  `;
-
-  switch (tab) {
-    case "constants":
-      return `
-        <table class="ref-table">
-          <thead><tr><th>Название</th><th>Значение</th></tr></thead>
-          <tbody>
-            ${constants.map(c => `<tr><td>${c.name}</td><td>${c.value} ${c.unit || ""}</td></tr>`).join("")}
-          </tbody>
-        </table>
-      `;
-    case "prefixes":
-      return `
-        <table class="ref-table">
-          <thead><tr><th>Приставка</th><th>Обозначение</th><th>Множитель</th><th>Число</th></tr></thead>
-          <tbody>
-            ${decimalPrefixes.map(p => `<tr><td>${p.name}</td><td>${p.symbol}</td><td>${p.power}</td><td>${p.value}</td></tr>`).join("")}
-          </tbody>
-        </table>
-      `;
-    case "units": return renderTable(unitConversions);
-    case "particles": return renderTable(particleMasses);
-    case "densities": return renderTable(densities);
-    case "heat": return renderTable(heatCapacities);
-    case "latent": return renderTable(latentHeats);
-    case "normal": return renderTable(normalConditions);
-    case "molar": return renderTable(molarMasses);
-    default: return "";
-  }
-}
-
-/* ПОИСК */
-searchInput.addEventListener("input", () => {
-  const q = searchInput.value.trim().toLowerCase();
-  if (!q) { renderHome(); return; }
-  currentView = { type: "search" };
-
-  const found = allFormulas.filter(f =>
-    f.title.toLowerCase().includes(q) ||
-    f.latex.toLowerCase().includes(q) ||
-    Object.keys(f.symbols).some(k => k.toLowerCase().includes(q)) ||
-    Object.values(f.symbols).some(v => v.toLowerCase().includes(q))
-  );
-
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="searchInput.value=''; renderHome();">← На главную</button>
-      <h2>Поиск: «${q}»</h2>
-    </div>
-    <div id="cards"></div>
-  `;
-  const box = document.getElementById("cards");
-  if (found.length === 0) {
-    box.innerHTML = `<div class="empty">Ничего не найдено.</div>`;
-    return;
-  }
-  found.forEach(f => box.appendChild(makeFormulaCard(f)));
-  renderLatex(box);
-});
-
-/* ФЛЕШ-КАРТЫ */
-let flashDeck = [], flashIndex = 0, flashRevealed = false;
-
-function startFlashcards() {
-  currentView = { type: "flash" };
-  flashDeck = [...allFormulas].sort(() => Math.random() - 0.5);
-  flashIndex = 0;
-  flashRevealed = false;
-  renderFlashcard();
-}
-function renderFlashcard() {
-  if (flashDeck.length === 0) { renderPractice(); return; }
-  const f = flashDeck[flashIndex];
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="renderPractice()">← К практике</button>
-      <h2>🧠 Флеш-карты (${flashIndex + 1} / ${flashDeck.length})</h2>
-    </div>
-    <div class="flashcard">
-      <div class="question">Что означает эта формула?</div>
-      <div class="content">$$${f.latex}$$</div>
-      ${flashRevealed ? `
-        <div class="answer">
-          <b>${f.title}</b>
-          <div class="sym-list">
-            ${Object.entries(f.symbols).map(([k, v]) =>
-              `<div class="sym-row"><b>$$${k}$$</b> - ${v}</div>`
-            ).join("")}
-          </div>
-          <div style="font-size:13px;color:var(--text-soft);margin-top:8px;">📍 ${f.ege}</div>
-        </div>
-      ` : ""}
-      <div class="buttons">
-        ${flashRevealed
-          ? `<button class="secondary" onclick="flashPrev()">← Назад</button>
-             <button onclick="flashNext()">Дальше →</button>`
-          : `<button onclick="flashReveal()">Показать ответ</button>`}
-      </div>
-    </div>
   `;
   renderLatex(app);
 }
-function flashReveal() { flashRevealed = true; renderFlashcard(); }
-function flashNext() { flashIndex = (flashIndex + 1) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
-function flashPrev() { flashIndex = (flashIndex - 1 + flashDeck.length) % flashDeck.length; flashRevealed = false; renderFlashcard(); }
 
-/* ТРЕНАЖЁРЫ */
-let quizCorrect = null, quizAnswered = false, reverseQuizCorrect = null, reverseQuizAnswered = false;
-
-function startQuiz() {
-  currentView = { type: "quiz" };
-  quizCorrect = allFormulas[Math.floor(Math.random() * allFormulas.length)];
-  const others = allFormulas.filter(f => f.id !== quizCorrect.id).sort(() => Math.random() - 0.5).slice(0, 3);
-  const options = [quizCorrect, ...others].sort(() => Math.random() - 0.5);
-  quizAnswered = false;
-
+/* Справочные материалы */
+function renderReferences() {
   app.innerHTML = `
     <div class="section-header">
-      <button class="back-btn" onclick="renderPractice()">← К практике</button>
-      <h2>🎯 Выбери формулу</h2>
+      <button class="back-btn" onclick="renderHome()">← На главную</button>
+      <h2>📌 Справочные материалы ЕГЭ</h2>
     </div>
-    <div class="quiz-card">
-      <div class="quiz-question">Какая формула соответствует названию:<br><b>«${quizCorrect.title}»</b>?</div>
-      <div class="quiz-options" id="quiz-options">
-        ${options.map(f => `
-          <button onclick="answerQuiz('${f.id}')" data-id="${f.id}">$$${f.latex}$$</button>
-        `).join("")}
-      </div>
-      <div class="quiz-result" id="quiz-result"></div>
-      <div style="margin-top:20px;"><button class="back-btn" onclick="startQuiz()">Другая задача →</button></div>
+
+    <div class="ref-section">
+      <div class="ref-title">Десятичные приставки</div>
+      <table class="ref-table split">
+        <tr><td>тера (Т) = 10¹²</td><td>гига (Г) = 10⁹</td></tr>
+        <tr><td>мега (М) = 10⁶</td><td>кило (к) = 10³</td></tr>
+        <tr><td>гекто (г) = 10²</td><td>деци (д) = 10⁻¹</td></tr>
+        <tr><td>санти (с) = 10⁻²</td><td>милли (м) = 10⁻³</td></tr>
+        <tr><td>микро (мк) = 10⁻⁶</td><td>нано (н) = 10⁻⁹</td></tr>
+        <tr><td>пико (п) = 10⁻¹²</td><td></td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Константы</div>
+      <table class="ref-table">
+        <tr><td>число π</td><td>π = 3,14</td></tr>
+        <tr><td>ускорение свободного падения на Земле</td><td>g = 10 м/с²</td></tr>
+        <tr><td>гравитационная постоянная</td><td>G = 6,7·10⁻¹¹ Н·м²/кг²</td></tr>
+        <tr><td>универсальная газовая постоянная</td><td>R = 8,31 Дж/(моль·К)</td></tr>
+        <tr><td>постоянная Больцмана</td><td>k = 1,38·10⁻²³ Дж/К</td></tr>
+        <tr><td>постоянная Авогадро</td><td>Nₐ = 6·10²³ моль⁻¹</td></tr>
+        <tr><td>скорость света в вакууме</td><td>c = 3·10⁸ м/с</td></tr>
+        <tr><td>коэффициент пропорциональности в законе Кулона</td><td>k = 1/(4πε₀) = 9·10⁹ Н·м²/Кл²</td></tr>
+        <tr><td>электрическая постоянная</td><td>ε₀ = 8,85·10⁻¹² Ф/м</td></tr>
+        <tr><td>модуль заряда электрона</td><td>e = 1,6·10⁻¹⁹ Кл</td></tr>
+        <tr><td>постоянная Планка</td><td>h = 6,6·10⁻³⁴ Дж·с</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Соотношения между единицами</div>
+      <table class="ref-table">
+        <tr><td>температура</td><td>0 К = -273 °C</td></tr>
+        <tr><td>атомная единица массы</td><td>1 а.е.м. = 1,66·10⁻²⁷ кг</td></tr>
+        <tr><td>1 атомная единица массы эквивалентна</td><td>931,5 МэВ</td></tr>
+        <tr><td>1 электронвольт</td><td>1 эВ = 1,6·10⁻¹⁹ Дж</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Масса частиц</div>
+      <table class="ref-table">
+        <tr><td>электрона</td><td>9,1·10⁻³¹ кг ≈ 5,5·10⁻⁴ а.е.м.</td></tr>
+        <tr><td>протона</td><td>1,673·10⁻²⁷ кг ≈ 1,007 а.е.м.</td></tr>
+        <tr><td>нейтрона</td><td>1,675·10⁻²⁷ кг ≈ 1,008 а.е.м.</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Плотность</div>
+      <table class="ref-table split">
+        <tr><td>бензина 710 кг/м³</td><td>древесины (сосна) 400 кг/м³</td></tr>
+        <tr><td>спирта 800 кг/м³</td><td>парафина 900 кг/м³</td></tr>
+        <tr><td>керосина 800 кг/м³</td><td>льда 900 кг/м³</td></tr>
+        <tr><td>подсолнечного масла 900 кг/м³</td><td>алюминия 2700 кг/м³</td></tr>
+        <tr><td>воды 1000 кг/м³</td><td>цинка 7100 кг/м³</td></tr>
+        <tr><td>гипса 1260 кг/м³</td><td>железа 7800 кг/м³</td></tr>
+        <tr><td>ртути 13 600 кг/м³</td><td>меди 8900 кг/м³</td></tr>
+        <tr><td></td><td>свинца 11 350 кг/м³</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Удельная теплоёмкость</div>
+      <table class="ref-table split">
+        <tr><td>воды 4,2·10³ Дж/(кг·К)</td><td>чугуна 500 Дж/(кг·К)</td></tr>
+        <tr><td>спирта 2,4·10³ Дж/(кг·К)</td><td>железа 460 Дж/(кг·К)</td></tr>
+        <tr><td>льда 2,1·10³ Дж/(кг·К)</td><td>свинца 130 Дж/(кг·К)</td></tr>
+        <tr><td>алюминия 900 Дж/(кг·К)</td><td>меди 380 Дж/(кг·К)</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Удельная теплота</div>
+      <table class="ref-table">
+        <tr><td>парообразования воды</td><td>2,3·10⁶ Дж/кг</td></tr>
+        <tr><td>парообразования спирта</td><td>9,0·10⁵ Дж/кг</td></tr>
+        <tr><td>плавления льда</td><td>3,3·10⁵ Дж/кг</td></tr>
+        <tr><td>плавления стали</td><td>7,8·10⁴ Дж/кг</td></tr>
+        <tr><td>плавления свинца</td><td>2,5·10⁴ Дж/кг</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Нормальные условия</div>
+      <table class="ref-table">
+        <tr><td>давление</td><td>10⁵ Па</td></tr>
+        <tr><td>температура</td><td>0 °C</td></tr>
+      </table>
+    </div>
+
+    <div class="ref-section">
+      <div class="ref-title">Молярная масса</div>
+      <table class="ref-table split">
+        <tr><td>азота 28·10⁻³ кг/моль</td><td>гелия 4·10⁻³ кг/моль</td></tr>
+        <tr><td>аргона 40·10⁻³ кг/моль</td><td>кислорода 32·10⁻³ кг/моль</td></tr>
+        <tr><td>водорода 2·10⁻³ кг/моль</td><td>лития 6·10⁻³ кг/моль</td></tr>
+        <tr><td>воздуха 29·10⁻³ кг/моль</td><td>неона 20·10⁻³ кг/моль</td></tr>
+        <tr><td>воды 18·10⁻³ кг/моль</td><td>углекислого газа 44·10⁻³ кг/моль</td></tr>
+      </table>
     </div>
   `;
-  renderLatex(app);
-}
-function answerQuiz(id) {
-  if (quizAnswered) return;
-  quizAnswered = true;
-  document.querySelectorAll("#quiz-options button").forEach(b => {
-    if (b.dataset.id === quizCorrect.id) b.classList.add("correct");
-    else if (b.dataset.id === id) b.classList.add("wrong");
-  });
-  const r = document.getElementById("quiz-result");
-  if (id === quizCorrect.id) { r.className = "quiz-result ok"; r.textContent = "✅ Верно!"; }
-  else { r.className = "quiz-result bad"; r.textContent = "❌ Неверно. Правильный вариант выделен зелёным."; }
-}
-
-function startReverseQuiz() {
-  currentView = { type: "reverseQuiz" };
-  reverseQuizCorrect = allFormulas[Math.floor(Math.random() * allFormulas.length)];
-  const others = allFormulas.filter(f => f.id !== reverseQuizCorrect.id).sort(() => Math.random() - 0.5).slice(0, 3);
-  const options = [reverseQuizCorrect, ...others].sort(() => Math.random() - 0.5);
-  reverseQuizAnswered = false;
-
-  app.innerHTML = `
-    <div class="section-header">
-      <button class="back-btn" onclick="renderPractice()">← К практике</button>
-      <h2>🔄 Выбери название</h2>
-    </div>
-    <div class="quiz-card">
-      <div class="quiz-question" style="text-align:center; font-size:28px;">$$${reverseQuizCorrect.latex}$$</div>
-      <div class="quiz-options" id="quiz-options">
-        ${options.map(f => `
-          <button onclick="answerReverseQuiz('${f.id}')" data-id="${f.id}">${f.title}</button>
-        `).join("")}
-      </div>
-      <div class="quiz-result" id="quiz-result"></div>
-      <div style="margin-top:20px;"><button class="back-btn" onclick="startReverseQuiz()">Другая задача →</button></div>
-    </div>
-  `;
-  renderLatex(app);
-}
-function answerReverseQuiz(id) {
-  if (reverseQuizAnswered) return;
-  reverseQuizAnswered = true;
-  document.querySelectorAll("#quiz-options button").forEach(b => {
-    if (b.dataset.id === reverseQuizCorrect.id) b.classList.add("correct");
-    else if (b.dataset.id === id) b.classList.add("wrong");
-  });
-  const r = document.getElementById("quiz-result");
-  if (id === reverseQuizCorrect.id) { r.className = "quiz-result ok"; r.textContent = "✅ Верно!"; }
-  else { r.className = "quiz-result bad"; r.textContent = "❌ Неверно. Правильный вариант выделен зелёным."; }
 }
 
 renderHome();
